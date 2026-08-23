@@ -1,0 +1,200 @@
+{
+  "states": [
+    "Maharashtra",
+    "Karnataka",
+    "Delhi NCR",
+    "Telangana",
+    "Tamil Nadu",
+    "Goa",
+    "Gujarat",
+    "West Bengal"
+  ],
+  "localities": [
+    { "name": "Koramangala", "city": "Bangalore", "state": "Karnataka" },
+    { "name": "Whitefield", "city": "Bangalore", "state": "Karnataka" },
+    { "name": "Hinjewadi", "city": "Pune", "state": "Maharashtra" },
+    { "name": "Andheri West", "city": "Mumbai", "state": "Maharashtra" },
+    { "name": "Sector 14", "city": "Gurgaon", "state": "Delhi NCR" },
+    { "name": "Gachibowli", "city": "Hyderabad", "state": "Telangana" },
+    { "name": "Shadnagar", "city": "Hyderabad", "state": "Telangana" },
+    { "name": "Anjuna", "city": "Goa", "state": "Goa" }
+  ],
+  "popularSearches": [
+    "2 BHK in Mumbai",
+    "Flats in Pune",
+    "PG in Bangalore",
+    "Villas in Goa",
+    "Land in Hyderabad"
+  ],
+  "features": [
+    { "icon": "verified", "title": "Verified Properties", "subtitle": "All listings are verified" },
+    { "icon": "tag", "title": "No Brokerage", "subtitle": "Zero brokerage deals" },
+    { "icon": "star", "title": "Trusted by Millions", "subtitle": "Happy customers" },
+    { "icon": "search", "title": "Easy Search", "subtitle": "Advanced filters" },
+    { "icon": "support", "title": "Expert Support", "subtitle": "We are here to help" }
+  ],
+  "stats": [
+    { "value": "10L+", "label": "Properties Listed" },
+    { "value": "50+", "label": "Cities Covered" },
+    { "value": "5L+", "label": "Happy Customers" },
+    { "value": "100%", "label": "Verified Listings" },
+    { "value": "24x7", "label": "Customer Support" }
+  ],
+  "propertyTypes": [
+    { "icon": "apartment", "title": "Apartments", "subtitle": "Flats & Apartments" },
+    { "icon": "villa", "title": "Villas", "subtitle": "Independent Villas" },
+    { "icon": "pg", "title": "PG", "subtitle": "Boys, Girls & Co-living" },
+    { "icon": "land", "title": "Land", "subtitle": "Residential & Commercial" },
+    { "icon": "commercial", "title": "Commercial", "subtitle": "Shops, Offices & More" }
+  ],
+  "locations": [
+    { "city": "Mumbai", "count": "50,000+ Properties", "image": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=600&q=80" },
+    { "city": "Pune", "count": "35,000+ Properties", "image": "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=600&q=80" },
+    { "city": "Bangalore", "count": "45,000+ Properties", "image": "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=600&q=80" },
+    { "city": "Hyderabad", "count": "30,000+ Properties", "image": "https://images.unsplash.com/photo-1600100397608-f2f4a58f2b3d?auto=format&fit=crop&w=600&q=80" },
+    { "city": "Delhi NCR", "count": "40,000+ Properties", "image": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=600&q=80" },
+    { "city": "Chennai", "count": "20,000+ Properties", "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80" }
+  ],
+  "projects": [
+    { "id": "pr1", "name": "Godrej Skyline", "location": "Thane, Mumbai", "price": "₹1.25 Cr* onwards", "config": "2, 3 BHK Apartments", "badge": "NEW LAUNCH", "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" },
+    { "id": "pr2", "name": "Lodha Belmondo", "location": "Pune", "price": "₹1.10 Cr* onwards", "config": "3, 4 BHK Apartments", "badge": "FEATURED", "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" },
+    { "id": "pr3", "name": "Prestige Serenity", "location": "Whitefield, Bangalore", "price": "₹1.35 Cr* onwards", "config": "2, 3 BHK Apartments", "badge": "NEW LAUNCH", "image": "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=800&q=80" },
+    { "id": "pr4", "name": "Aparna Zenon", "location": "Hyderabad", "price": "₹1.05 Cr* onwards", "config": "2, 3 BHK Apartments", "badge": "FEATURED", "image": "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80" },
+    { "id": "pr5", "name": "M3M Sky City", "location": "Gurgaon", "price": "₹2.10 Cr* onwards", "config": "2, 3 BHK Apartments", "badge": "FEATURED", "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" }
+  ],
+  "testimonials": [
+    { "id": "t1", "name": "Rohit Verma", "city": "Mumbai", "rating": 5, "quote": "Found my dream home in Andheri with zero brokerage. The experience was smooth and hassle-free.", "avatar": "https://i.pravatar.cc/100?img=12" },
+    { "id": "t2", "name": "Sneha Iyer", "city": "Bangalore", "rating": 5, "quote": "Great platform to find verified PG accommodations. Saved a lot of time and effort.", "avatar": "https://i.pravatar.cc/100?img=45" },
+    { "id": "t3", "name": "Aman Khan", "city": "Hyderabad", "rating": 5, "quote": "Listed my property and got genuine tenants within a week. Highly recommended platform!", "avatar": "https://i.pravatar.cc/100?img=33" }
+  ],
+  "properties": [
+    {
+      "id": "p1",
+      "title": "2 BHK Apartment",
+      "locality": "Koramangala",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "status": "FOR RENT",
+      "featured": true,
+      "price": "₹25,000",
+      "priceSuffix": "/month",
+      "beds": 2,
+      "baths": 2,
+      "area": "1200 Sq.Ft",
+      "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "p2",
+      "title": "3 BHK Flat",
+      "locality": "Hinjewadi",
+      "city": "Pune",
+      "state": "Maharashtra",
+      "status": "FOR SALE",
+      "featured": true,
+      "price": "₹85 Lakh",
+      "priceSuffix": "",
+      "beds": 3,
+      "baths": 3,
+      "area": "1500 Sq.Ft",
+      "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "p3",
+      "title": "PG for Boys",
+      "locality": "Sector 14",
+      "city": "Gurgaon",
+      "state": "Delhi NCR",
+      "status": "FOR RENT",
+      "featured": false,
+      "price": "₹8,000",
+      "priceSuffix": "/month",
+      "beds": 1,
+      "baths": 1,
+      "area": "350 Sq.Ft",
+      "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "p4",
+      "title": "4 BHK Villa",
+      "locality": "Whitefield",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "status": "FOR SALE",
+      "featured": false,
+      "price": "₹2.15 Cr",
+      "priceSuffix": "",
+      "beds": 4,
+      "baths": 4,
+      "area": "2800 Sq.Ft",
+      "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "p5",
+      "title": "Residential Land",
+      "locality": "Shadnagar",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "status": "FOR SALE",
+      "featured": false,
+      "price": "₹45 Lakh",
+      "priceSuffix": "",
+      "area": "2400 Sq.Ft",
+      "facing": "East Facing",
+      "image": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "pgs": [
+    {
+      "id": "pg1",
+      "name": "Comfort Stay PG",
+      "type": "Boys PG",
+      "locality": "Koramangala",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "price": "₹9,500",
+      "priceSuffix": "/month",
+      "sharing": "Double Sharing",
+      "amenities": ["WiFi", "Meals", "Laundry"],
+      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "pg2",
+      "name": "Green Nest PG",
+      "type": "Girls PG",
+      "locality": "Hinjewadi",
+      "city": "Pune",
+      "state": "Maharashtra",
+      "price": "₹8,000",
+      "priceSuffix": "/month",
+      "sharing": "Triple Sharing",
+      "amenities": ["WiFi", "AC", "Meals"],
+      "image": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "pg3",
+      "name": "Urban Living PG",
+      "type": "Co-ed PG",
+      "locality": "Gachibowli",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "price": "₹10,500",
+      "priceSuffix": "/month",
+      "sharing": "Single Room",
+      "amenities": ["WiFi", "Housekeeping", "Parking"],
+      "image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "pg4",
+      "name": "Sunrise PG",
+      "type": "Boys PG",
+      "locality": "Andheri West",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "price": "₹12,000",
+      "priceSuffix": "/month",
+      "sharing": "Double Sharing",
+      "amenities": ["WiFi", "Meals", "Gym"],
+      "image": "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=800&q=80"
+    }
+  ]
+}
