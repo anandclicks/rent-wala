@@ -1,3 +1,17 @@
+"use client";
+
+import Link from "next/link";
+
+function statusBadge(property) {
+  if (property.categoryEnum === "PG") {
+    return { label: "PG / Hostel", className: "bg-brand-dark text-white" };
+  }
+  if (property.status === "FOR SALE") {
+    return { label: "For Sale", className: "bg-sale text-white" };
+  }
+  return { label: "For Rent", className: "bg-brand-mint text-brand-dark" };
+}
+
 function BedIcon({ className }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -36,74 +50,74 @@ function HeartIcon({ className }) {
 }
 
 export default function PropertyCard({ property }) {
-  const isRent = property.status === "FOR RENT";
+  const href = property.slug ? `/property/${property.slug}` : "#";
+  const badge = statusBadge(property);
 
   return (
-    <article className="group overflow-hidden rounded-xl border border-line bg-white shadow-sm transition hover:shadow-md">
-      <div className="relative aspect-[4/3] overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={property.image}
-          alt={`${property.title} in ${property.locality}`}
-          className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-        />
-        <div className="absolute left-3 top-3 flex gap-2">
+    <article className="group overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+      <Link href={href} className="block">
+        <div className="relative aspect-[4/3] overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={property.image}
+            alt={`${property.title} in ${property.locality}`}
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+          />
           <span
-            className={`rounded-md px-2.5 py-1 text-[11px] font-semibold text-white ${
-              isRent ? "bg-brand" : "bg-emerald-600"
-            }`}
+            className={`absolute left-3 top-3 rounded-md px-2.5 py-1 text-[11px] font-bold ${badge.className}`}
           >
-            {property.status}
+            {badge.label}
           </span>
-          {property.featured && (
-            <span className="rounded-md bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-ink">
-              Featured
-            </span>
-          )}
+          <button
+            type="button"
+            aria-label="Add to shortlist"
+            onClick={(e) => e.preventDefault()}
+            className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white text-ink/50 shadow-sm transition hover:text-brand-dark"
+          >
+            <HeartIcon className="h-4 w-4" />
+          </button>
         </div>
-        <button
-          aria-label="Add to shortlist"
-          className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/90 text-ink transition hover:bg-white hover:text-brand"
-        >
-          <HeartIcon className="h-4.5 w-4.5" />
-        </button>
-      </div>
 
-      <div className="p-4">
-        <h3 className="text-base font-semibold text-ink">{property.title}</h3>
-        <p className="mt-1 flex items-center gap-1 text-sm text-muted">
-          <PinIcon className="h-4 w-4 text-brand" />
-          {property.locality}, {property.city}
-        </p>
+        <div className="p-4">
+          <p className="text-lg font-bold text-ink">
+            {property.price}
+            {property.priceSuffix && (
+              <span className="text-sm font-medium text-muted"> {property.priceSuffix}</span>
+            )}
+          </p>
+          <h3 className="mt-1 line-clamp-1 text-sm font-semibold text-ink/85">{property.title}</h3>
+          <p className="mt-1 flex items-center gap-1 text-xs text-muted">
+            <PinIcon className="h-3.5 w-3.5 shrink-0 text-brand" />
+            <span className="line-clamp-1">
+              {property.locality}, {property.city}
+            </span>
+          </p>
 
-        <p className="mt-3 text-lg font-bold text-brand">
-          {property.price}
-          {property.priceSuffix && (
-            <span className="text-sm font-medium text-muted"> {property.priceSuffix}</span>
-          )}
-        </p>
-
-        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-line pt-3 text-sm text-muted">
-          {property.beds != null && (
-            <span className="flex items-center gap-1.5">
-              <BedIcon className="h-4 w-4" /> {property.beds} Beds
-            </span>
-          )}
-          {property.baths != null && (
-            <span className="flex items-center gap-1.5">
-              <BathIcon className="h-4 w-4" /> {property.baths} Baths
-            </span>
-          )}
-          {property.area && (
-            <span className="flex items-center gap-1.5">
-              <AreaIcon className="h-4 w-4" /> {property.area}
-            </span>
-          )}
-          {property.facing && (
-            <span className="flex items-center gap-1.5">• {property.facing}</span>
-          )}
+          <div className="mt-3 flex items-center gap-4 border-t border-line pt-3 text-xs text-muted">
+            {property.beds != null && property.beds > 0 && (
+              <span className="flex items-center gap-1.5">
+                <BedIcon className="h-3.5 w-3.5" />
+                {property.beds} {property.beds === 1 ? "Bed" : "Beds"}
+              </span>
+            )}
+            {property.baths != null && property.baths > 0 && (
+              <span className="flex items-center gap-1.5">
+                <BathIcon className="h-3.5 w-3.5" />
+                {property.baths} {property.baths === 1 ? "Bath" : "Baths"}
+              </span>
+            )}
+            {property.area && (
+              <span className="flex items-center gap-1.5">
+                <AreaIcon className="h-3.5 w-3.5" />
+                {property.area.replace(" Sq.Ft", " sq.ft")}
+              </span>
+            )}
+            {property.categoryEnum === "PG" && !property.beds && (
+              <span className="text-brand-dark">{property.suitableFor || "Co-living"}</span>
+            )}
+          </div>
         </div>
-      </div>
+      </Link>
     </article>
   );
 }

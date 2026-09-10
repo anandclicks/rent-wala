@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum ListingType {
+  RENT
+  SELL
+}
+
+enum PropertyCategory {
+  APARTMENT
+  VILLA
+  INDEPENDENT_HOUSE
+  BUILDER_FLOOR
+  PG
+  COMMERCIAL
+  LAND
+  STUDIO
+  PENTHOUSE
+}
+
+enum PublishStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  mobile    String?  @unique
+  role      UserRole @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OtpCode {
+  id        String   @id @default(cuid())
+  email     String
+  codeHash  String
+  purpose   String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([email, purpose])
+}
+
+model Property {
+  id             String           @id @default(cuid())
+  slug           String           @unique
+  title          String
+  description    String?
+  category       PropertyCategory
+  listingType    ListingType
+  city           String
+  locality       String
+  address        String?
+  price          Int
+  priceLabel     String?
+  beds           Int?
+  baths          Int?
+  areaSqft       Int?
+  floor          String?
+  totalFloors    String?
+  furnishing     String?
+  propertyAge    String?
+  facing         String?
+  suitableFor    String?
+  badges           String[]         @default([])
+  amenities        String[]         @default([])
+  featureTags      String[]         @default([])
+  highlights       String[]         @default([])
+  nearbyLocations  Json?
+  availability     String?
+  images           String[]         @default([])
+  roomOptions      Json?
+  featured       Boolean          @default(false)
+  verified       Boolean          @default(false)
+  status         PublishStatus    @default(PUBLISHED)
+  inquiries      Inquiry[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  @@index([city, locality])
+  @@index([category, listingType])
+  @@index([status])
+}
+
+model Inquiry {
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  name       String
+  mobile     String
+  email      String?
+  message    String?
+  createdAt  DateTime @default(now())
+
+  @@index([propertyId])
+}
+
+model SiteSetting {
+  id             String @id @default("default")
+  callNumber     String @default("+919876543210")
+  whatsappNumber String @default("+919876543210")
+}

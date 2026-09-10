@@ -2,15 +2,20 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #1f2937;
+  --foreground: #1a2332;
 
-  /* Brand theme */
-  --brand: #0b74e5;
-  --brand-dark: #0a63c4;
-  --brand-light: #eaf3fe;
-  --ink: #111827;
-  --muted: #6b7280;
-  --line: #e5e7eb;
+  --brand: #40916c;
+  --brand-dark: #1b4332;
+  --brand-darker: #081c15;
+  --brand-light: #d8f3dc;
+  --brand-soft: #f0f7f4;
+  --brand-mint: #e8f5e9;
+  --ink: #1a2332;
+  --navy: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --sale: #2563eb;
+  --rent-badge: #2d6a4f;
 }
 
 @theme inline {
@@ -19,16 +24,32 @@
 
   --color-brand: var(--brand);
   --color-brand-dark: var(--brand-dark);
+  --color-brand-darker: var(--brand-darker);
   --color-brand-light: var(--brand-light);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-mint: var(--brand-mint);
   --color-ink: var(--ink);
+  --color-navy: var(--navy);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-sale: var(--sale);
+  --color-rent-badge: var(--rent-badge);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-script: var(--font-dancing-script);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--brand) 30%, white);
+  color: var(--ink);
+}
+
+.font-script {
+  font-family: var(--font-dancing-script), cursive;
 }
