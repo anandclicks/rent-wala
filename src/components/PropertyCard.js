@@ -9,7 +9,7 @@ function statusBadge(property) {
   if (property.status === "FOR SALE") {
     return { label: "For Sale", className: "bg-sale text-white" };
   }
-  return { label: "For Rent", className: "bg-brand-mint text-brand-dark" };
+  return { label: "FOR RENT", className: "bg-brand text-white" };
 }
 
 function BedIcon({ className }) {

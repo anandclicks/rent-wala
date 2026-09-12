@@ -1,322 +1,379 @@
 {
   "states": [
-    "Maharashtra",
-    "Karnataka",
-    "Delhi NCR",
-    "Telangana",
-    "Tamil Nadu",
-    "Goa",
-    "Gujarat",
-    "West Bengal"
+    "Uttar Pradesh"
   ],
   "cities": [
-    "Delhi",
-    "Noida",
-    "Gurugram",
-    "Faridabad",
-    "Ghaziabad",
-    "Lucknow",
-    "Bangalore"
+    "Noida"
   ],
   "localities": [
-    { "name": "Connaught Place", "city": "Delhi", "state": "Delhi" },
-    { "name": "Dwarka", "city": "Delhi", "state": "Delhi" },
-    { "name": "Rohini", "city": "Delhi", "state": "Delhi" },
-    { "name": "Sector 62", "city": "Noida", "state": "Uttar Pradesh" },
-    { "name": "Sector 18", "city": "Noida", "state": "Uttar Pradesh" },
-    { "name": "Sector 14", "city": "Gurugram", "state": "Haryana" },
-    { "name": "DLF Phase 3", "city": "Gurugram", "state": "Haryana" },
-    { "name": "Sector 16", "city": "Faridabad", "state": "Haryana" },
-    { "name": "NIT", "city": "Faridabad", "state": "Haryana" },
-    { "name": "Indirapuram", "city": "Ghaziabad", "state": "Uttar Pradesh" },
-    { "name": "Vaishali", "city": "Ghaziabad", "state": "Uttar Pradesh" },
-    { "name": "Gomti Nagar", "city": "Lucknow", "state": "Uttar Pradesh" },
-    { "name": "Hazratganj", "city": "Lucknow", "state": "Uttar Pradesh" },
-    { "name": "Koramangala", "city": "Bangalore", "state": "Karnataka" },
-    { "name": "Whitefield", "city": "Bangalore", "state": "Karnataka" }
+    {
+      "name": "Greater Noida",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Knowledge Park III",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 1",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 101",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 104",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 116",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 122",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 125",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 126",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 127",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 130",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 132",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 134",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 135",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 136",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 142",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 143",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 144",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 16",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 16a",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 16B",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 18",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 19",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 2",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 22",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 27",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 29",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 3",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 31",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 32",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 4",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 44",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 50",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 53",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 58",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 59",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 62",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 63",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 63a",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 64",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 66",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 67",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 68",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 70",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 73",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 78",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 8",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 90",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 94",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 96",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 98",
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    }
   ],
   "popularSearches": [
-    "2 BHK in Noida",
-    "Flats in Gurugram",
-    "PG in Bangalore",
-    "Rent in Delhi",
-    "Villas in Lucknow"
+    "PG in Sector 62 Noida",
+    "Coworking in Sector 62",
+    "Coliving in Sector 44",
+    "Office Space in Noida",
+    "Flats in Sector 18"
   ],
   "features": [
-    { "icon": "verified", "title": "Verified Properties", "subtitle": "All listings are verified" },
-    { "icon": "tag", "title": "Zero Brokerage", "subtitle": "No hidden charges" },
-    { "icon": "star", "title": "Trusted Platform", "subtitle": "Loved by millions" },
-    { "icon": "search", "title": "Smart Search", "subtitle": "Advanced filters" },
-    { "icon": "support", "title": "Expert Support", "subtitle": "We are here to help" }
+    {
+      "icon": "verified",
+      "title": "Verified Properties",
+      "subtitle": "All listings are verified"
+    },
+    {
+      "icon": "tag",
+      "title": "Zero Brokerage",
+      "subtitle": "No hidden charges"
+    },
+    {
+      "icon": "star",
+      "title": "Trusted Platform",
+      "subtitle": "Loved by thousands"
+    },
+    {
+      "icon": "search",
+      "title": "Smart Search",
+      "subtitle": "Advanced filters"
+    },
+    {
+      "icon": "support",
+      "title": "Expert Support",
+      "subtitle": "We are here to help"
+    }
   ],
   "stats": [
-    { "value": "10L+", "label": "Properties Listed" },
-    { "value": "50+", "label": "Cities Covered" },
-    { "value": "5L+", "label": "Happy Customers" },
-    { "value": "100%", "label": "Verified Listings" },
-    { "value": "24x7", "label": "Customer Support" }
+    {
+      "value": "177",
+      "label": "Properties Listed"
+    },
+    {
+      "value": "51",
+      "label": "Localities Covered"
+    },
+    {
+      "value": "52",
+      "label": "PG & Coliving"
+    },
+    {
+      "value": "122",
+      "label": "Commercial Spaces"
+    },
+    {
+      "value": "24x7",
+      "label": "Customer Support"
+    }
   ],
   "propertyTypes": [
-    { "icon": "apartment", "title": "Apartments", "subtitle": "Flats & Apartments" },
-    { "icon": "villa", "title": "Villas", "subtitle": "Independent Villas" },
-    { "icon": "pg", "title": "PG", "subtitle": "Boys, Girls & Co-living" },
-    { "icon": "land", "title": "Land", "subtitle": "Residential & Commercial" },
-    { "icon": "commercial", "title": "Commercial", "subtitle": "Shops, Offices & More" }
+    {
+      "icon": "pg",
+      "title": "PG & Coliving",
+      "subtitle": "Boys, Girls & Co-living"
+    },
+    {
+      "icon": "commercial",
+      "title": "Coworking",
+      "subtitle": "Shared & private desks"
+    },
+    {
+      "icon": "commercial",
+      "title": "Office Space",
+      "subtitle": "Managed offices"
+    },
+    {
+      "icon": "apartment",
+      "title": "Apartments",
+      "subtitle": "Flats & Apartments"
+    }
   ],
   "locations": [
-    { "city": "Delhi", "count": "40,000+ Properties", "image": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=600&q=80" },
-    { "city": "Noida", "count": "25,000+ Properties", "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80" },
-    { "city": "Gurugram", "count": "30,000+ Properties", "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" },
-    { "city": "Faridabad", "count": "12,000+ Properties", "image": "https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=600&q=80" },
-    { "city": "Ghaziabad", "count": "15,000+ Properties", "image": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=600&q=80" },
-    { "city": "Lucknow", "count": "18,000+ Properties", "image": "https://images.unsplash.com/photo-1524497534804-c01287275253?auto=format&fit=crop&w=600&q=80" },
-    { "city": "Bangalore", "count": "45,000+ Properties", "image": "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=600&q=80" }
+    {
+      "city": "Noida",
+      "count": "177 Properties",
+      "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80"
+    }
   ],
-  "projects": [
-    { "id": "pr1", "name": "Godrej Skyline", "location": "Thane, Mumbai", "price": "₹1.25 Cr* onwards", "config": "2, 3 BHK Apartments", "badge": "NEW LAUNCH", "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" },
-    { "id": "pr2", "name": "Lodha Belmondo", "location": "Pune", "price": "₹1.10 Cr* onwards", "config": "3, 4 BHK Apartments", "badge": "FEATURED", "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" },
-    { "id": "pr3", "name": "Prestige Serenity", "location": "Whitefield, Bangalore", "price": "₹1.35 Cr* onwards", "config": "2, 3 BHK Apartments", "badge": "NEW LAUNCH", "image": "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=800&q=80" },
-    { "id": "pr4", "name": "Aparna Zenon", "location": "Hyderabad", "price": "₹1.05 Cr* onwards", "config": "2, 3 BHK Apartments", "badge": "FEATURED", "image": "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80" },
-    { "id": "pr5", "name": "M3M Sky City", "location": "Gurgaon", "price": "₹2.10 Cr* onwards", "config": "2, 3 BHK Apartments", "badge": "FEATURED", "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" }
-  ],
+  "projects": [],
   "testimonials": [
-    { "id": "t1", "name": "Rohit Verma", "city": "Mumbai", "rating": 5, "quote": "Found my dream home in Andheri with zero brokerage. The experience was smooth and hassle-free.", "avatar": "https://i.pravatar.cc/100?img=12" },
-    { "id": "t2", "name": "Sneha Iyer", "city": "Bangalore", "rating": 5, "quote": "Great platform to find verified PG accommodations. Saved a lot of time and effort.", "avatar": "https://i.pravatar.cc/100?img=45" },
-    { "id": "t3", "name": "Aman Khan", "city": "Hyderabad", "rating": 5, "quote": "Listed my property and got genuine tenants within a week. Highly recommended platform!", "avatar": "https://i.pravatar.cc/100?img=33" }
-  ],
-  "properties": [
     {
-      "id": "p1",
-      "title": "2 BHK Apartment",
-      "locality": "Koramangala",
-      "city": "Bangalore",
-      "state": "Karnataka",
-      "status": "FOR RENT",
-      "featured": true,
-      "price": "₹25,000",
-      "priceSuffix": "/month",
-      "beds": 2,
-      "baths": 2,
-      "area": "1200 Sq.Ft",
-      "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "p2",
-      "title": "3 BHK Flat",
-      "locality": "Whitefield",
-      "city": "Bangalore",
-      "state": "Karnataka",
-      "status": "FOR SALE",
-      "featured": true,
-      "price": "₹85 Lakh",
-      "priceSuffix": "",
-      "beds": 3,
-      "baths": 3,
-      "area": "1500 Sq.Ft",
-      "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "p3",
-      "title": "PG for Boys",
-      "locality": "Sector 14",
-      "city": "Gurugram",
-      "state": "Haryana",
-      "status": "FOR RENT",
-      "featured": false,
-      "price": "₹8,000",
-      "priceSuffix": "/month",
-      "beds": 1,
-      "baths": 1,
-      "area": "350 Sq.Ft",
-      "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "p4",
-      "title": "2 BHK Apartment",
-      "locality": "Sector 62",
+      "id": "t1",
+      "name": "Rohit Verma",
       "city": "Noida",
-      "state": "Uttar Pradesh",
-      "status": "FOR RENT",
-      "featured": true,
-      "price": "₹22,000",
-      "priceSuffix": "/month",
-      "beds": 2,
-      "baths": 2,
-      "area": "1100 Sq.Ft",
-      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+      "rating": 5,
+      "quote": "Found a great PG in Sector 62 with zero brokerage. Smooth experience!",
+      "avatar": "https://i.pravatar.cc/100?img=12"
     },
     {
-      "id": "p5",
-      "title": "3 BHK Flat",
-      "locality": "Sector 18",
+      "id": "t2",
+      "name": "Sneha Iyer",
       "city": "Noida",
-      "state": "Uttar Pradesh",
-      "status": "FOR SALE",
-      "featured": false,
-      "price": "₹72 Lakh",
-      "priceSuffix": "",
-      "beds": 3,
-      "baths": 2,
-      "area": "1400 Sq.Ft",
-      "image": "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80"
+      "rating": 5,
+      "quote": "Booked a coworking desk near my office. Very convenient platform.",
+      "avatar": "https://i.pravatar.cc/100?img=45"
     },
     {
-      "id": "p6",
-      "title": "2 BHK Apartment",
-      "locality": "Dwarka",
-      "city": "Delhi",
-      "state": "Delhi",
-      "status": "FOR RENT",
-      "featured": true,
-      "price": "₹28,000",
-      "priceSuffix": "/month",
-      "beds": 2,
-      "baths": 2,
-      "area": "1050 Sq.Ft",
-      "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "p7",
-      "title": "4 BHK Villa",
-      "locality": "DLF Phase 3",
-      "city": "Gurugram",
-      "state": "Haryana",
-      "status": "FOR SALE",
-      "featured": false,
-      "price": "₹2.15 Cr",
-      "priceSuffix": "",
-      "beds": 4,
-      "baths": 4,
-      "area": "2800 Sq.Ft",
-      "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "p8",
-      "title": "2 BHK Apartment",
-      "locality": "Indirapuram",
-      "city": "Ghaziabad",
-      "state": "Uttar Pradesh",
-      "status": "FOR RENT",
-      "featured": false,
-      "price": "₹16,000",
-      "priceSuffix": "/month",
-      "beds": 2,
-      "baths": 2,
-      "area": "950 Sq.Ft",
-      "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "p9",
-      "title": "3 BHK Flat",
-      "locality": "Gomti Nagar",
-      "city": "Lucknow",
-      "state": "Uttar Pradesh",
-      "status": "FOR RENT",
-      "featured": true,
-      "price": "₹18,000",
-      "priceSuffix": "/month",
-      "beds": 3,
-      "baths": 2,
-      "area": "1300 Sq.Ft",
-      "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "p10",
-      "title": "2 BHK Apartment",
-      "locality": "Sector 16",
-      "city": "Faridabad",
-      "state": "Haryana",
-      "status": "FOR RENT",
-      "featured": false,
-      "price": "₹14,000",
-      "priceSuffix": "/month",
-      "beds": 2,
-      "baths": 2,
-      "area": "900 Sq.Ft",
-      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "p11",
-      "title": "3 BHK Flat",
-      "locality": "Connaught Place",
-      "city": "Delhi",
-      "state": "Delhi",
-      "status": "FOR SALE",
-      "featured": false,
-      "price": "₹1.25 Cr",
-      "priceSuffix": "",
-      "beds": 3,
-      "baths": 3,
-      "area": "1600 Sq.Ft",
-      "image": "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "p12",
-      "title": "Residential Plot",
-      "locality": "Hazratganj",
-      "city": "Lucknow",
-      "state": "Uttar Pradesh",
-      "status": "FOR SALE",
-      "featured": false,
-      "price": "₹45 Lakh",
-      "priceSuffix": "",
-      "area": "1800 Sq.Ft",
-      "facing": "East Facing",
-      "image": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80"
+      "id": "t3",
+      "name": "Aman Khan",
+      "city": "Noida",
+      "rating": 5,
+      "quote": "Verified listings and genuine contact details. Highly recommended!",
+      "avatar": "https://i.pravatar.cc/100?img=33"
     }
   ],
-  "pgs": [
-    {
-      "id": "pg1",
-      "name": "Comfort Stay PG",
-      "type": "Boys PG",
-      "locality": "Koramangala",
-      "city": "Bangalore",
-      "state": "Karnataka",
-      "price": "₹9,500",
-      "priceSuffix": "/month",
-      "sharing": "Double Sharing",
-      "amenities": ["WiFi", "Meals", "Laundry"],
-      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "pg2",
-      "name": "Green Nest PG",
-      "type": "Girls PG",
-      "locality": "Sector 62",
-      "city": "Noida",
-      "state": "Uttar Pradesh",
-      "price": "₹8,000",
-      "priceSuffix": "/month",
-      "sharing": "Triple Sharing",
-      "amenities": ["WiFi", "AC", "Meals"],
-      "image": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "pg3",
-      "name": "Urban Living PG",
-      "type": "Co-ed PG",
-      "locality": "Sector 14",
-      "city": "Gurugram",
-      "state": "Haryana",
-      "price": "₹10,500",
-      "priceSuffix": "/month",
-      "sharing": "Single Room",
-      "amenities": ["WiFi", "Housekeeping", "Parking"],
-      "image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "pg4",
-      "name": "Sunrise PG",
-      "type": "Boys PG",
-      "locality": "Dwarka",
-      "city": "Delhi",
-      "state": "Delhi",
-      "price": "₹12,000",
-      "priceSuffix": "/month",
-      "sharing": "Double Sharing",
-      "amenities": ["WiFi", "Meals", "Gym"],
-      "image": "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=800&q=80"
-    }
-  ]
+  "properties": [],
+  "pgs": []
 }

@@ -37,8 +37,8 @@ const STATS = [
 
 export default function Home() {
   const properties = getAllProperties();
-  const independentHouses = getPropertiesByCategoryEnum("INDEPENDENT_HOUSE");
-  const villas = getPropertiesByCategoryEnum("VILLA");
+  const pgs = getPropertiesByCategoryEnum("PG");
+  const commercial = getPropertiesByCategoryEnum("COMMERCIAL");
   const flats = getPropertiesByCategoryEnum("FLATS");
 
   return (
@@ -49,16 +49,16 @@ export default function Home() {
       <FeaturedProperties properties={properties} />
       <DualCTA />
       <ExploreCarouselSection
-        title="Independent Houses"
-        subtitle="Spacious homes with privacy and comfort"
-        viewAllHref="/search?category=INDEPENDENT_HOUSE&city=Noida"
-        items={independentHouses}
+        title="PG & Coliving"
+        subtitle="Affordable stays for students and professionals"
+        viewAllHref="/search?category=PG&city=Noida"
+        items={pgs}
       />
       <ExploreCarouselSection
-        title="Villas"
-        subtitle="Luxury living in premium neighbourhoods"
-        viewAllHref="/search?category=VILLA&city=Gurugram"
-        items={villas}
+        title="Coworking & Offices"
+        subtitle="Professional workspaces across Noida"
+        viewAllHref="/search?category=COMMERCIAL&city=Noida"
+        items={commercial}
         className="bg-brand-soft/30"
       />
       <ExploreCarouselSection

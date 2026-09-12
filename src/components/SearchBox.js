@@ -14,13 +14,7 @@ const PROPERTY_TYPES = ["Apartment", "Villa", "Independent House", "Plot", "PG /
 const CATEGORIES = ["HOMES", "PG", "VILLAS", "MORE"];
 
 const CITY_ALIASES = {
-  Delhi: ["delhi", "new delhi", "south delhi", "north delhi", "east delhi", "west delhi", "central delhi"],
-  Noida: ["noida", "greater noida"],
-  Gurugram: ["gurugram", "gurgaon"],
-  Faridabad: ["faridabad"],
-  Ghaziabad: ["ghaziabad"],
-  Lucknow: ["lucknow"],
-  Bangalore: ["bangalore", "bengaluru", "bangalore urban"],
+  Noida: ["noida", "greater noida", "delhi ncr"],
 };
 
 function matchSupportedCity(...values) {
@@ -186,7 +180,7 @@ export default function SearchBox({
             if (isSearchPage) pushSearch({ location: label, city: matchedCity });
           } else {
             setLocError(
-              "Location detected, but we currently serve Delhi NCR, Lucknow & Bangalore only."
+              "Location detected, but we currently serve Noida only."
             );
           }
         } catch {

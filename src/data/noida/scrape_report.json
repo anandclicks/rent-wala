@@ -1,0 +1,17 @@
+{
+  "started_at": "2026-09-12T09:31:48.653892+00:00",
+  "finished_at": "2026-09-12T09:31:59.474728+00:00",
+  "duration_seconds": 10.69,
+  "total_records": 177,
+  "by_type": {
+    "coworking": 107,
+    "coliving": 52,
+    "office": 15,
+    "flat": 3
+  },
+  "by_city": {
+    "Noida": 177
+  },
+  "errors": [],
+  "error_count": 0
+}

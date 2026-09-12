@@ -1,13 +1,7 @@
 import data from "@/data/data.json";
 
 const CITY_ALIASES = {
-  Delhi: ["delhi", "new delhi"],
-  Noida: ["noida", "greater noida"],
-  Gurugram: ["gurugram", "gurgaon"],
-  Faridabad: ["faridabad"],
-  Ghaziabad: ["ghaziabad"],
-  Lucknow: ["lucknow"],
-  Bangalore: ["bangalore", "bengaluru"],
+  Noida: ["noida", "greater noida", "delhi ncr"],
 };
 
 export function normalizeCity(city = "") {

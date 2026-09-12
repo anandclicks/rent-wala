@@ -4,18 +4,20 @@
   --background: #ffffff;
   --foreground: #1a2332;
 
-  --brand: #40916c;
-  --brand-dark: #1b4332;
-  --brand-darker: #081c15;
-  --brand-light: #d8f3dc;
-  --brand-soft: #f0f7f4;
-  --brand-mint: #e8f5e9;
+  --brand: #0066ff;
+  --brand-dark: #0052cc;
+  --brand-darker: #003d99;
+  --brand-light: #e8f0ff;
+  --brand-soft: #f4f8ff;
+  --brand-mint: #dbeafe;
   --ink: #1a2332;
   --navy: #0f172a;
   --muted: #64748b;
   --line: #e2e8f0;
-  --sale: #2563eb;
-  --rent-badge: #2d6a4f;
+  --sale: #0066ff;
+  --rent-badge: #0066ff;
+  --surface: #f8f9fa;
+  --footer-bg: #1e293b;
 }
 
 @theme inline {
@@ -34,6 +36,8 @@
   --color-line: var(--line);
   --color-sale: var(--sale);
   --color-rent-badge: var(--rent-badge);
+  --color-surface: var(--surface);
+  --color-footer-bg: var(--footer-bg);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

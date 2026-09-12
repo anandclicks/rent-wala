@@ -15,10 +15,10 @@ const CATEGORIES = [
     href: "/search?category=PG&city=Noida",
   },
   {
-    title: "Villas & Independent Houses",
-    subtitle: "Luxury Living",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
-    href: "/search?category=VILLA&city=Gurugram",
+    title: "Coworking Spaces",
+    subtitle: "Flexible desks & cabins",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+    href: "/search?category=COMMERCIAL&city=Noida",
   },
   {
     title: "Plots & Commercial",

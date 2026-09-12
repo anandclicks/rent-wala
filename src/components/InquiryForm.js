@@ -33,9 +33,9 @@ export default function InquiryForm({ propertyId, propertyTitle, compact = false
 
   if (done) {
     return (
-      <div className="rounded-xl bg-emerald-50 px-4 py-6 text-center">
-        <p className="font-bold text-emerald-800">Thank you!</p>
-        <p className="mt-1 text-sm text-emerald-700">
+      <div className="rounded-xl bg-brand-light px-4 py-6 text-center">
+        <p className="font-bold text-brand-dark">Thank you!</p>
+        <p className="mt-1 text-sm text-brand">
           We received your inquiry for {propertyTitle}. Our team will contact you shortly.
         </p>
       </div>

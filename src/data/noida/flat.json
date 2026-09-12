@@ -1,0 +1,1258 @@
+[
+  {
+    "id": "62f35b46de3be80a27c9bcd8",
+    "property_type": "flat",
+    "name": "Aster House",
+    "slug": "aster-house-sector-58",
+    "url": "https://cofynd.com/flat-space/aster-house-sector-58",
+    "description": "",
+    "city": "Noida",
+    "city_id": "5e3e77de936bc06de1f9a5e2",
+    "locality": "",
+    "address": "Sector 58, Noida",
+    "latitude": 28.6055717,
+    "longitude": 77.3551264,
+    "starting_price": 36000,
+    "currency": "INR",
+    "price_plans": [
+      {
+        "name": "62d69f0da463c54183942672",
+        "duration": "",
+        "price": 36000,
+        "number_of_items": null
+      }
+    ],
+    "amenities": [
+      "Air-Conditioning",
+      "Bike Parking",
+      "Parking",
+      "Fully Furnished",
+      "Housekeeping",
+      "Cook",
+      "Power Backup",
+      "TV",
+      "Wi-Fi",
+      "CCTV",
+      "Cupboard",
+      "Geyser",
+      "Lift",
+      "Work Desk",
+      "Veg Only",
+      "Bathroom",
+      "Cafe",
+      "Deposit",
+      "Gym",
+      "Kitchen",
+      "Lounge",
+      "Washing Machine",
+      "Side Table",
+      "Refrigerator",
+      "Dustbin",
+      "Shoe-rack",
+      "Veg & Non-Veg"
+    ],
+    "images": [
+      "https://img.cofynd.com/images/original/be44efc256c90468f3c55a65ae9cc084ee7f0aeb.jpg",
+      "https://img.cofynd.com/images/original/42aa4e3501194858b924126f6d215142ea33780f.jpg",
+      "https://img.cofynd.com/images/original/2fe034ee8c6a79c6293501c7d5c04352b877d7e4.jpg",
+      "https://img.cofynd.com/images/original/59ee51f657929b0675f2de0de654440371064142.jpg",
+      "https://img.cofynd.com/images/original/835eb3da379d6042e76b4170d431dbd895fd4a6e.jpg"
+    ],
+    "brand": "5e4a3d07ca98017cfe112e43",
+    "ratings": null,
+    "contact": {
+      "name": "",
+      "email": "",
+      "phone": ""
+    },
+    "tags": [],
+    "seo": {
+      "title": "",
+      "description": "",
+      "keywords": ""
+    },
+    "product_id": "CFAP20220026",
+    "status": "approve",
+    "scraped_at": "2026-09-12T09:31:59.086205+00:00",
+    "raw": {
+      "location": {
+        "metro_detail": {
+          "is_near_metro": false
+        },
+        "shuttle_point": {
+          "is_near": false
+        },
+        "is_hospital": false,
+        "is_school": false,
+        "is_restro": false,
+        "is_near_metro": false,
+        "is_ferry_stop": false,
+        "is_bus_stop": false,
+        "is_taxi_stand": false,
+        "is_tram": false,
+        "name": "Sector 58",
+        "address": "Sector 58, Noida",
+        "country": "6231ae062a52af3ddaa73a39",
+        "state": "6231b6bc2a52af3ddaa73a61",
+        "city": {
+          "cityImage": {
+            "coworking": "65e1b02e532e076b8490f8e1",
+            "coliving": "65e1b5f7532e076b8494e3b7",
+            "officespace": "65e1a55c532e076b848b418b",
+            "virtualoffice": "65e1bdb2532e076b84980f6c"
+          },
+          "_id": "5e3e77de936bc06de1f9a5e2",
+          "name": "Noida",
+          "updated_on": "2024-03-01T11:36:20.301Z",
+          "__v": 0,
+          "added_on": "2020-02-08T08:57:02.533Z",
+          "active": true,
+          "description": null,
+          "country": "6231ae062a52af3ddaa73a39",
+          "for_coLiving": true,
+          "for_coWorking": true,
+          "for_office": true,
+          "icons": "64a26ca81b7604586d6abf5e",
+          "image": "6231e1982a52af3ddaa7469d",
+          "state": "6231b6bc2a52af3ddaa73a61",
+          "for_flatspace": false,
+          "for_virtual": true,
+          "id": "5e3e77de936bc06de1f9a5e2"
+        },
+        "micro_location": "6074825bf270b433823140fb",
+        "latitude": 28.6055717,
+        "longitude": 77.3551264,
+        "landmark": "",
+        "landmark_distance": ""
+      },
+      "seo": {
+        "twitter": {
+          "image": null
+        },
+        "open_graph": {
+          "image": null
+        },
+        "status": true
+      },
+      "other_detail": {
+        "breakfast": {
+          "is_include": false,
+          "price": 0
+        },
+        "lunch": {
+          "is_include": false,
+          "price": 0
+        },
+        "dinner": {
+          "is_include": false,
+          "price": 0
+        },
+        "is_electricity_bill_included": false,
+        "beds": 35,
+        "rent_per_bed": 36000,
+        "type_of_co_living": "1 BHK",
+        "food_and_beverage": "Optional"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.3551264,
+          28.6055717
+        ]
+      },
+      "is_popular": {
+        "value": false
+      },
+      "priority": {
+        "overall": {
+          "is_active": false,
+          "order": 1000
+        },
+        "location": {
+          "is_active": false,
+          "order": 1000
+        },
+        "micro_location": {
+          "is_active": false,
+          "order": 1000
+        }
+      },
+      "assignedUsers": [],
+      "for_sale": false,
+      "for_rent": false,
+      "user": "5f2ce468ecdb5a5d67f0c621",
+      "added_by_user": "admin",
+      "_id": "62f35b46de3be80a27c9bcd8",
+      "likes": [],
+      "amenties": [
+        {
+          "name": "Air-Conditioning",
+          "is_available": true
+        },
+        {
+          "name": "Bike Parking",
+          "is_available": true
+        },
+        {
+          "name": "Parking",
+          "is_available": true
+        },
+        {
+          "name": "Fully Furnished",
+          "is_available": true
+        },
+        {
+          "name": "Housekeeping",
+          "is_available": true
+        },
+        {
+          "name": "Cook",
+          "is_available": true
+        },
+        {
+          "name": "Power Backup",
+          "is_available": true
+        },
+        {
+          "name": "TV",
+          "is_available": true
+        },
+        {
+          "name": "Wi-Fi",
+          "is_available": true
+        },
+        {
+          "name": "CCTV",
+          "is_available": true
+        },
+        {
+          "name": "Cupboard",
+          "is_available": true
+        },
+        {
+          "name": "Geyser",
+          "is_available": true
+        },
+        {
+          "name": "Lift",
+          "is_available": true
+        },
+        {
+          "name": "Work Desk",
+          "is_available": true
+        },
+        {
+          "name": "Veg Only",
+          "is_available": true
+        },
+        {
+          "name": "Bathroom",
+          "is_available": true
+        },
+        {
+          "name": "Cafe",
+          "is_available": true
+        },
+        {
+          "name": "Deposit",
+          "is_available": true
+        },
+        {
+          "name": "Gym",
+          "is_available": true
+        },
+        {
+          "name": "Kitchen",
+          "is_available": true
+        },
+        {
+          "name": "Lounge",
+          "is_available": true
+        },
+        {
+          "name": "Washing Machine",
+          "is_available": true
+        },
+        {
+          "name": "Side Table",
+          "is_available": true
+        },
+        {
+          "name": "Refrigerator",
+          "is_available": true
+        },
+        {
+          "name": "Dustbin",
+          "is_available": true
+        },
+        {
+          "name": "Shoe-rack",
+          "is_available": true
+        },
+        {
+          "name": "Veg & Non-Veg",
+          "is_available": true
+        }
+      ],
+      "is_active": true,
+      "status": "approve",
+      "name": "Aster House",
+      "currency_code": "INR",
+      "country_dbname": "India",
+      "images": [
+        {
+          "_id": "62f35b46de3be80a27c9bcd9",
+          "order": 1,
+          "image": {
+            "_id": "62f35afcde3be80a27c9bcd5",
+            "name": "be44efc256c90468f3c55a65ae9cc084ee7f0aeb.jpg",
+            "real_name": "modern-1bhk-home-living-room-designed-with-comfortable-couch-and-tv-unit.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/be44efc256c90468f3c55a65ae9cc084ee7f0aeb.jpg",
+            "size": 168700,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:15:08.618Z",
+            "updated_on": "2022-08-10T07:15:08.618Z",
+            "id": "62f35afcde3be80a27c9bcd5"
+          },
+          "id": "62f35b46de3be80a27c9bcd9"
+        },
+        {
+          "_id": "62f35b46de3be80a27c9bcda",
+          "order": 2,
+          "image": {
+            "_id": "62f35afcde3be80a27c9bcd3",
+            "name": "42aa4e3501194858b924126f6d215142ea33780f.jpg",
+            "real_name": "bathroom-design-with-vanity-unit-for-1bhk-house-design-in-bengaluru.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/42aa4e3501194858b924126f6d215142ea33780f.jpg",
+            "size": 169103,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:15:08.580Z",
+            "updated_on": "2022-08-10T07:15:08.580Z",
+            "id": "62f35afcde3be80a27c9bcd3"
+          },
+          "id": "62f35b46de3be80a27c9bcda"
+        },
+        {
+          "_id": "62f35b46de3be80a27c9bcdb",
+          "order": 3,
+          "image": {
+            "_id": "62f35afcde3be80a27c9bcd4",
+            "name": "2fe034ee8c6a79c6293501c7d5c04352b877d7e4.jpg",
+            "real_name": "modern-1bhk-house-living-room-design-with-tv-unit.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/2fe034ee8c6a79c6293501c7d5c04352b877d7e4.jpg",
+            "size": 163449,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:15:08.616Z",
+            "updated_on": "2022-08-10T07:15:08.616Z",
+            "id": "62f35afcde3be80a27c9bcd4"
+          },
+          "id": "62f35b46de3be80a27c9bcdb"
+        },
+        {
+          "_id": "62f35b46de3be80a27c9bcdc",
+          "order": 4,
+          "image": {
+            "_id": "62f35afcde3be80a27c9bcd6",
+            "name": "59ee51f657929b0675f2de0de654440371064142.jpg",
+            "real_name": "living-room-design-with-yellow-sofa-in-1bhk-house-design.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/59ee51f657929b0675f2de0de654440371064142.jpg",
+            "size": 169807,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:15:08.825Z",
+            "updated_on": "2022-08-10T07:15:08.825Z",
+            "id": "62f35afcde3be80a27c9bcd6"
+          },
+          "id": "62f35b46de3be80a27c9bcdc"
+        },
+        {
+          "_id": "62f35b46de3be80a27c9bcdd",
+          "order": 5,
+          "image": {
+            "_id": "62f35afcde3be80a27c9bcd7",
+            "name": "835eb3da379d6042e76b4170d431dbd895fd4a6e.jpg",
+            "real_name": "open-set-of-shelves-to-display-books-and-decor-items-in-1bhk-house.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/835eb3da379d6042e76b4170d431dbd895fd4a6e.jpg",
+            "size": 173391,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:15:08.839Z",
+            "updated_on": "2022-08-10T07:15:08.839Z",
+            "id": "62f35afcde3be80a27c9bcd7"
+          },
+          "id": "62f35b46de3be80a27c9bcdd"
+        }
+      ],
+      "slug": "aster-house-sector-58",
+      "coliving_plans": [
+        {
+          "price": 36000,
+          "_id": "62f35b46de3be80a27c9bcde",
+          "planId": "62d69f0da463c54183942672",
+          "id": "62f35b46de3be80a27c9bcde"
+        }
+      ],
+      "brand": "5e4a3d07ca98017cfe112e43",
+      "added_on": "2022-08-10T07:16:22.224Z",
+      "updated_on": "2022-08-10T18:07:31.970Z",
+      "__v": 0,
+      "productId": "CFAP20220026",
+      "createdAt": "2026-09-12T09:31:59.771Z",
+      "expireAt": "2026-09-12T09:31:59.771Z",
+      "space_type": "flats",
+      "id": "62f35b46de3be80a27c9bcd8",
+      "is_favorite": false
+    }
+  },
+  {
+    "id": "62f35e88de3be80a27c9bd07",
+    "property_type": "flat",
+    "name": "Sky Homes",
+    "slug": "sky-homes-sector-66",
+    "url": "https://cofynd.com/flat-space/sky-homes-sector-66",
+    "description": "",
+    "city": "Noida",
+    "city_id": "5e3e77de936bc06de1f9a5e2",
+    "locality": "",
+    "address": "Sector 66, Noida",
+    "latitude": 28.6055225,
+    "longitude": 77.37628,
+    "starting_price": 33999,
+    "currency": "INR",
+    "price_plans": [
+      {
+        "name": "62d69f0da463c54183942672",
+        "duration": "",
+        "price": 33999,
+        "number_of_items": null
+      }
+    ],
+    "amenities": [
+      "Air-Conditioning",
+      "Bike Parking",
+      "Parking",
+      "Fully Furnished",
+      "Power Backup",
+      "Cook",
+      "Housekeeping",
+      "TV",
+      "Wi-Fi",
+      "CCTV",
+      "Cupboard",
+      "Geyser",
+      "Self Cooking",
+      "24x7 Security",
+      "Veg Only",
+      "Work Desk",
+      "Cafe",
+      "Deposit",
+      "Gym",
+      "Kitchen",
+      "Lounge",
+      "Side Table",
+      "Washing Machine",
+      "Bathroom",
+      "Refrigerator",
+      "Dustbin",
+      "Shoe-rack",
+      "Veg & Non-Veg"
+    ],
+    "images": [
+      "https://img.cofynd.com/images/original/5d0496d17e29b84a44473298280e135d17cc5e27.jpg",
+      "https://img.cofynd.com/images/original/24511975a2de5376454e027e59f6dc8182e23cfa.jpg",
+      "https://img.cofynd.com/images/original/35d60a8f920d809fcfd20deee3837e6d2af971b7.jpg",
+      "https://img.cofynd.com/images/original/70ca691f279ee3a489a623d4eb2c61cc67889d7e.jpg",
+      "https://img.cofynd.com/images/original/9113382a041d0e0ce82862f5281cafb176953445.jpg"
+    ],
+    "brand": "5e4a3d07ca98017cfe112e43",
+    "ratings": null,
+    "contact": {
+      "name": "",
+      "email": "",
+      "phone": ""
+    },
+    "tags": [],
+    "seo": {
+      "title": "",
+      "description": "",
+      "keywords": ""
+    },
+    "product_id": "CFAP20220029",
+    "status": "approve",
+    "scraped_at": "2026-09-12T09:31:59.194119+00:00",
+    "raw": {
+      "location": {
+        "metro_detail": {
+          "is_near_metro": false
+        },
+        "shuttle_point": {
+          "is_near": false
+        },
+        "is_hospital": false,
+        "is_school": false,
+        "is_restro": false,
+        "is_near_metro": false,
+        "is_ferry_stop": false,
+        "is_bus_stop": false,
+        "is_taxi_stand": false,
+        "is_tram": false,
+        "name": "Sector 66",
+        "address": "Sector 66, Noida",
+        "country": "6231ae062a52af3ddaa73a39",
+        "state": "6231b6bc2a52af3ddaa73a61",
+        "city": {
+          "cityImage": {
+            "coworking": "65e1b02e532e076b8490f8e1",
+            "coliving": "65e1b5f7532e076b8494e3b7",
+            "officespace": "65e1a55c532e076b848b418b",
+            "virtualoffice": "65e1bdb2532e076b84980f6c"
+          },
+          "_id": "5e3e77de936bc06de1f9a5e2",
+          "name": "Noida",
+          "updated_on": "2024-03-01T11:36:20.301Z",
+          "__v": 0,
+          "added_on": "2020-02-08T08:57:02.533Z",
+          "active": true,
+          "description": null,
+          "country": "6231ae062a52af3ddaa73a39",
+          "for_coLiving": true,
+          "for_coWorking": true,
+          "for_office": true,
+          "icons": "64a26ca81b7604586d6abf5e",
+          "image": "6231e1982a52af3ddaa7469d",
+          "state": "6231b6bc2a52af3ddaa73a61",
+          "for_flatspace": false,
+          "for_virtual": true,
+          "id": "5e3e77de936bc06de1f9a5e2"
+        },
+        "micro_location": "6074825cf270b43382314103",
+        "latitude": 28.6055225,
+        "longitude": 77.37628,
+        "landmark": "",
+        "landmark_distance": ""
+      },
+      "seo": {
+        "twitter": {
+          "image": null
+        },
+        "open_graph": {
+          "image": null
+        },
+        "status": true
+      },
+      "other_detail": {
+        "breakfast": {
+          "is_include": false,
+          "price": 0
+        },
+        "lunch": {
+          "is_include": false,
+          "price": 0
+        },
+        "dinner": {
+          "is_include": false,
+          "price": 0
+        },
+        "is_electricity_bill_included": false,
+        "beds": 60,
+        "rent_per_bed": 33999,
+        "type_of_co_living": "1 BHK",
+        "food_and_beverage": "Optional",
+        "deposit": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.37628,
+          28.6055225
+        ]
+      },
+      "is_popular": {
+        "value": false
+      },
+      "priority": {
+        "overall": {
+          "is_active": false,
+          "order": 1000
+        },
+        "location": {
+          "is_active": false,
+          "order": 1000
+        },
+        "micro_location": {
+          "is_active": false,
+          "order": 1000
+        }
+      },
+      "assignedUsers": [],
+      "for_sale": false,
+      "for_rent": false,
+      "user": "5f2ce468ecdb5a5d67f0c621",
+      "added_by_user": "admin",
+      "_id": "62f35e88de3be80a27c9bd07",
+      "likes": [],
+      "amenties": [
+        {
+          "name": "Air-Conditioning",
+          "is_available": true
+        },
+        {
+          "name": "Bike Parking",
+          "is_available": true
+        },
+        {
+          "name": "Parking",
+          "is_available": true
+        },
+        {
+          "name": "Fully Furnished",
+          "is_available": true
+        },
+        {
+          "name": "Power Backup",
+          "is_available": true
+        },
+        {
+          "name": "Cook",
+          "is_available": true
+        },
+        {
+          "name": "Housekeeping",
+          "is_available": true
+        },
+        {
+          "name": "TV",
+          "is_available": true
+        },
+        {
+          "name": "Wi-Fi",
+          "is_available": true
+        },
+        {
+          "name": "CCTV",
+          "is_available": true
+        },
+        {
+          "name": "Cupboard",
+          "is_available": true
+        },
+        {
+          "name": "Geyser",
+          "is_available": true
+        },
+        {
+          "name": "Self Cooking",
+          "is_available": true
+        },
+        {
+          "name": "24x7 Security",
+          "is_available": true
+        },
+        {
+          "name": "Veg Only",
+          "is_available": true
+        },
+        {
+          "name": "Work Desk",
+          "is_available": true
+        },
+        {
+          "name": "Cafe",
+          "is_available": true
+        },
+        {
+          "name": "Deposit",
+          "is_available": true
+        },
+        {
+          "name": "Gym",
+          "is_available": true
+        },
+        {
+          "name": "Kitchen",
+          "is_available": true
+        },
+        {
+          "name": "Lounge",
+          "is_available": true
+        },
+        {
+          "name": "Side Table",
+          "is_available": true
+        },
+        {
+          "name": "Washing Machine",
+          "is_available": true
+        },
+        {
+          "name": "Bathroom",
+          "is_available": true
+        },
+        {
+          "name": "Refrigerator",
+          "is_available": true
+        },
+        {
+          "name": "Dustbin",
+          "is_available": true
+        },
+        {
+          "name": "Shoe-rack",
+          "is_available": true
+        },
+        {
+          "name": "Veg & Non-Veg",
+          "is_available": true
+        }
+      ],
+      "is_active": true,
+      "status": "approve",
+      "name": "Sky Homes",
+      "currency_code": "INR",
+      "country_dbname": "India",
+      "images": [
+        {
+          "_id": "62f35fffde3be80a27c9bd10",
+          "order": 1,
+          "image": {
+            "_id": "62f35e35de3be80a27c9bd04",
+            "name": "5d0496d17e29b84a44473298280e135d17cc5e27.jpg",
+            "real_name": "open-1-bhk-kitchen-design-with-breakfast-counter-and-two-chairs.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/5d0496d17e29b84a44473298280e135d17cc5e27.jpg",
+            "size": 169254,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:28:53.680Z",
+            "updated_on": "2022-08-10T07:28:53.680Z",
+            "id": "62f35e35de3be80a27c9bd04"
+          },
+          "id": "62f35fffde3be80a27c9bd10"
+        },
+        {
+          "_id": "62f35fffde3be80a27c9bd11",
+          "order": 2,
+          "image": {
+            "_id": "62f35e35de3be80a27c9bd02",
+            "name": "24511975a2de5376454e027e59f6dc8182e23cfa.jpg",
+            "real_name": "1-bhk-home-foyer-area-with-drawers-and-seater.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/24511975a2de5376454e027e59f6dc8182e23cfa.jpg",
+            "size": 172549,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:28:53.599Z",
+            "updated_on": "2022-08-10T07:28:53.599Z",
+            "id": "62f35e35de3be80a27c9bd02"
+          },
+          "id": "62f35fffde3be80a27c9bd11"
+        },
+        {
+          "_id": "62f35fffde3be80a27c9bd12",
+          "order": 3,
+          "image": {
+            "_id": "62f35e35de3be80a27c9bd03",
+            "name": "35d60a8f920d809fcfd20deee3837e6d2af971b7.jpg",
+            "real_name": "living-room-in-1-bhk-flat-designed-with-textured-wallpaper-behind-entertainment-unit.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/35d60a8f920d809fcfd20deee3837e6d2af971b7.jpg",
+            "size": 176370,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:28:53.615Z",
+            "updated_on": "2022-08-10T07:28:53.615Z",
+            "id": "62f35e35de3be80a27c9bd03"
+          },
+          "id": "62f35fffde3be80a27c9bd12"
+        },
+        {
+          "_id": "62f35fffde3be80a27c9bd13",
+          "order": 4,
+          "image": {
+            "_id": "62f35e35de3be80a27c9bd05",
+            "name": "70ca691f279ee3a489a623d4eb2c61cc67889d7e.jpg",
+            "real_name": "1-bhk-flat-living-room-has-brick-cladding-wall-and-small-study-nook.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/70ca691f279ee3a489a623d4eb2c61cc67889d7e.jpg",
+            "size": 173947,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:28:53.717Z",
+            "updated_on": "2022-08-10T07:28:53.717Z",
+            "id": "62f35e35de3be80a27c9bd05"
+          },
+          "id": "62f35fffde3be80a27c9bd13"
+        },
+        {
+          "_id": "62f35fffde3be80a27c9bd14",
+          "order": 5,
+          "image": {
+            "_id": "62f35e35de3be80a27c9bd06",
+            "name": "9113382a041d0e0ce82862f5281cafb176953445.jpg",
+            "real_name": "living-room-in-1-bhk-home-designed-with-sectional-sofa.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/9113382a041d0e0ce82862f5281cafb176953445.jpg",
+            "size": 178412,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:28:53.748Z",
+            "updated_on": "2022-08-10T07:28:53.748Z",
+            "id": "62f35e35de3be80a27c9bd06"
+          },
+          "id": "62f35fffde3be80a27c9bd14"
+        }
+      ],
+      "slug": "sky-homes-sector-66",
+      "coliving_plans": [
+        {
+          "price": 33999,
+          "_id": "62f35e88de3be80a27c9bd0d",
+          "planId": "62d69f0da463c54183942672",
+          "id": "62f35e88de3be80a27c9bd0d"
+        }
+      ],
+      "brand": "5e4a3d07ca98017cfe112e43",
+      "added_on": "2022-08-10T07:30:16.204Z",
+      "updated_on": "2022-08-10T18:08:25.027Z",
+      "__v": 0,
+      "description": null,
+      "productId": "CFAP20220029",
+      "createdAt": "2026-09-12T09:31:59.883Z",
+      "expireAt": "2026-09-12T09:31:59.884Z",
+      "space_type": "flats",
+      "id": "62f35e88de3be80a27c9bd07",
+      "is_favorite": false
+    }
+  },
+  {
+    "id": "62f36155de3be80a27c9bd1c",
+    "property_type": "flat",
+    "name": "Adelaide House",
+    "slug": "adelaide-house-greater-noida",
+    "url": "https://cofynd.com/flat-space/adelaide-house-greater-noida",
+    "description": "",
+    "city": "Noida",
+    "city_id": "5e3e77de936bc06de1f9a5e2",
+    "locality": "",
+    "address": "Knowledge Park III, Greater Noida",
+    "latitude": 28.4785555,
+    "longitude": 77.4863245,
+    "starting_price": 34999,
+    "currency": "INR",
+    "price_plans": [
+      {
+        "name": "62d69f0da463c54183942672",
+        "duration": "",
+        "price": 34999,
+        "number_of_items": null
+      }
+    ],
+    "amenities": [
+      "Air-Conditioning",
+      "Bike Parking",
+      "Parking",
+      "Fully Furnished",
+      "Housekeeping",
+      "Wi-Fi",
+      "TV",
+      "Power Backup",
+      "Cook",
+      "Cupboard",
+      "Geyser",
+      "Self Cooking",
+      "CCTV",
+      "Work Desk",
+      "24x7 Security",
+      "Lift",
+      "Bathroom",
+      "Deposit",
+      "Gym",
+      "Kitchen",
+      "Pet Friendly",
+      "Side Table",
+      "Washing Machine",
+      "Lounge",
+      "Veg & Non-Veg",
+      "Shoe-rack",
+      "Refrigerator",
+      "Dustbin"
+    ],
+    "images": [
+      "https://img.cofynd.com/images/original/b06f561d3bddd0671e8be2ae8ce32cc8165442bc.jpg",
+      "https://img.cofynd.com/images/original/6c2a5ef38b2389b92591e8a971641261f2e64c44.jpg",
+      "https://img.cofynd.com/images/original/c53db6c06d8b058064c6bca0fd218637834856d5.jpg",
+      "https://img.cofynd.com/images/original/c060cf6630e98857f289f1466142d82cd8ad0f9b.jpg",
+      "https://img.cofynd.com/images/original/53a0458684d5faefab63465ac57e51c79b63652b.jpg"
+    ],
+    "brand": "5e4a3d07ca98017cfe112e43",
+    "ratings": null,
+    "contact": {
+      "name": "",
+      "email": "",
+      "phone": ""
+    },
+    "tags": [
+      "Popular"
+    ],
+    "seo": {
+      "title": "",
+      "description": "",
+      "keywords": ""
+    },
+    "product_id": "CFAP20220030",
+    "status": "approve",
+    "scraped_at": "2026-09-12T09:31:59.239416+00:00",
+    "raw": {
+      "location": {
+        "metro_detail": {
+          "is_near_metro": false
+        },
+        "shuttle_point": {
+          "is_near": false
+        },
+        "is_near_metro": false,
+        "is_ferry_stop": false,
+        "is_bus_stop": false,
+        "is_taxi_stand": false,
+        "is_tram": false,
+        "is_hospital": false,
+        "is_school": false,
+        "is_restro": false,
+        "name": "Greater Noida",
+        "address": "Knowledge Park III, Greater Noida",
+        "country": "6231ae062a52af3ddaa73a39",
+        "state": "6231b6bc2a52af3ddaa73a61",
+        "city": {
+          "cityImage": {
+            "coworking": "65e1b02e532e076b8490f8e1",
+            "coliving": "65e1b5f7532e076b8494e3b7",
+            "officespace": "65e1a55c532e076b848b418b",
+            "virtualoffice": "65e1bdb2532e076b84980f6c"
+          },
+          "_id": "5e3e77de936bc06de1f9a5e2",
+          "name": "Noida",
+          "updated_on": "2024-03-01T11:36:20.301Z",
+          "__v": 0,
+          "added_on": "2020-02-08T08:57:02.533Z",
+          "active": true,
+          "description": null,
+          "country": "6231ae062a52af3ddaa73a39",
+          "for_coLiving": true,
+          "for_coWorking": true,
+          "for_office": true,
+          "icons": "64a26ca81b7604586d6abf5e",
+          "image": "6231e1982a52af3ddaa7469d",
+          "state": "6231b6bc2a52af3ddaa73a61",
+          "for_flatspace": false,
+          "for_virtual": true,
+          "id": "5e3e77de936bc06de1f9a5e2"
+        },
+        "micro_location": "6074825cf270b433823142c5",
+        "latitude": 28.4785555,
+        "longitude": 77.4863245,
+        "landmark": "",
+        "landmark_distance": ""
+      },
+      "seo": {
+        "twitter": {
+          "image": null
+        },
+        "open_graph": {
+          "image": null
+        },
+        "status": true
+      },
+      "other_detail": {
+        "breakfast": {
+          "is_include": false,
+          "price": 0
+        },
+        "lunch": {
+          "is_include": false,
+          "price": 0
+        },
+        "dinner": {
+          "is_include": false,
+          "price": 0
+        },
+        "is_electricity_bill_included": false,
+        "beds": 38,
+        "rent_per_bed": 34999,
+        "type_of_co_living": "1 BHK",
+        "food_and_beverage": "Optional",
+        "deposit": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.4863245,
+          28.4785555
+        ]
+      },
+      "is_popular": {
+        "value": true,
+        "order": 6
+      },
+      "priority": {
+        "overall": {
+          "is_active": false,
+          "order": 1000
+        },
+        "location": {
+          "is_active": false,
+          "order": 1000
+        },
+        "micro_location": {
+          "is_active": false,
+          "order": 1000
+        }
+      },
+      "assignedUsers": [],
+      "for_sale": false,
+      "for_rent": false,
+      "user": "5f2ce468ecdb5a5d67f0c621",
+      "added_by_user": "admin",
+      "_id": "62f36155de3be80a27c9bd1c",
+      "likes": [],
+      "amenties": [
+        {
+          "name": "Air-Conditioning",
+          "is_available": true
+        },
+        {
+          "name": "Bike Parking",
+          "is_available": true
+        },
+        {
+          "name": "Parking",
+          "is_available": true
+        },
+        {
+          "name": "Fully Furnished",
+          "is_available": true
+        },
+        {
+          "name": "Housekeeping",
+          "is_available": true
+        },
+        {
+          "name": "Wi-Fi",
+          "is_available": true
+        },
+        {
+          "name": "TV",
+          "is_available": true
+        },
+        {
+          "name": "Power Backup",
+          "is_available": true
+        },
+        {
+          "name": "Cook",
+          "is_available": true
+        },
+        {
+          "name": "Cupboard",
+          "is_available": true
+        },
+        {
+          "name": "Geyser",
+          "is_available": true
+        },
+        {
+          "name": "Self Cooking",
+          "is_available": true
+        },
+        {
+          "name": "CCTV",
+          "is_available": true
+        },
+        {
+          "name": "Work Desk",
+          "is_available": true
+        },
+        {
+          "name": "24x7 Security",
+          "is_available": true
+        },
+        {
+          "name": "Lift",
+          "is_available": true
+        },
+        {
+          "name": "Bathroom",
+          "is_available": true
+        },
+        {
+          "name": "Deposit",
+          "is_available": true
+        },
+        {
+          "name": "Gym",
+          "is_available": true
+        },
+        {
+          "name": "Kitchen",
+          "is_available": true
+        },
+        {
+          "name": "Pet Friendly",
+          "is_available": true
+        },
+        {
+          "name": "Side Table",
+          "is_available": true
+        },
+        {
+          "name": "Washing Machine",
+          "is_available": true
+        },
+        {
+          "name": "Lounge",
+          "is_available": true
+        },
+        {
+          "name": "Veg & Non-Veg",
+          "is_available": true
+        },
+        {
+          "name": "Shoe-rack",
+          "is_available": true
+        },
+        {
+          "name": "Refrigerator",
+          "is_available": true
+        },
+        {
+          "name": "Dustbin",
+          "is_available": true
+        }
+      ],
+      "is_active": true,
+      "status": "approve",
+      "name": "Adelaide House",
+      "currency_code": "INR",
+      "country_dbname": "India",
+      "images": [
+        {
+          "_id": "62f3615ede3be80a27c9bd23",
+          "order": 1,
+          "image": {
+            "_id": "62f36106de3be80a27c9bd1a",
+            "name": "b06f561d3bddd0671e8be2ae8ce32cc8165442bc.jpg",
+            "real_name": "modern-1bhk-house-balcony-design-with-sliding-glass-door.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/b06f561d3bddd0671e8be2ae8ce32cc8165442bc.jpg",
+            "size": 170243,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:40:54.604Z",
+            "updated_on": "2022-08-10T07:40:54.604Z",
+            "id": "62f36106de3be80a27c9bd1a"
+          },
+          "id": "62f3615ede3be80a27c9bd23"
+        },
+        {
+          "_id": "62f3615ede3be80a27c9bd24",
+          "order": 2,
+          "image": {
+            "_id": "62f36106de3be80a27c9bd17",
+            "name": "6c2a5ef38b2389b92591e8a971641261f2e64c44.jpg",
+            "real_name": "modern-1-bhk-home-straight-kitchen-with-muted-colours-and-clean-lines.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/6c2a5ef38b2389b92591e8a971641261f2e64c44.jpg",
+            "size": 167699,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:40:54.507Z",
+            "updated_on": "2022-08-10T07:40:54.507Z",
+            "id": "62f36106de3be80a27c9bd17"
+          },
+          "id": "62f3615ede3be80a27c9bd24"
+        },
+        {
+          "_id": "62f3615ede3be80a27c9bd25",
+          "order": 3,
+          "image": {
+            "_id": "62f36106de3be80a27c9bd18",
+            "name": "c53db6c06d8b058064c6bca0fd218637834856d5.jpg",
+            "real_name": "modern-1bhk-house-design-with-beautiful-foyer-unit-with-textured-wallpaper.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/c53db6c06d8b058064c6bca0fd218637834856d5.jpg",
+            "size": 169836,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:40:54.555Z",
+            "updated_on": "2022-08-10T07:40:54.555Z",
+            "id": "62f36106de3be80a27c9bd18"
+          },
+          "id": "62f3615ede3be80a27c9bd25"
+        },
+        {
+          "_id": "62f3615ede3be80a27c9bd26",
+          "order": 4,
+          "image": {
+            "_id": "62f36106de3be80a27c9bd19",
+            "name": "c060cf6630e98857f289f1466142d82cd8ad0f9b.jpg",
+            "real_name": "modern-1bhk-bedroom-design-with-false-ceiling-and-queen-size-bed.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/c060cf6630e98857f289f1466142d82cd8ad0f9b.jpg",
+            "size": 168168,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:40:54.581Z",
+            "updated_on": "2022-08-10T07:40:54.581Z",
+            "id": "62f36106de3be80a27c9bd19"
+          },
+          "id": "62f3615ede3be80a27c9bd26"
+        },
+        {
+          "_id": "62f3615ede3be80a27c9bd27",
+          "order": 5,
+          "image": {
+            "_id": "62f36106de3be80a27c9bd1b",
+            "name": "53a0458684d5faefab63465ac57e51c79b63652b.jpg",
+            "real_name": "modern-1bhk-house-design-with-small-breakfast-table-and-chairs.jpg",
+            "s3_link": "https://img.cofynd.com/images/original/53a0458684d5faefab63465ac57e51c79b63652b.jpg",
+            "size": 155362,
+            "height": null,
+            "width": null,
+            "__v": 0,
+            "added_on": "2022-08-10T07:40:54.878Z",
+            "updated_on": "2022-08-10T07:40:54.878Z",
+            "id": "62f36106de3be80a27c9bd1b"
+          },
+          "id": "62f3615ede3be80a27c9bd27"
+        }
+      ],
+      "slug": "adelaide-house-greater-noida",
+      "coliving_plans": [
+        {
+          "price": 34999,
+          "_id": "62f3615ede3be80a27c9bd28",
+          "planId": "62d69f0da463c54183942672",
+          "id": "62f3615ede3be80a27c9bd28"
+        }
+      ],
+      "brand": "5e4a3d07ca98017cfe112e43",
+      "added_on": "2022-08-10T07:42:13.341Z",
+      "updated_on": "2022-08-10T18:09:34.455Z",
+      "__v": 0,
+      "description": null,
+      "productId": "CFAP20220030",
+      "createdAt": "2026-09-12T09:31:59.926Z",
+      "expireAt": "2026-09-12T09:31:59.926Z",
+      "space_type": "flats",
+      "id": "62f36155de3be80a27c9bd1c",
+      "is_favorite": false
+    }
+  }
+]

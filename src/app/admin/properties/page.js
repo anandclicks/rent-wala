@@ -84,7 +84,7 @@ export default function AdminPropertiesPage() {
                     <span
                       className={`rounded-full px-2 py-0.5 text-xs font-bold ${
                         p.status === "PUBLISHED"
-                          ? "bg-emerald-100 text-emerald-700"
+                          ? "bg-brand-light text-brand-dark"
                           : "bg-gray-100 text-gray-600"
                       }`}
                     >

@@ -70,7 +70,7 @@ export default function AdminSettingsPage() {
           />
         </label>
         {message && (
-          <p className={`text-sm ${message.includes("saved") ? "text-emerald-700" : "text-red-600"}`}>
+          <p className={`text-sm ${message.includes("saved") ? "text-brand-dark" : "text-red-600"}`}>
             {message}
           </p>
         )}

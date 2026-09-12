@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: "Buy", href: "/search?listingType=SELL&city=Noida" },
   { label: "Rent", href: "/search?listingType=RENT&city=Noida" },
   { label: "PG/Hostel", href: "/search?category=PG&city=Noida" },
-  { label: "Villa", href: "/search?category=VILLA&city=Gurugram" },
+  { label: "Commercial", href: "/search?category=COMMERCIAL&city=Noida" },
   { label: "Independent House", href: "/search?category=INDEPENDENT_HOUSE&city=Noida" },
   { label: "Agents", href: "#" },
 ];

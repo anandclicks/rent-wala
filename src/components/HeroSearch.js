@@ -27,10 +27,10 @@ const BUDGET_OPTIONS = [
 ];
 
 const POPULAR = [
-  { label: "2 BHK in Delhi", location: "Delhi", type: "Apartment" },
-  { label: "PG in Bangalore", location: "Bangalore", type: "PG / Hostel" },
-  { label: "Villa in Goa", location: "Gurugram", type: "Villa" },
-  { label: "Independent House in Noida", location: "Noida", type: "Independent House" },
+  { label: "PG in Sector 62", location: "Sector 62, Noida", type: "PG / Hostel" },
+  { label: "Coworking in Sector 63", location: "Sector 63, Noida", type: "Office Space" },
+  { label: "Coliving in Sector 44", location: "Sector 44, Noida", type: "PG / Hostel" },
+  { label: "Flats in Sector 18", location: "Sector 18, Noida", type: "Apartment" },
 ];
 
 export default function HeroSearch() {
