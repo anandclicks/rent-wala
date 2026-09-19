@@ -32,7 +32,7 @@ export default function FeaturedProperties({ properties }) {
             <p className="mt-1 text-sm text-muted">Handpicked listings just for you</p>
           </div>
           <Link
-            href="/search?city=Noida"
+            href="/search"
             className="text-sm font-semibold text-brand-dark transition hover:text-brand-darker"
           >
             View All →

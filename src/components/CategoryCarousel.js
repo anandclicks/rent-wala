@@ -6,25 +6,25 @@ const CATEGORIES = [
     title: "Flats / Apartments",
     subtitle: "Buy or Rent",
     image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
-    href: "/search?category=APARTMENT&city=Noida",
+    href: "/search?category=APARTMENT",
   },
   {
     title: "PG / Hostels",
     subtitle: "Single to Triple Sharing",
     image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80",
-    href: "/search?category=PG&city=Noida",
+    href: "/search?category=PG",
   },
   {
     title: "Coworking Spaces",
     subtitle: "Flexible desks & cabins",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
-    href: "/search?category=COMMERCIAL&city=Noida",
+    href: "/search?category=COMMERCIAL",
   },
   {
     title: "Plots & Commercial",
     subtitle: "Investment & Business",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
-    href: "/search?category=COMMERCIAL&city=Noida",
+    href: "/search?category=COMMERCIAL",
   },
 ];
 

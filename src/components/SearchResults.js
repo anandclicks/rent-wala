@@ -15,7 +15,7 @@ export default function SearchResults() {
   const cityParam = searchParams.get("city") || "";
   const localityParam = searchParams.get("locality") || "";
   const type = searchParams.get("type") || "";
-  const q = searchParams.get("q") || "";
+  const q = searchParams.get("q") || searchParams.get("location") || "";
   const categoryParam = searchParams.get("category") || "";
   const category = categoryParam || mapSearchTypeToCategory(type);
   const listingType = searchParams.get("listingType") || "";
@@ -33,9 +33,12 @@ export default function SearchResults() {
   }, [cityParam, localityParam, q]);
 
   const properties = useMemo(() => {
-    if (!city) return [];
+    const hasLocation = Boolean(q || locality || city);
+    const hasFilters = Boolean(category || listingType || minPrice || maxPrice || bhk || furnishing);
+    if (!hasLocation && !hasFilters) return [];
+
     return filterStaticProperties({
-      city,
+      city: city || undefined,
       locality,
       category,
       listingType,
@@ -43,13 +46,15 @@ export default function SearchResults() {
       maxPrice,
       bhk,
       furnishing,
-      q: locality ? "" : q,
+      q,
     });
   }, [city, locality, category, listingType, minPrice, maxPrice, bhk, furnishing, q]);
 
   const total = properties.length;
-  const hasSearch = Boolean(city);
-  const locationLabel = [locality, city].filter(Boolean).join(", ");
+  const hasSearch = Boolean(
+    q || locality || city || category || listingType || minPrice || maxPrice || bhk || furnishing
+  );
+  const locationLabel = q || [locality, city].filter(Boolean).join(", ") || "Delhi NCR";
 
   return (
     <div className="min-h-[60vh] bg-gray-50">

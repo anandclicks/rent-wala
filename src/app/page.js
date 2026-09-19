@@ -51,20 +51,20 @@ export default function Home() {
       <ExploreCarouselSection
         title="PG & Coliving"
         subtitle="Affordable stays for students and professionals"
-        viewAllHref="/search?category=PG&city=Noida"
+        viewAllHref="/search?category=PG"
         items={pgs}
       />
       <ExploreCarouselSection
         title="Coworking & Offices"
         subtitle="Professional workspaces across Noida"
-        viewAllHref="/search?category=COMMERCIAL&city=Noida"
+        viewAllHref="/search?category=COMMERCIAL"
         items={commercial}
         className="bg-brand-soft/30"
       />
       <ExploreCarouselSection
         title="Flats & Apartments"
         subtitle="Modern apartments for every budget"
-        viewAllHref="/search?category=APARTMENT&city=Noida"
+        viewAllHref="/search?category=APARTMENT"
         items={flats}
       />
       <StatsSection />
@@ -198,7 +198,7 @@ function DualCTA() {
                 A Better Tomorrow Starts with a Brighter Home
               </h3>
               <Link
-                href="/search?city=Noida"
+                href="/search"
                 className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-dark transition hover:text-brand-darker"
               >
                 Explore Properties

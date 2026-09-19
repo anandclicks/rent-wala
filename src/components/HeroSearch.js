@@ -48,8 +48,8 @@ export default function HeroSearch() {
       const loc = overrides.location ?? location;
       const selectedCity = overrides.city ?? city;
       const parsed = parseLocationInput(loc, selectedCity);
-      if (!parsed.city) {
-        setError("Please enter a location or select a city.");
+      if (!loc.trim()) {
+        setError("Please enter a location to search.");
         return;
       }
       setError("");

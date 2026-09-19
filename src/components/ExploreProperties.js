@@ -1,7 +1,7 @@
 import ExploreCarouselSection from "@/components/ExploreCarouselSection";
 import { getAllProperties } from "@/data/properties";
 
-export default function ExploreProperties({ items, title = "Explore Properties", viewAllHref = "/search?city=Noida" }) {
+export default function ExploreProperties({ items, title = "Explore Properties", viewAllHref = "/search" }) {
   const properties = items ?? getAllProperties().slice(0, 12);
 
   return (

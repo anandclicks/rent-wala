@@ -6,11 +6,10 @@ import { usePathname, useRouter } from "next/navigation";
 import Logo from "@/components/Logo";
 
 const NAV_LINKS = [
-  { label: "Buy", href: "/search?listingType=SELL&city=Noida" },
-  { label: "Rent", href: "/search?listingType=RENT&city=Noida" },
-  { label: "PG/Hostel", href: "/search?category=PG&city=Noida" },
-  { label: "Commercial", href: "/search?category=COMMERCIAL&city=Noida" },
-  { label: "Independent House", href: "/search?category=INDEPENDENT_HOUSE&city=Noida" },
+  { label: "Rent", href: "/search?listingType=RENT" },
+  { label: "PG/Hostel", href: "/search?category=PG" },
+  { label: "Commercial", href: "/search?category=COMMERCIAL" },
+  { label: "Independent House", href: "/search?category=INDEPENDENT_HOUSE" },
 ];
 
 function NavbarSearch() {
@@ -20,7 +19,7 @@ function NavbarSearch() {
   const submit = (e) => {
     e.preventDefault();
     const q = query.trim();
-    router.push(q ? `/search?location=${encodeURIComponent(q)}` : "/search");
+    router.push(q ? `/search?q=${encodeURIComponent(q)}` : "/search");
   };
 
   return (

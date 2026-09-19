@@ -98,8 +98,8 @@ export default function SearchBox({
       const selectedType = overrides.type ?? propertyType;
       const parsed = parseLocationInput(loc, selectedCity);
 
-      if (!parsed.city) {
-        setSearchError("Please detect location or select a city to search nearby properties.");
+      if (!loc.trim() && !selectedCity) {
+        setSearchError("Please enter a location or select a city.");
         return;
       }
 

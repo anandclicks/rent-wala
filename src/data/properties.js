@@ -59,6 +59,24 @@ export function getPropertiesByCategoryEnum(category) {
   return PROPERTIES.filter((p) => p.category === category).map(formatPropertyForCard);
 }
 
+function propertyLocationText(property) {
+  return [property.title, property.locality, property.city, property.address, property.description]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+}
+
+function matchesLocationQuery(property, query) {
+  const q = query.trim().toLowerCase();
+  if (!q) return true;
+
+  const haystack = propertyLocationText(property);
+  const tokens = q.split(/[\s,]+/).filter(Boolean);
+  if (tokens.length === 0) return haystack.includes(q);
+
+  return tokens.every((token) => haystack.includes(token));
+}
+
 export function filterStaticProperties(filters) {
   let results = [...PROPERTIES];
 
@@ -66,11 +84,10 @@ export function filterStaticProperties(filters) {
     const city = normalizeCity(filters.city).toLowerCase();
     results = results.filter((p) => p.city.toLowerCase() === city);
   }
-  if (filters.locality) {
-    const loc = filters.locality.toLowerCase();
-    results = results.filter(
-      (p) => p.locality.toLowerCase().includes(loc) || loc.includes(p.locality.toLowerCase())
-    );
+
+  const locationQuery = (filters.q || filters.locality || "").trim();
+  if (locationQuery) {
+    results = results.filter((p) => matchesLocationQuery(p, locationQuery));
   }
   if (filters.category) {
     results = results.filter((p) => p.category === filters.category);
@@ -97,17 +114,6 @@ export function filterStaticProperties(filters) {
     const f = filters.furnishing.toLowerCase();
     results = results.filter((p) => p.furnishing?.toLowerCase().includes(f));
   }
-  if (filters.q) {
-    const q = filters.q.toLowerCase();
-    results = results.filter(
-      (p) =>
-        p.title.toLowerCase().includes(q) ||
-        p.locality.toLowerCase().includes(q) ||
-        p.city.toLowerCase().includes(q) ||
-        p.address?.toLowerCase().includes(q)
-    );
-  }
-
   return results.map(formatPropertyForCard);
 }
 

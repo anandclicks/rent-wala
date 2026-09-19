@@ -4,42 +4,82 @@ import { normalizeCity } from "@/lib/cities";
 
 export { normalizeCity };
 
+function findLocalityMatch(text) {
+  const lower = text.toLowerCase();
+  const exact = data.localities.find((l) => l.name.toLowerCase() === lower);
+  if (exact) return exact;
+
+  const partial = data.localities.filter(
+    (l) =>
+      l.name.toLowerCase().includes(lower) ||
+      lower.includes(l.name.toLowerCase())
+  );
+  if (partial.length === 1) return partial[0];
+  return null;
+}
+
 export function parseLocationInput(location = "", city = "") {
   const text = location.trim();
-  if (!text) return { city: normalizeCity(city), locality: "" };
+  const explicitCity = normalizeCity(city);
+
+  if (!text) {
+    return { city: explicitCity, locality: "", q: "" };
+  }
 
   const parts = text.split(",").map((p) => p.trim()).filter(Boolean);
   if (parts.length >= 2) {
     const maybeCity = normalizeCity(parts[parts.length - 1]);
     const locality = parts.slice(0, -1).join(", ");
-    return { city: maybeCity || normalizeCity(city), locality };
+    return {
+      city: maybeCity || explicitCity,
+      locality,
+      q: text,
+    };
   }
 
-  const normalizedCity = normalizeCity(city) || normalizeCity(text);
-  const knownLocality = data.localities.find(
-    (l) => l.name.toLowerCase() === text.toLowerCase()
-  );
+  const asCity = normalizeCity(text);
+  if (data.cities.some((c) => c.toLowerCase() === text.toLowerCase())) {
+    return { city: asCity, locality: "", q: text };
+  }
+
+  const knownLocality = findLocalityMatch(text);
   if (knownLocality) {
-    return { city: normalizeCity(knownLocality.city), locality: knownLocality.name };
+    return {
+      city: normalizeCity(knownLocality.city),
+      locality: knownLocality.name,
+      q: text,
+    };
   }
 
-  if (normalizedCity && text.toLowerCase() !== normalizedCity.toLowerCase()) {
-    return { city: normalizedCity, locality: text };
+  for (const knownCity of data.cities) {
+    if (text.toLowerCase().includes(knownCity.toLowerCase())) {
+      const localityPart = text
+        .replace(new RegExp(knownCity, "i"), "")
+        .replace(/,/g, "")
+        .trim();
+      return {
+        city: knownCity,
+        locality: localityPart,
+        q: text,
+      };
+    }
   }
 
-  return { city: normalizedCity, locality: "" };
+  if (explicitCity) {
+    return { city: explicitCity, locality: text, q: text };
+  }
+
+  return { city: asCity && asCity !== text ? asCity : "", locality: "", q: text };
 }
 
-export function filterListings({ city, locality = "", type = "", listingType = "" }) {
-  const normCity = normalizeCity(city);
-  if (!normCity) return { properties: [], pgs: [] };
-
+export function filterListings({ city, locality = "", type = "", listingType = "", q = "" }) {
   const category = mapSearchTypeToCategory(type);
   const results = filterStaticProperties({
-    city: normCity,
+    city: normalizeCity(city) || undefined,
     locality,
     category,
     listingType,
+    q,
   });
 
   const pgs = results.filter((p) => p.categoryEnum === "PG");
