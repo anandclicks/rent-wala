@@ -4,7 +4,7 @@ import {
   transformScrapedProperties,
   buildLocalitiesFromProperties,
 } from "@/lib/scraped-transform";
-import allProperties from "@/data/noida/all_properties.json";
+import allProperties from "@/data/delhi_ncr/all_properties.json";
 
 export const SITE_CONFIG = {
   callNumber: "+919876543210",
@@ -119,6 +119,6 @@ export function getScrapedStats() {
   return {
     total: PROPERTIES.length,
     byType,
-    city: PROPERTIES[0]?.city || "Noida",
+    cities: [...new Set(PROPERTIES.map((p) => p.city))].sort(),
   };
 }

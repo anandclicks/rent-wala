@@ -1,20 +1,409 @@
 {
   "states": [
-    "Uttar Pradesh"
+    "Delhi",
+    "Uttar Pradesh",
+    "Haryana"
   ],
   "cities": [
+    "Delhi",
+    "Gurugram",
     "Noida"
   ],
   "localities": [
+    {
+      "name": "Aerocity",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Bhikaji Cama Place",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Bungalow Rd",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Chattarpur",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Connaught Place",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Cyber City",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Defence Colony",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "DLF Cyber City",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Dlf Phase 1",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "DLF Phase 1",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "DLF Phase 2",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "DLF Phase 3",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "DLF Phase 4",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Dwarka",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Dwarka Delhi",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "East Delhi",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "East of Kailash",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "F13/11 Dlf Phase 1",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Friends Colony",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Ghitorni",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Golf Course Extension Road",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Golf Course Road",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Greater Kailash",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Greater Kailash II",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
     {
       "name": "Greater Noida",
       "city": "Noida",
       "state": "Uttar Pradesh"
     },
     {
+      "name": "Green Park",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Gwal Pahari",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Hauz Khas",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Huda City Centre",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Janakpuri",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Jasola",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Jawahar Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Jhandewalan",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Kailash Colony",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Kalkaji",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Kamla Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Kanjhawala Rd",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "KarKardooma",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Karol Bagh",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Katwaria Sarai",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Kirti Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
       "name": "Knowledge Park III",
       "city": "Noida",
       "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Lado Sarai",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Lajpat Nagar I",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Lajpat Nagar Ii",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Lajpat Nagar III",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Laxmi Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Mahipalpur",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Malviya Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Manesar",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Mayapuri",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Mayur Vihar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Mg Road Gurugram",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "MG Road Gurugram",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Mohan Cooperative",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Moti Bagh II",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Moti Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Najafgarh",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Naraina",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Nehru Place",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Netaji Subhash Place",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "New Friends Colony",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "NH 8",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "North Campus",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "North Delhi",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Okhla",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Panchsheel Enclave",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Paschim Vihar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Patel Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Preet Vihar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Pusa Road",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Raja garden",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Rajinder Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Rohini",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Roop Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Saket",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "satya niketan",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Satya Niketan",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Sector - 27",
+      "city": "Gurugram",
+      "state": "Haryana"
     },
     {
       "name": "Sector 1",
@@ -97,6 +486,11 @@
       "state": "Uttar Pradesh"
     },
     {
+      "name": "Sector 15",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
       "name": "Sector 16",
       "city": "Noida",
       "state": "Uttar Pradesh"
@@ -110,6 +504,16 @@
       "name": "Sector 16B",
       "city": "Noida",
       "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 17",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 18",
+      "city": "Gurugram",
+      "state": "Haryana"
     },
     {
       "name": "Sector 18",
@@ -127,14 +531,59 @@
       "state": "Uttar Pradesh"
     },
     {
+      "name": "Sector 21",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 21 Pocket C Gurgaon",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 22",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
       "name": "Sector 22",
       "city": "Noida",
       "state": "Uttar Pradesh"
     },
     {
+      "name": "Sector 22 A",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 23",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 27",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
       "name": "Sector 27",
       "city": "Noida",
       "state": "Uttar Pradesh"
+    },
+    {
+      "name": "sector 28",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 28",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 29",
+      "city": "Gurugram",
+      "state": "Haryana"
     },
     {
       "name": "Sector 29",
@@ -143,8 +592,28 @@
     },
     {
       "name": "Sector 3",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Sector 3",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 3",
       "city": "Noida",
       "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 30",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 31",
+      "city": "Gurugram",
+      "state": "Haryana"
     },
     {
       "name": "Sector 31",
@@ -153,8 +622,28 @@
     },
     {
       "name": "Sector 32",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 32",
       "city": "Noida",
       "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 35",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 38",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 39",
+      "city": "Gurugram",
+      "state": "Haryana"
     },
     {
       "name": "Sector 4",
@@ -162,9 +651,69 @@
       "state": "Uttar Pradesh"
     },
     {
+      "name": "Sector 40",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 41",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 42",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 43",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 44",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
       "name": "Sector 44",
       "city": "Noida",
       "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 45",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 46",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 47",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 47 Gurgaon",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 48",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 49",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 50",
+      "city": "Gurugram",
+      "state": "Haryana"
     },
     {
       "name": "Sector 50",
@@ -172,9 +721,44 @@
       "state": "Uttar Pradesh"
     },
     {
+      "name": "Sector 51",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 52",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 53",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
       "name": "Sector 53",
       "city": "Noida",
       "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 54",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 55",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 56",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sector 57",
+      "city": "Gurugram",
+      "state": "Haryana"
     },
     {
       "name": "Sector 58",
@@ -207,6 +791,11 @@
       "state": "Uttar Pradesh"
     },
     {
+      "name": "Sector 65",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
       "name": "Sector 66",
       "city": "Noida",
       "state": "Uttar Pradesh"
@@ -222,6 +811,11 @@
       "state": "Uttar Pradesh"
     },
     {
+      "name": "Sector 69",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
       "name": "Sector 70",
       "city": "Noida",
       "state": "Uttar Pradesh"
@@ -230,6 +824,11 @@
       "name": "Sector 73",
       "city": "Noida",
       "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector 74",
+      "city": "Gurugram",
+      "state": "Haryana"
     },
     {
       "name": "Sector 78",
@@ -260,14 +859,104 @@
       "name": "Sector 98",
       "city": "Noida",
       "state": "Uttar Pradesh"
+    },
+    {
+      "name": "Sector-39",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Shakti Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Shivaji Marg",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Sohna Road",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "South City",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "South City 1",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "South Delhi",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "South Extension",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "South Moti Bagh",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Southern Peripheral Road",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sushant Lok 1",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Sushant Lok Phase 1",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Tilak Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Udyog Vihar",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "Unitech Cyber Park",
+      "city": "Gurugram",
+      "state": "Haryana"
+    },
+    {
+      "name": "University Enclave",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Vasant Kunj",
+      "city": "Delhi",
+      "state": "Delhi"
+    },
+    {
+      "name": "Vijay Nagar",
+      "city": "Delhi",
+      "state": "Delhi"
     }
   ],
   "popularSearches": [
     "PG in Sector 62 Noida",
-    "Coworking in Sector 62",
-    "Coliving in Sector 44",
-    "Office Space in Noida",
-    "Flats in Sector 18"
+    "Coworking in Gurugram",
+    "Coliving in South Delhi",
+    "Office Space in Connaught Place",
+    "Flats in Sector 18 Noida"
   ],
   "features": [
     {
@@ -298,19 +987,19 @@
   ],
   "stats": [
     {
-      "value": "177",
+      "value": "827",
       "label": "Properties Listed"
     },
     {
-      "value": "51",
+      "value": "188",
       "label": "Localities Covered"
     },
     {
-      "value": "52",
+      "value": "261",
       "label": "PG & Coliving"
     },
     {
-      "value": "122",
+      "value": "554",
       "label": "Commercial Spaces"
     },
     {
@@ -342,6 +1031,16 @@
   ],
   "locations": [
     {
+      "city": "Delhi",
+      "count": "279 Properties",
+      "image": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "city": "Gurugram",
+      "count": "371 Properties",
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80"
+    },
+    {
       "city": "Noida",
       "count": "177 Properties",
       "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80"
@@ -360,15 +1059,15 @@
     {
       "id": "t2",
       "name": "Sneha Iyer",
-      "city": "Noida",
+      "city": "Gurugram",
       "rating": 5,
-      "quote": "Booked a coworking desk near my office. Very convenient platform.",
+      "quote": "Booked a coworking desk near Cyber City. Very convenient platform.",
       "avatar": "https://i.pravatar.cc/100?img=45"
     },
     {
       "id": "t3",
       "name": "Aman Khan",
-      "city": "Noida",
+      "city": "Delhi",
       "rating": 5,
       "quote": "Verified listings and genuine contact details. Highly recommended!",
       "avatar": "https://i.pravatar.cc/100?img=33"

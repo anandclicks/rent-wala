@@ -1,0 +1,19 @@
+{
+  "started_at": "2026-09-19T06:08:35.491366+00:00",
+  "finished_at": "2026-09-19T06:09:51.596808+00:00",
+  "duration_seconds": 75.49,
+  "total_records": 827,
+  "by_type": {
+    "coworking": 379,
+    "coliving": 261,
+    "office": 175,
+    "flat": 12
+  },
+  "by_city": {
+    "Delhi": 279,
+    "Gurugram": 371,
+    "Noida": 177
+  },
+  "errors": [],
+  "error_count": 0
+}

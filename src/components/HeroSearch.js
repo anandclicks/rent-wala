@@ -28,9 +28,9 @@ const BUDGET_OPTIONS = [
 
 const POPULAR = [
   { label: "PG in Sector 62", location: "Sector 62, Noida", type: "PG / Hostel" },
-  { label: "Coworking in Sector 63", location: "Sector 63, Noida", type: "Office Space" },
-  { label: "Coliving in Sector 44", location: "Sector 44, Noida", type: "PG / Hostel" },
-  { label: "Flats in Sector 18", location: "Sector 18, Noida", type: "Apartment" },
+  { label: "Coworking in Gurugram", location: "Gurugram", type: "Office Space" },
+  { label: "Coliving in South Delhi", location: "South Delhi", type: "PG / Hostel" },
+  { label: "Office in Connaught Place", location: "Connaught Place, Delhi", type: "Office Space" },
 ];
 
 export default function HeroSearch() {

@@ -155,13 +155,25 @@ export function transformScrapedProperties(items = []) {
   return transformed;
 }
 
+const CITY_STATE = {
+  Delhi: "Delhi",
+  Noida: "Uttar Pradesh",
+  Gurugram: "Haryana",
+  Faridabad: "Haryana",
+  Ghaziabad: "Uttar Pradesh",
+};
+
+function stateForCity(city = "") {
+  return CITY_STATE[city] || "Delhi NCR";
+}
+
 export function buildLocalitiesFromProperties(properties = []) {
   const map = new Map();
   for (const p of properties) {
     if (!p.locality || !p.city) continue;
     const key = `${p.locality}|${p.city}`;
     if (!map.has(key)) {
-      map.set(key, { name: p.locality, city: p.city, state: "Uttar Pradesh" });
+      map.set(key, { name: p.locality, city: p.city, state: stateForCity(p.city) });
     }
   }
   return [...map.values()].sort((a, b) => a.name.localeCompare(b.name));

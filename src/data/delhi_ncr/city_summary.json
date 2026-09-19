@@ -1,0 +1,13 @@
+{
+  "delhi": 279,
+  "gurugram": 371,
+  "greater_noida": 13,
+  "noida_total_on_cofynd": 177,
+  "combined_total": 663,
+  "by_type": {
+    "coworking": 277,
+    "coliving": 215,
+    "office": 161,
+    "flat": 10
+  }
+}
