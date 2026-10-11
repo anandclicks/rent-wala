@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 function LogoMark({ className = "h-10 w-10 text-brand" }) {
   return (
@@ -19,27 +20,53 @@ function LogoMark({ className = "h-10 w-10 text-brand" }) {
 
 function LogoVideo({ className = "" }) {
   return (
-    <video
-      src="/logo.webm"
+    <Image
+      src="/logo-brand.png"
       width={1239}
       height={394}
-      autoPlay
-      loop
-      muted
-      playsInline
-      aria-label="Property Rent Wala"
-      className={`block h-10 w-auto max-w-[10.5rem] object-contain object-left [transform:translateZ(0)] sm:h-11 sm:max-w-[11.5rem] ${className}`}
+      alt="Property Rent Wala"
+      className={`block h-9 w-auto max-w-[10rem] object-contain object-left [transform:translateZ(0)] sm:h-10 sm:max-w-[11rem] ${className}`}
     />
+  );
+}
+
+function LogoBrandLight({ className = "" }) {
+  return (
+    <span
+      className={`inline-flex items-center rounded-xl bg-brand-soft/50 px-2.5 py-1.5 ring-1 ring-brand/15 ${className}`}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/logo-brand.png"
+        alt="Property Rent Wala"
+        className="h-9 w-auto max-w-[10rem] object-contain sm:h-10 sm:max-w-[11rem]"
+      />
+    </span>
+  );
+}
+
+function LogoBrandHome({ className = "" }) {
+  return (
+    <span
+      className={`inline-flex items-center rounded-xl bg-white px-2.5 py-1.5 shadow-sm ring-1 ring-line/80 ${className}`}
+    >
+      <LogoVideo />
+    </span>
   );
 }
 
 export default function Logo({ variant = "light", className = "", asLink = true }) {
   const isDark = variant === "dark";
 
-  const content =
-    variant === "brand" ? (
-      <LogoVideo className={className} />
-    ) : (
+  let content;
+  if (variant === "brandLight") {
+    content = <LogoBrandLight className={className} />;
+  } else if (variant === "brandHome") {
+    content = <LogoBrandHome className={className} />;
+  } else if (variant === "brand") {
+    content = <LogoVideo className={className} />;
+  } else {
+    content = (
       <span className={`flex items-center gap-2.5 ${className}`}>
         <LogoMark className={`h-10 w-10 shrink-0 sm:h-11 sm:w-11 ${isDark ? "text-white" : "text-brand"}`} />
         <span className="leading-none">
@@ -67,6 +94,7 @@ export default function Logo({ variant = "light", className = "", asLink = true 
         </span>
       </span>
     );
+  }
 
   if (!asLink) return content;
 

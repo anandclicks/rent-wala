@@ -23,6 +23,7 @@ export default function SearchResults() {
   const maxPrice = searchParams.get("maxPrice") || "";
   const bhk = searchParams.get("bhk") || "";
   const furnishing = searchParams.get("furnishing") || "";
+  const kitchen = searchParams.get("kitchen") === "1";
 
   const { city, locality } = useMemo(() => {
     const parsed = parseLocationInput(q, cityParam);
@@ -34,7 +35,9 @@ export default function SearchResults() {
 
   const properties = useMemo(() => {
     const hasLocation = Boolean(q || locality || city);
-    const hasFilters = Boolean(category || listingType || minPrice || maxPrice || bhk || furnishing);
+    const hasFilters = Boolean(
+      category || listingType || minPrice || maxPrice || bhk || furnishing || kitchen
+    );
     if (!hasLocation && !hasFilters) return [];
 
     return filterStaticProperties({
@@ -46,13 +49,23 @@ export default function SearchResults() {
       maxPrice,
       bhk,
       furnishing,
+      kitchen,
       q,
     });
-  }, [city, locality, category, listingType, minPrice, maxPrice, bhk, furnishing, q]);
+  }, [city, locality, category, listingType, minPrice, maxPrice, bhk, furnishing, kitchen, q]);
 
   const total = properties.length;
   const hasSearch = Boolean(
-    q || locality || city || category || listingType || minPrice || maxPrice || bhk || furnishing
+    q ||
+      locality ||
+      city ||
+      category ||
+      listingType ||
+      minPrice ||
+      maxPrice ||
+      bhk ||
+      furnishing ||
+      kitchen
   );
   const locationLabel = q || [locality, city].filter(Boolean).join(", ") || "Delhi NCR";
 

@@ -4,6 +4,34 @@ import { normalizeCity } from "@/lib/cities";
 
 export { normalizeCity };
 
+export const LOOKING_FOR_OPTIONS = [
+  { value: "pg", label: "PG / Coliving" },
+  { value: "hotel", label: "Hotel / Hostel" },
+  { value: "flat", label: "Rent Flat / Apartment" },
+  { value: "commercial", label: "Commercial / Coworking" },
+  { value: "kitchen", label: "Kitchen space" },
+  { value: "independent", label: "Independent / Villa" },
+];
+
+const LOOKING_FOR_MAP = {
+  pg: { type: "PG / Hostel", category: "PG", listingType: "RENT" },
+  hotel: { type: "PG / Hostel", category: "PG", listingType: "RENT" },
+  flat: { type: "Apartment", category: "APARTMENT", listingType: "RENT" },
+  commercial: { type: "Office Space", category: "COMMERCIAL", listingType: "RENT" },
+  kitchen: { kitchen: true, listingType: "RENT" },
+  independent: { type: "Independent House", category: "INDEPENDENT_HOUSE", listingType: "RENT" },
+};
+
+export function mapLookingFor(lookingFor = "") {
+  return LOOKING_FOR_MAP[lookingFor] || {};
+}
+
+export const BHK_HERO_OPTIONS = ["1 RK", "1 BHK", "2 BHK", "3 BHK"];
+
+export function showsBhkForLookingFor(lookingFor = "") {
+  return lookingFor === "pg" || lookingFor === "hotel" || lookingFor === "flat";
+}
+
 function findLocalityMatch(text) {
   const lower = text.toLowerCase();
   const exact = data.localities.find((l) => l.name.toLowerCase() === lower);
@@ -72,7 +100,7 @@ export function parseLocationInput(location = "", city = "") {
   return { city: asCity && asCity !== text ? asCity : "", locality: "", q: text };
 }
 
-export function filterListings({ city, locality = "", type = "", listingType = "", q = "" }) {
+export function filterListings({ city, locality = "", type = "", listingType = "", q = "", kitchen = false }) {
   const category = mapSearchTypeToCategory(type);
   const results = filterStaticProperties({
     city: normalizeCity(city) || undefined,
@@ -80,6 +108,7 @@ export function filterListings({ city, locality = "", type = "", listingType = "
     category,
     listingType,
     q,
+    kitchen,
   });
 
   const pgs = results.filter((p) => p.categoryEnum === "PG");
@@ -128,6 +157,8 @@ export function buildSearchQuery({
   type,
   listingType,
   category,
+  kitchen,
+  bhk,
   preserveParams,
 }) {
   const parsed = parseLocationInput(location, city);
@@ -140,16 +171,21 @@ export function buildSearchQuery({
   params.delete("q");
   params.delete("type");
   params.delete("category");
+  params.delete("kitchen");
+  params.delete("bhk");
 
-  if (parsed.city) params.set("city", parsed.city);
+  const resolvedCity = normalizeCity(city) || parsed.city;
+  if (resolvedCity) params.set("city", resolvedCity);
   if (parsed.locality) params.set("locality", parsed.locality);
-  if (location.trim()) params.set("q", location.trim());
+  if (location?.trim()) params.set("q", location.trim());
 
-  const resolvedCategory = type ? mapSearchTypeToCategory(type) : category || "";
+  const resolvedCategory = category || (type ? mapSearchTypeToCategory(type) : "");
   if (type) params.set("type", type);
   if (resolvedCategory) params.set("category", resolvedCategory);
 
   if (listingType) params.set("listingType", listingType);
+  if (kitchen) params.set("kitchen", "1");
+  if (bhk) params.set("bhk", bhk);
 
   return params.toString();
 }

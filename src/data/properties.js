@@ -66,6 +66,15 @@ function propertyLocationText(property) {
     .toLowerCase();
 }
 
+function hasKitchenAmenity(property) {
+  const amenities = property.amenities || [];
+  const text = propertyLocationText(property);
+  return (
+    amenities.some((a) => /kitchen|modular/i.test(a)) ||
+    /kitchen|modular kitchen/i.test(text)
+  );
+}
+
 function matchesLocationQuery(property, query) {
   const q = query.trim().toLowerCase();
   if (!q) return true;
@@ -113,6 +122,9 @@ export function filterStaticProperties(filters) {
   if (filters.furnishing) {
     const f = filters.furnishing.toLowerCase();
     results = results.filter((p) => p.furnishing?.toLowerCase().includes(f));
+  }
+  if (filters.kitchen) {
+    results = results.filter((p) => hasKitchenAmenity(p));
   }
   return results.map(formatPropertyForCard);
 }
