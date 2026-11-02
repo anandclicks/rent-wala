@@ -1,20 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ChevronDown, Heart, MapPin, Menu, Plus, Search, UserRound, Check } from "lucide-react";
 import Logo from "@/components/Logo";
+import Dropdown, { DropdownItem } from "@/components/ui/Dropdown";
+import MobileMenu from "@/components/layout/MobileMenu";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
+import { CITIES, MORE_LINKS, NAV_LINKS, isLinkActive } from "@/components/layout/nav-config";
+import { useWishlist } from "@/lib/wishlist";
 
-const NAV_LINKS = [
-  { label: "Rent", href: "/search?listingType=RENT" },
-  { label: "PG/Hostel", href: "/search?category=PG" },
-  { label: "Commercial", href: "/search?category=COMMERCIAL" },
-  { label: "Independent House", href: "/search?category=INDEPENDENT_HOUSE" },
-];
-
-function NavbarSearch() {
+function NavbarSearch({ className = "", initial = "" }) {
   const router = useRouter();
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initial);
 
   const submit = (e) => {
     e.preventDefault();
@@ -23,185 +22,276 @@ function NavbarSearch() {
   };
 
   return (
-    <form onSubmit={submit} className="hidden lg:block">
-      <label className="relative flex items-center">
+    <form onSubmit={submit} role="search" className={className}>
+      <label className="group flex h-11 items-stretch overflow-hidden rounded-lg border-2 border-ink/85 bg-white transition focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/10">
         <span className="sr-only">Search location, property or landmark</span>
-        <SearchIcon className="pointer-events-none absolute left-3.5 h-4 w-4 text-muted" />
+        <span className="grid place-items-center pl-3.5 text-muted">
+          <Search className="h-[18px] w-[18px]" />
+        </span>
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search location, property or landmark"
-          className="h-10 w-[220px] rounded-full border border-line bg-brand-soft/40 pl-10 pr-4 text-sm text-ink outline-none transition placeholder:text-muted/70 focus:border-brand focus:bg-white xl:w-[280px]"
+          className="min-w-0 flex-1 bg-transparent px-3 text-sm text-ink outline-none placeholder:text-muted/80"
         />
+        <button
+          type="submit"
+          aria-label="Search"
+          className="hidden w-12 place-items-center bg-ink/90 text-white transition hover:bg-brand sm:grid"
+        >
+          <Search className="h-5 w-5" />
+        </button>
       </label>
     </form>
   );
 }
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-  const close = () => setOpen(false);
-  const isHome = pathname === "/";
-  const showSearch = !isHome;
+function NavbarSearchWithParams(props) {
+  const params = useSearchParams();
+  const q = params.get("q") || "";
+  // Remount when the URL query changes so the field reflects the current search.
+  return <NavbarSearch key={q} {...props} initial={q} />;
+}
 
-  const linkClass = isHome
-    ? "text-sm font-medium text-white/85 transition hover:text-white"
-    : "text-sm font-medium text-ink/70 transition hover:text-brand-dark";
+function CityPicker({ params, compact = false }) {
+  const router = useRouter();
+  const current = params?.get("city") || "";
+  const label = current || "Delhi NCR";
 
   return (
-    <header
-      className={
-        isHome
-          ? "sticky top-0 z-50 border-b border-white/10 bg-black/10 backdrop-blur-md"
-          : "sticky top-0 z-50 border-b border-line bg-white shadow-sm"
-      }
-    >
-      <div className="mx-auto flex h-[4.25rem] max-w-[1400px] items-center gap-4 px-4 lg:px-8">
-        <Logo variant="brand" />
-
-        <nav className="mx-auto hidden items-center gap-7 xl:flex">
-          {NAV_LINKS.map((link) => (
-            <Link key={link.label} href={link.href} className={linkClass}>
-              {link.label}
-            </Link>
-          ))}
-          <button type="button" className={`flex items-center gap-1 ${linkClass}`}>
-            More
-            <ChevronDown className="h-3.5 w-3.5" />
-          </button>
-        </nav>
-
-        <div className="ml-auto hidden items-center gap-3 lg:flex">
-          {showSearch && <NavbarSearch />}
-          <button
-            type="button"
-            aria-label="Shortlisted properties"
-            className={`grid h-10 w-10 place-items-center rounded-full transition ${
-              isHome
-                ? "text-white/85 hover:bg-white/10 hover:text-white"
-                : "text-ink/60 hover:bg-brand-soft hover:text-brand-dark"
-            }`}
-          >
-            <HeartIcon className="h-5 w-5" />
-          </button>
-          {!showSearch && (
-            <Link
-              href="/list-your-property"
-              className={`rounded-full border px-5 py-2.5 text-sm font-semibold transition ${
-                isHome
-                  ? "border-white/40 text-white hover:border-white hover:bg-white/10"
-                  : "border-line text-ink hover:border-brand-dark hover:text-brand-dark"
-              }`}
-            >
-              List Property
-            </Link>
-          )}
-          <button
-            type="button"
-            aria-label="Account"
-            className={`grid h-10 w-10 place-items-center rounded-full transition ${
-              isHome
-                ? "bg-white/15 text-white hover:bg-white/25"
-                : "bg-brand-soft text-brand-dark hover:bg-brand-light"
-            }`}
-          >
-            <UserIcon className="h-5 w-5" />
-          </button>
-        </div>
-
+    <Dropdown
+      trigger={({ open, toggle }) => (
         <button
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
+          type="button"
+          onClick={toggle}
           aria-expanded={open}
-          className={`ml-auto grid h-10 w-10 place-items-center rounded-full border transition lg:hidden ${
-            isHome
-              ? "border-white/30 text-white hover:bg-white/10"
-              : "border-line text-ink hover:bg-brand-soft"
+          aria-haspopup="menu"
+          className={`flex h-11 items-center gap-2 rounded-lg text-sm font-medium text-ink transition hover:bg-surface ${
+            compact ? "max-w-[150px] px-2" : "min-w-[170px] border border-line px-3"
           }`}
         >
-          {open ? <CloseIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
+          <MapPin className="h-[18px] w-[18px] text-brand" />
+          <span className="truncate">{label}</span>
+          <ChevronDown
+            className={`ml-auto h-4 w-4 text-muted transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          />
         </button>
-      </div>
-
-      {open && (
-        <div className="border-t border-line bg-white lg:hidden">
-          <div className="px-4 pb-5 pt-3">
-            <nav className="flex flex-col">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={close}
-                  className="rounded-xl px-3 py-2.5 text-sm font-medium text-ink/80 transition hover:bg-brand-soft hover:text-brand-dark"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-            <div className="mt-3 flex flex-col gap-2 border-t border-line pt-4">
-              <Link
-                href="/list-your-property"
-                onClick={close}
-                className="flex items-center justify-center rounded-full border border-line px-4 py-2.5 text-sm font-semibold text-ink transition hover:border-brand-dark"
-              >
-                List Property
-              </Link>
-            </div>
-          </div>
+      )}
+    >
+      {({ close }) => (
+        <div role="menu">
+          <p className="px-3 pb-1 pt-2 text-[11px] font-bold uppercase tracking-wider text-muted">
+            Choose city
+          </p>
+          {CITIES.map((city) => (
+            <DropdownItem
+              key={city}
+              icon={MapPin}
+              active={city === current}
+              onClick={() => {
+                close();
+                router.push(`/search?city=${encodeURIComponent(city)}`);
+              }}
+            >
+              <span className="flex-1">{city}</span>
+              {city === current && <Check className="h-4 w-4" />}
+            </DropdownItem>
+          ))}
         </div>
       )}
-    </header>
+    </Dropdown>
   );
 }
 
-function HeartIcon({ className }) {
+function CityPickerWithParams(props) {
+  const params = useSearchParams();
+  return <CityPicker {...props} params={params} />;
+}
+
+function CategoryBar({ params }) {
+  const pathname = usePathname();
+  const moreActive = MORE_LINKS.some((l) => isLinkActive(l, pathname, params));
+
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M12 20s-7-4.35-9.33-8.4C1.1 8.9 2.3 5.5 5.6 5.5c1.9 0 3.2 1.2 4.4 2.6 1.2-1.4 2.5-2.6 4.4-2.6 3.3 0 4.5 3.4 2.93 6.1C19 15.65 12 20 12 20z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-    </svg>
+    <nav aria-label="Property categories" className="flex items-center gap-1">
+      {NAV_LINKS.map((link) => {
+        const active = isLinkActive(link, pathname, params);
+        const Icon = link.icon;
+        return (
+          <Link
+            key={link.label}
+            href={link.href}
+            aria-current={active ? "page" : undefined}
+            className={`relative flex h-11 items-center gap-2 rounded-lg px-3 text-sm font-medium transition ${
+              active ? "text-brand" : "text-ink/75 hover:bg-surface hover:text-ink"
+            }`}
+          >
+            <Icon className="h-[18px] w-[18px]" />
+            {link.label}
+            {active && <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-brand" />}
+          </Link>
+        );
+      })}
+      <Dropdown
+        trigger={({ open, toggle }) => (
+          <button
+            type="button"
+            onClick={toggle}
+            aria-expanded={open}
+            aria-haspopup="menu"
+            className={`flex h-11 items-center gap-1.5 rounded-lg px-3 text-sm font-medium transition ${
+              moreActive || open ? "text-brand" : "text-ink/75 hover:bg-surface hover:text-ink"
+            }`}
+          >
+            More
+            <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+          </button>
+        )}
+      >
+        {({ close }) => (
+          <div role="menu">
+            {MORE_LINKS.map((link) => (
+              <DropdownItem
+                key={link.label}
+                as={Link}
+                href={link.href}
+                icon={link.icon}
+                active={isLinkActive(link, pathname, params)}
+                onClick={close}
+              >
+                {link.label}
+              </DropdownItem>
+            ))}
+          </div>
+        )}
+      </Dropdown>
+    </nav>
   );
 }
 
-function UserIcon({ className }) {
+function CategoryBarWithParams() {
+  const params = useSearchParams();
+  return <CategoryBar params={params} />;
+}
+
+function WishlistButton({ className = "" }) {
+  const { count } = useWishlist();
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="12" cy="8" r="3.2" stroke="currentColor" strokeWidth="1.7" />
-      <path d="M5 19c1.2-3 4-4.5 7-4.5s5.8 1.5 7 4.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-    </svg>
+    <span className={`relative ${className}`}>
+      <button type="button" aria-label={`Shortlisted properties (${count})`} className="icon-btn">
+        <Heart className="h-[22px] w-[22px]" />
+      </button>
+      {count > 0 && (
+        <span className="pointer-events-none absolute right-0.5 top-0.5 grid h-[18px] min-w-[18px] animate-scale-in place-items-center rounded-full bg-brand px-1 text-[10px] font-bold text-white ring-2 ring-white">
+          {count}
+        </span>
+      )}
+    </span>
   );
 }
 
-function ChevronDown({ className }) {
+/** OLX-style "Sell" pill: white button wrapped in a two-tone ring. */
+export function PostPropertyButton({ className = "" }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <Link
+      href="/list-your-property"
+      className={`group relative rounded-full bg-[conic-gradient(from_180deg,var(--brand),var(--accent),#23e5db,var(--brand))] p-[3px] shadow-sm transition hover:shadow-md active:scale-[0.98] ${className}`}
+    >
+      <span className="flex h-[38px] items-center gap-1.5 rounded-full bg-white px-4 text-sm font-bold tracking-wide text-ink">
+        <Plus className="h-[18px] w-[18px] transition-transform duration-300 group-hover:rotate-90" />
+        POST PROPERTY
+      </span>
+    </Link>
   );
 }
 
-function MenuIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
-}
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const [lastPath, setLastPath] = useState(pathname);
 
-function CloseIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
-}
+  // Close the drawer whenever navigation happens.
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setMenuOpen(false);
+  }
 
-function SearchIcon({ className }) {
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M20 20l-3.2-3.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
+    <>
+      <header
+        className={`sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur-md transition-shadow duration-300 ${
+          scrolled ? "shadow-[0_4px_20px_-12px_rgb(15_23_42/0.25)]" : ""
+        }`}
+      >
+        {/* Row 1 — logo, location, search, actions */}
+        <div className="container-page flex h-16 items-center gap-3 lg:h-[4.5rem] lg:gap-5">
+          <button
+            type="button"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            className="icon-btn -ml-2 lg:hidden"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+
+          <Logo variant="brand" />
+
+          <div className="hidden lg:block">
+            <Suspense fallback={<CityPicker params={null} />}>
+              <CityPickerWithParams />
+            </Suspense>
+          </div>
+
+          <Suspense fallback={<NavbarSearch className="hidden flex-1 lg:block" />}>
+            <NavbarSearchWithParams className="hidden flex-1 lg:block" />
+          </Suspense>
+
+          <div className="ml-auto flex items-center gap-1 lg:ml-0 lg:gap-2">
+            <div className="lg:hidden">
+              <Suspense fallback={<CityPicker params={null} compact />}>
+                <CityPickerWithParams compact />
+              </Suspense>
+            </div>
+            <WishlistButton />
+            <button type="button" aria-label="Account" className="icon-btn hidden lg:grid">
+              <UserRound className="h-[22px] w-[22px]" />
+            </button>
+            <PostPropertyButton className="ml-2 hidden lg:inline-flex" />
+          </div>
+        </div>
+
+        {/* Row 2 — mobile search */}
+        <div className="container-page pb-3 lg:hidden">
+          <Suspense fallback={<NavbarSearch />}>
+            <NavbarSearchWithParams />
+          </Suspense>
+        </div>
+
+        {/* Row 2 — desktop category bar */}
+        <div className="hidden border-t border-line lg:block">
+          <div className="container-page flex items-center justify-between">
+            <Suspense fallback={<CategoryBar params={null} />}>
+              <CategoryBarWithParams />
+            </Suspense>
+            <p className="hidden items-center gap-1.5 text-xs font-medium text-muted xl:flex">
+              <span className="h-1.5 w-1.5 rounded-full bg-success" />
+              Verified listings · Zero brokerage
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <MobileBottomNav onMenu={() => setMenuOpen(true)} />
+    </>
   );
 }

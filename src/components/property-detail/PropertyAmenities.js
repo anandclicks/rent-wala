@@ -1,40 +1,46 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { AmenityIcon } from "./icons";
 
 const INITIAL_COUNT = 12;
 
-export default function PropertyAmenities({ amenities }) {
+export default function PropertyAmenities({ amenities: rawAmenities }) {
   const [showAll, setShowAll] = useState(false);
-  if (!amenities?.length) return null;
+  // Scraped data can repeat entries (e.g. "Meeting Rooms" three times).
+  const amenities = [...new Set(rawAmenities || [])];
+  if (!amenities.length) return null;
 
   const hasMore = amenities.length > INITIAL_COUNT;
   const visible = showAll ? amenities : amenities.slice(0, INITIAL_COUNT);
 
   return (
-    <section className="rounded-2xl border border-line bg-white p-6">
+    <section className="card-section">
       <div className="flex items-center justify-between gap-4">
         <h2 className="text-lg font-bold text-ink">Amenities</h2>
         {hasMore && (
           <button
             type="button"
             onClick={() => setShowAll((v) => !v)}
-            className="text-sm font-semibold text-brand-dark hover:underline"
+            className="link text-sm"
           >
-            {showAll ? "Show less" : "View All Amenities"}
+            {showAll ? "Show less" : `View all ${amenities.length}`}
+            <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${showAll ? "rotate-180" : ""}`} />
           </button>
         )}
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+      <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4">
         {visible.map((name) => (
           <div
             key={name}
-            className="flex flex-col items-center gap-2 rounded-xl border border-line bg-brand-soft/30 px-3 py-4 text-center"
+            className="group flex animate-fade-in items-center gap-3 rounded-xl border border-line px-3 py-3 transition duration-200 hover:border-brand/30 hover:bg-brand-soft"
           >
-            <AmenityIcon name={name} className="h-6 w-6 text-brand-dark" />
-            <span className="text-xs font-medium leading-snug text-ink">{name}</span>
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-light text-brand transition group-hover:bg-brand group-hover:text-white">
+              <AmenityIcon name={name} className="h-[18px] w-[18px]" />
+            </span>
+            <span className="text-[13px] font-medium leading-snug text-ink">{name}</span>
           </div>
         ))}
       </div>

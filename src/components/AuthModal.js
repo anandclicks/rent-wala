@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, Loader2, Mail, X } from "lucide-react";
 
 const OTP_LENGTH = 6;
 const RESEND_SECONDS = 30;
@@ -155,16 +156,22 @@ export default function AuthModal({ open, mode, onClose, onLogin, onSwitchMode }
         type="button"
         aria-label="Close"
         onClick={onClose}
-        className="absolute inset-0 bg-black/45 backdrop-blur-[2px]"
+        className="absolute inset-0 animate-fade-in bg-navy/50 backdrop-blur-[2px]"
       />
 
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="auth-title"
-        className="relative w-full max-w-md rounded-t-2xl border border-line bg-white shadow-2xl sm:rounded-2xl"
+        className="relative w-full max-w-md animate-sheet-up rounded-t-2xl border border-line bg-white shadow-pop sm:animate-scale-in sm:rounded-2xl"
       >
-        <div className="border-b border-line px-6 py-5">
+        <div className="relative border-b border-line px-6 py-5">
+          <button type="button" onClick={onClose} aria-label="Close" className="icon-btn absolute right-3 top-3">
+            <X className="h-5 w-5" />
+          </button>
+          <span className="mb-3 grid h-11 w-11 place-items-center rounded-xl bg-brand-light text-brand">
+            <Mail className="h-5 w-5" />
+          </span>
           <h2 id="auth-title" className="text-xl font-bold text-ink">
             {step === "otp" ? "Verify Email OTP" : isSignUp ? "Sign Up" : "Sign In"}
           </h2>
@@ -204,15 +211,16 @@ export default function AuthModal({ open, mode, onClose, onLogin, onSwitchMode }
                 />
               </Field>
 
-              {error && <p className="text-sm text-red-600">{error}</p>}
+              {error && <p role="alert" className="animate-fade-in text-sm font-medium text-danger">{error}</p>}
 
               <button
                 type="button"
                 onClick={sendOtp}
                 disabled={!canSendOtp || loading}
-                className="w-full rounded-xl bg-brand-dark py-3.5 text-sm font-bold tracking-wide text-white transition hover:bg-brand-darker disabled:cursor-not-allowed disabled:bg-gray-300"
+                className="btn btn-primary btn-lg w-full"
               >
-                {loading ? "Sending OTP..." : isSignUp ? "GET EMAIL OTP" : "SEND OTP & SIGN IN"}
+                {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                {loading ? "Sending OTP..." : isSignUp ? "Get Email OTP" : "Send OTP & Sign In"}
               </button>
             </div>
           ) : (
@@ -229,26 +237,27 @@ export default function AuthModal({ open, mode, onClose, onLogin, onSwitchMode }
                     value={digit}
                     onChange={(e) => handleOtpChange(i, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(i, e)}
-                    className="h-12 w-10 rounded-lg border border-line text-center text-lg font-bold text-ink outline-none transition focus:border-brand-dark focus:ring-2 focus:ring-brand/15 sm:h-14 sm:w-12"
+                    className="h-12 w-10 rounded-lg border border-line text-center text-lg font-bold text-ink outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/10 sm:h-14 sm:w-12"
                   />
                 ))}
               </div>
 
               {devOtp && (
-                <p className="rounded-lg bg-brand-soft px-3 py-2 text-center text-xs text-brand-dark">
+                <p className="rounded-lg bg-brand-soft px-3 py-2 text-center text-xs text-brand">
                   Dev OTP: <span className="font-bold tracking-widest">{devOtp}</span>
                 </p>
               )}
 
-              {error && <p className="text-center text-sm text-red-600">{error}</p>}
+              {error && <p role="alert" className="animate-fade-in text-center text-sm font-medium text-danger">{error}</p>}
 
               <button
                 type="button"
                 onClick={verifyOtp}
                 disabled={!canVerify || loading}
-                className="w-full rounded-xl bg-brand-dark py-3.5 text-sm font-bold tracking-wide text-white transition hover:bg-brand-darker disabled:cursor-not-allowed disabled:bg-gray-300"
+                className="btn btn-primary btn-lg w-full"
               >
-                {loading ? "Verifying..." : "VERIFY & CONTINUE"}
+                {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                {loading ? "Verifying..." : "Verify & Continue"}
               </button>
 
               <p className="text-center text-sm text-muted">
@@ -259,7 +268,7 @@ export default function AuthModal({ open, mode, onClose, onLogin, onSwitchMode }
                     type="button"
                     onClick={resendOtp}
                     disabled={loading}
-                    className="font-semibold text-brand-dark hover:underline"
+                    className="cursor-pointer font-semibold text-brand transition hover:text-brand-dark"
                   >
                     Resend OTP
                   </button>
@@ -273,9 +282,10 @@ export default function AuthModal({ open, mode, onClose, onLogin, onSwitchMode }
                   setError("");
                   setOtp(Array(OTP_LENGTH).fill(""));
                 }}
-                className="w-full text-sm font-semibold text-muted hover:text-brand-dark"
+                className="flex w-full cursor-pointer items-center justify-center gap-1.5 text-sm font-semibold text-muted transition hover:text-brand"
               >
-                ← Change email
+                <ArrowLeft className="h-4 w-4" />
+                Change email
               </button>
             </div>
           )}
@@ -288,7 +298,7 @@ export default function AuthModal({ open, mode, onClose, onLogin, onSwitchMode }
               <button
                 type="button"
                 onClick={() => onSwitchMode("signin")}
-                className="font-semibold text-brand-dark hover:underline"
+                className="cursor-pointer font-semibold text-brand transition hover:text-brand-dark"
               >
                 Sign In
               </button>
@@ -299,7 +309,7 @@ export default function AuthModal({ open, mode, onClose, onLogin, onSwitchMode }
               <button
                 type="button"
                 onClick={() => onSwitchMode("signup")}
-                className="font-semibold text-brand-dark hover:underline"
+                className="cursor-pointer font-semibold text-brand transition hover:text-brand-dark"
               >
                 Sign Up
               </button>
@@ -311,13 +321,12 @@ export default function AuthModal({ open, mode, onClose, onLogin, onSwitchMode }
   );
 }
 
-const inputClass =
-  "w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none transition focus:border-brand-dark focus:ring-2 focus:ring-brand/15";
+const inputClass = "input h-12";
 
 function Field({ label, children }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-sm font-semibold text-ink">{label}</span>
+      <span className="label">{label}</span>
       {children}
     </label>
   );

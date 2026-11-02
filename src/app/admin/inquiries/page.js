@@ -26,7 +26,7 @@ export default function AdminInquiriesPage() {
       ) : (
         <div className="mt-6 space-y-4">
           {inquiries.map((inq) => (
-            <article key={inq.id} className="rounded-2xl border border-line bg-white p-5">
+            <article key={inq.id} className="card p-5">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <div>
                   <p className="font-bold text-ink">{inq.name}</p>
@@ -44,7 +44,7 @@ export default function AdminInquiriesPage() {
                   Property:{" "}
                   <Link
                     href={`/property/${inq.property.slug}`}
-                    className="font-semibold text-brand-dark hover:underline"
+                    className="font-semibold text-brand transition hover:text-brand-dark"
                   >
                     {inq.property.title}
                   </Link>{" "}
@@ -52,11 +52,11 @@ export default function AdminInquiriesPage() {
                 </p>
               )}
               {inq.message && (
-                <p className="mt-2 rounded-lg bg-gray-50 px-3 py-2 text-sm text-muted">{inq.message}</p>
+                <p className="mt-2 rounded-lg bg-surface px-3 py-2 text-sm text-muted">{inq.message}</p>
               )}
               <a
                 href={`tel:+91${inq.mobile}`}
-                className="mt-3 inline-block text-sm font-semibold text-brand-dark hover:underline"
+                className="mt-3 inline-block text-sm font-semibold text-brand transition hover:text-brand-dark"
               >
                 Call lead →
               </a>

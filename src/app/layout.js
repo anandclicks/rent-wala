@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import { SITE_CONFIG } from "@/data/properties";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,11 +33,11 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans">
+      <body className="flex min-h-full flex-col bg-surface font-sans text-ink">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
-        <WhatsAppFloat />
+        <WhatsAppFloat number={SITE_CONFIG.whatsappNumber || ""} />
       </body>
     </html>
   );

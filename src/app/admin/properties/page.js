@@ -39,7 +39,7 @@ export default function AdminPropertiesPage() {
         <h1 className="text-2xl font-bold text-ink">All Listings</h1>
         <Link
           href="/admin/properties/new"
-          className="rounded-xl bg-brand-dark px-4 py-2.5 text-sm font-semibold text-white"
+          className="btn btn-primary"
         >
           + Add Listing
         </Link>
@@ -50,9 +50,9 @@ export default function AdminPropertiesPage() {
       ) : properties.length === 0 ? (
         <p className="mt-8 text-muted">No listings yet. Add your first property.</p>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-2xl border border-line bg-white">
+        <div className="mt-6 overflow-x-auto card">
           <table className="w-full min-w-[640px] text-left text-sm">
-            <thead className="border-b border-line bg-gray-50 text-xs uppercase text-muted">
+            <thead className="border-b border-line bg-surface text-xs uppercase tracking-wide text-muted">
               <tr>
                 <th className="px-4 py-3">Title</th>
                 <th className="px-4 py-3">City</th>
@@ -85,7 +85,7 @@ export default function AdminPropertiesPage() {
                       className={`rounded-full px-2 py-0.5 text-xs font-bold ${
                         p.status === "PUBLISHED"
                           ? "bg-brand-light text-brand-dark"
-                          : "bg-gray-100 text-gray-600"
+                          : "bg-surface text-muted"
                       }`}
                     >
                       {p.status}
@@ -96,7 +96,7 @@ export default function AdminPropertiesPage() {
                       {p.status === "PUBLISHED" && (
                         <Link
                           href={`/property/${p.slug}`}
-                          className="text-brand-dark hover:underline"
+                          className="text-brand transition hover:text-brand-dark"
                           target="_blank"
                         >
                           View
@@ -105,14 +105,14 @@ export default function AdminPropertiesPage() {
                       <button
                         type="button"
                         onClick={() => toggleStatus(p)}
-                        className="text-brand-dark hover:underline"
+                        className="text-brand transition hover:text-brand-dark"
                       >
                         {p.status === "PUBLISHED" ? "Unpublish" : "Publish"}
                       </button>
                       <button
                         type="button"
                         onClick={() => remove(p.id)}
-                        className="text-red-600 hover:underline"
+                        className="text-danger transition hover:text-red-700"
                       >
                         Delete
                       </button>

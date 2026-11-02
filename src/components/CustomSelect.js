@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { Check, ChevronDown } from "lucide-react";
 
 const PANEL_MAX_HEIGHT = 260;
 const PANEL_GAP = 8;
@@ -88,8 +89,10 @@ export default function CustomSelect({
 
   const triggerClass =
     variant === "inline"
-      ? "flex w-full items-center justify-between gap-2 bg-transparent py-0.5 text-left text-sm outline-none"
-      : "flex w-full items-center justify-between gap-2 rounded-xl border border-line bg-white px-3.5 py-2.5 text-left text-sm outline-none transition hover:border-brand/35 focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/15 lg:min-w-[150px]";
+      ? "flex w-full cursor-pointer items-center justify-between gap-2 rounded-md bg-transparent py-0.5 text-left text-sm outline-none focus-visible:ring-4 focus-visible:ring-brand/15"
+      : `flex h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-lg border bg-white px-3.5 text-left text-sm outline-none transition hover:border-slate-300 focus-visible:border-brand focus-visible:ring-4 focus-visible:ring-brand/10 lg:min-w-[150px] ${
+          open ? "border-brand ring-4 ring-brand/10" : "border-line"
+        }`;
 
   const panel =
     open && mounted
@@ -99,7 +102,7 @@ export default function CustomSelect({
             role="listbox"
             aria-label={ariaLabel}
             style={panelStyle}
-            className="overflow-y-auto rounded-xl border border-line bg-white py-1.5 shadow-xl shadow-black/10 ring-1 ring-black/5"
+            className="animate-scale-in overflow-y-auto rounded-xl border border-line bg-white p-1.5 shadow-pop"
           >
             {options.map((opt) => {
               const isSelected = opt.value === value;
@@ -113,14 +116,14 @@ export default function CustomSelect({
                       onChange(opt.value);
                       setOpen(false);
                     }}
-                    className={`flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm transition ${
+                    className={`flex w-full cursor-pointer items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm transition ${
                       isSelected
-                        ? "bg-brand-soft font-semibold text-brand-dark"
-                        : "text-ink hover:bg-brand-soft/50"
+                        ? "bg-brand-soft font-semibold text-brand"
+                        : "text-ink/85 hover:bg-surface hover:text-ink"
                     }`}
                   >
-                    {isSelected && <CheckIcon className="h-3.5 w-3.5 shrink-0 text-brand-dark" />}
-                    <span className={isSelected ? "" : "pl-[22px]"}>{opt.label}</span>
+                    {isSelected && <Check className="h-4 w-4 text-brand" />}
+                    <span className={isSelected ? "" : "pl-6"}>{opt.label}</span>
                   </button>
                 </li>
               );
@@ -145,27 +148,11 @@ export default function CustomSelect({
         className={triggerClass}
       >
         <span className={`truncate ${hasValue ? "font-medium text-ink" : "text-muted"}`}>{label}</span>
-        <ChevronIcon
-          className={`h-4 w-4 shrink-0 text-muted transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        <ChevronDown
+          className={`h-4 w-4 text-muted transition-transform duration-200 ${open ? "rotate-180 text-brand" : ""}`}
         />
       </button>
       {panel}
     </div>
-  );
-}
-
-function ChevronIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function CheckIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M5 12l4 4 10-10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }

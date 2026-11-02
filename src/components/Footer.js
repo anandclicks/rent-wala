@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { Mail, MapPin, Phone } from "lucide-react";
 import Logo from "@/components/Logo";
+import { SUPPORT } from "@/components/layout/nav-config";
 
 const COLUMNS = [
   {
@@ -23,22 +25,24 @@ const COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-footer-bg text-gray-300">
-      <div className="mx-auto max-w-[1400px] px-4 py-14 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-3">
-            <Logo variant="brand" asLink={false} className="!h-10" />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-gray-400">
+    <footer className="bg-footer-bg text-slate-300">
+      <div className="container-page py-12 lg:py-14">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12">
+          <div className="sm:col-span-2 lg:col-span-4">
+            <span className="inline-flex rounded-lg bg-white px-2.5 py-1.5">
+              <Logo variant="brand" asLink={false} className="!h-9" />
+            </span>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
               India&apos;s trusted property platform for rent, buy, PG, land &amp; commercial properties.
               Verified listings. Zero brokerage.
             </p>
-            <div className="mt-5 flex gap-2.5">
+            <div className="mt-5 flex gap-2">
               {["facebook", "instagram", "twitter", "youtube", "linkedin"].map((s) => (
                 <Link
                   key={s}
                   href="#"
                   aria-label={s}
-                  className="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white transition hover:bg-brand"
+                  className="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white transition duration-200 hover:-translate-y-0.5 hover:bg-brand"
                 >
                   <SocialIcon name={s} className="h-4 w-4" />
                 </Link>
@@ -48,29 +52,33 @@ export default function Footer() {
 
           {COLUMNS.map((col) => (
             <div key={col.title} className="lg:col-span-2">
-              <h4 className="text-sm font-bold text-white">{col.title}</h4>
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-white">{col.title}</h4>
               {col.contact ? (
-                <ul className="mt-4 space-y-3 text-sm text-gray-400">
-                  <li className="flex items-start gap-2">
-                    <PinIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                    B-120, Sector 63, Noida, Uttar Pradesh - 201301
+                <ul className="mt-4 space-y-3 text-sm text-slate-400">
+                  <li className="flex items-start gap-2.5">
+                    <MapPin className="mt-0.5 h-4 w-4 text-brand" />
+                    {SUPPORT.address}
                   </li>
-                  <li className="flex items-start gap-2">
-                    <MailIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                    support@propertyrentwala.com
+                  <li>
+                    <a href={`mailto:${SUPPORT.email}`} className="flex items-start gap-2.5 break-all transition hover:text-white">
+                      <Mail className="mt-0.5 h-4 w-4 text-brand" />
+                      {SUPPORT.email}
+                    </a>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <PhoneIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                    +91 98765 43210
+                  <li>
+                    <a href={SUPPORT.phoneHref} className="flex items-start gap-2.5 transition hover:text-white">
+                      <Phone className="mt-0.5 h-4 w-4 text-brand" />
+                      {SUPPORT.phone}
+                    </a>
                   </li>
                 </ul>
               ) : (
-                <ul className="mt-4 space-y-3">
+                <ul className="mt-4 space-y-2.5">
                   {col.links.map((link) => (
                     <li key={link}>
                       <Link
                         href={link === "Post Property" ? "/list-your-property" : "#"}
-                        className="text-sm text-gray-400 transition hover:text-white"
+                        className="inline-block text-sm text-slate-400 transition duration-200 hover:translate-x-0.5 hover:text-white"
                       >
                         {link}
                       </Link>
@@ -84,18 +92,14 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-3 px-4 py-5 text-sm text-gray-500 sm:flex-row lg:px-8">
+        <div className="container-page flex flex-col items-center justify-between gap-3 pb-24 pt-5 text-sm text-slate-500 sm:flex-row lg:pb-5">
           <p>© {new Date().getFullYear()} Property Rent Wala. All rights reserved.</p>
           <div className="flex gap-5">
-            <Link href="#" className="transition hover:text-white">
-              Terms
-            </Link>
-            <Link href="#" className="transition hover:text-white">
-              Privacy
-            </Link>
-            <Link href="#" className="transition hover:text-white">
-              Cookies
-            </Link>
+            {["Terms", "Privacy", "Cookies"].map((l) => (
+              <Link key={l} href="#" className="transition hover:text-white">
+                {l}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
@@ -132,32 +136,6 @@ function SocialIcon({ name, className }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
       {icons[name]}
-    </svg>
-  );
-}
-
-function PhoneIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M4 5c0 8 7 15 15 15l1.5-3.2-4-1.6-1.6 1.6c-2.2-1.1-4.2-3.1-5.3-5.3l1.6-1.6-1.6-4L4 5z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function MailIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M4 6h16v12H4z" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M4 7l8 6 8-6" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function PinIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      <circle cx="12" cy="10" r="2.4" stroke="currentColor" strokeWidth="1.6" />
     </svg>
   );
 }

@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Check, ChevronRight } from "lucide-react";
+import { useWishlist } from "@/lib/wishlist";
 import { HeartIcon, ShareIcon } from "./icons";
 
-const WISHLIST_KEY = "prw_wishlist";
-
 export default function PropertyDetailHeader({ property }) {
-  const [saved, setSaved] = useState(false);
+  const { has, toggle } = useWishlist();
+  const saved = has(property.id);
   const [shareMsg, setShareMsg] = useState("");
 
   const listingLabel = property.status === "FOR SALE" ? "Buy" : "Rent";
@@ -15,26 +16,6 @@ export default function PropertyDetailHeader({ property }) {
     property.categoryEnum === "PG"
       ? "PG/Hostel"
       : property.category?.replace(/_/g, " ") || "Properties";
-
-  useEffect(() => {
-    try {
-      const list = JSON.parse(localStorage.getItem(WISHLIST_KEY) || "[]");
-      setSaved(list.includes(property.id));
-    } catch {
-      setSaved(false);
-    }
-  }, [property.id]);
-
-  const toggleSave = () => {
-    try {
-      const list = JSON.parse(localStorage.getItem(WISHLIST_KEY) || "[]");
-      const next = saved ? list.filter((id) => id !== property.id) : [...list, property.id];
-      localStorage.setItem(WISHLIST_KEY, JSON.stringify(next));
-      setSaved(!saved);
-    } catch {
-      /* ignore */
-    }
-  };
 
   const share = async () => {
     const url = window.location.href;
@@ -52,47 +33,55 @@ export default function PropertyDetailHeader({ property }) {
     }
   };
 
+  const crumb = "shrink-0 transition hover:text-brand";
+
   return (
     <div className="border-b border-line bg-white">
-      <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-3 px-4 py-3 lg:px-6">
-        <nav className="text-xs text-muted">
-          <Link href="/" className="hover:text-brand-dark">
+      <div className="container-page flex items-center justify-between gap-3 py-2.5">
+        <nav aria-label="Breadcrumb" className="flex min-w-0 items-center gap-1 text-xs text-muted">
+          <Link href="/" className={crumb}>
             Home
           </Link>
-          <span className="mx-1.5">›</span>
-          <Link href={`/search?listingType=${property.status === "FOR SALE" ? "SELL" : "RENT"}&city=${property.city}`} className="hover:text-brand-dark">
+          <ChevronRight className="h-3.5 w-3.5" />
+          <Link
+            href={`/search?listingType=${property.status === "FOR SALE" ? "SELL" : "RENT"}&city=${property.city}`}
+            className={crumb}
+          >
             {listingLabel}
           </Link>
-          <span className="mx-1.5">›</span>
-          <Link href={`/search?city=${property.city}&category=${property.categoryEnum}`} className="hover:text-brand-dark">
-            {typeLabel} in {property.city}
+          <ChevronRight className="h-3.5 w-3.5" />
+          <Link href={`/search?city=${property.city}&category=${property.categoryEnum}`} className={`${crumb} capitalize`}>
+            {typeLabel.toLowerCase()} in {property.city}
           </Link>
-          <span className="mx-1.5">›</span>
-          <span className="text-ink">{property.title}</span>
+          <ChevronRight className="hidden h-3.5 w-3.5 sm:block" />
+          <span className="hidden truncate text-ink sm:inline">{property.title}</span>
         </nav>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={share}
-            className="flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-semibold text-ink/70 hover:text-brand-dark"
-          >
+        <div className="relative flex shrink-0 items-center gap-1">
+          <button type="button" onClick={share} className="btn btn-ghost btn-sm">
             <ShareIcon className="h-4 w-4" />
-            Share
+            <span className="hidden sm:inline">Share</span>
           </button>
           <button
             type="button"
-            onClick={toggleSave}
-            className={`flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-semibold transition ${
-              saved ? "text-brand-dark" : "text-ink/70 hover:text-brand-dark"
-            }`}
+            onClick={() => toggle(property.id)}
+            aria-pressed={saved}
+            className={`btn btn-sm ${saved ? "bg-red-50 text-red-500 hover:bg-red-100" : "btn-ghost"}`}
           >
-            <HeartIcon className="h-4 w-4" filled={saved} />
-            Save
+            <HeartIcon key={String(saved)} className={`h-4 w-4 ${saved ? "animate-scale-in" : ""}`} filled={saved} />
+            <span className="hidden sm:inline">{saved ? "Saved" : "Save"}</span>
           </button>
+          {shareMsg && (
+            <span
+              role="status"
+              className="absolute right-0 top-full z-10 mt-1 flex animate-scale-in items-center gap-1.5 whitespace-nowrap rounded-lg bg-ink px-3 py-1.5 text-xs font-medium text-white shadow-pop"
+            >
+              <Check className="h-3.5 w-3.5" />
+              {shareMsg}
+            </span>
+          )}
         </div>
       </div>
-      {shareMsg && <p className="mx-auto max-w-[1280px] px-4 pb-2 text-xs text-brand-dark lg:px-6">{shareMsg}</p>}
     </div>
   );
 }

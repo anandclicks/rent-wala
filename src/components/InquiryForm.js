@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CircleCheck, Loader2, Send } from "lucide-react";
 
 export default function InquiryForm({ propertyId, propertyTitle, compact = false }) {
   const [name, setName] = useState("");
@@ -33,9 +34,10 @@ export default function InquiryForm({ propertyId, propertyTitle, compact = false
 
   if (done) {
     return (
-      <div className="rounded-xl bg-brand-light px-4 py-6 text-center">
-        <p className="font-bold text-brand-dark">Thank you!</p>
-        <p className="mt-1 text-sm text-brand">
+      <div role="status" className="animate-scale-in rounded-xl bg-success/10 px-4 py-6 text-center">
+        <CircleCheck className="mx-auto h-10 w-10 text-success" />
+        <p className="mt-2 font-bold text-ink">Thank you!</p>
+        <p className="mt-1 text-sm text-ink/70">
           We received your inquiry for {propertyTitle}. Our team will contact you shortly.
         </p>
       </div>
@@ -45,7 +47,7 @@ export default function InquiryForm({ propertyId, propertyTitle, compact = false
   const fieldClass = compact ? inputClassCompact : inputClass;
 
   return (
-    <form onSubmit={submit} className={compact ? "space-y-2" : "space-y-3"}>
+    <form onSubmit={submit} className={compact ? "space-y-3" : "space-y-4"}>
       <Field label="Name" compact={compact}>
         <input required value={name} onChange={(e) => setName(e.target.value)} className={fieldClass} placeholder="Full name" />
       </Field>
@@ -71,28 +73,27 @@ export default function InquiryForm({ propertyId, propertyTitle, compact = false
           </Field>
         </>
       )}
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p role="alert" className="animate-fade-in text-xs font-medium text-danger">{error}</p>}
       <button
         type="submit"
         disabled={loading}
-        className={`w-full rounded-lg bg-brand-dark text-sm font-bold text-white transition hover:bg-brand-darker disabled:opacity-60 ${compact ? "py-2" : "rounded-xl py-3"}`}
+        className={`btn btn-primary w-full ${compact ? "" : "btn-lg"}`}
       >
+        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
         {loading ? "Submitting..." : "Send Inquiry"}
       </button>
     </form>
   );
 }
 
-const inputClass =
-  "w-full rounded-xl border border-line bg-white px-4 py-2.5 text-sm text-ink outline-none focus:border-brand-dark focus:ring-2 focus:ring-brand/15";
+const inputClass = "input";
 
-const inputClassCompact =
-  "w-full rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink outline-none focus:border-brand-dark focus:ring-1 focus:ring-brand/15";
+const inputClassCompact = "input h-10";
 
 function Field({ label, children, compact }) {
   return (
     <label className="block">
-      <span className={`block font-semibold text-ink ${compact ? "mb-0.5 text-[10px]" : "mb-1 text-xs"}`}>{label}</span>
+      <span className={`block font-medium text-ink ${compact ? "mb-1 text-xs" : "mb-1.5 text-sm"}`}>{label}</span>
       {children}
     </label>
   );

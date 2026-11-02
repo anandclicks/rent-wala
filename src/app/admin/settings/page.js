@@ -48,36 +48,36 @@ export default function AdminSettingsPage() {
         Configure which number visitors call or WhatsApp from property pages and the site footer.
       </p>
 
-      <form onSubmit={save} className="mt-8 max-w-md space-y-4 rounded-2xl border border-line bg-white p-6">
+      <form onSubmit={save} className="mt-8 max-w-md space-y-4 card p-6">
         <label className="block">
-          <span className="mb-1 block text-xs font-semibold">Call number</span>
+          <span className="label">Call number</span>
           <input
             required
             value={callNumber}
             onChange={(e) => setCallNumber(e.target.value)}
-            className="w-full rounded-xl border border-line px-4 py-2.5 text-sm outline-none focus:border-brand-dark"
+            className="input"
             placeholder="+919876543210"
           />
         </label>
         <label className="block">
-          <span className="mb-1 block text-xs font-semibold">WhatsApp number</span>
+          <span className="label">WhatsApp number</span>
           <input
             required
             value={whatsappNumber}
             onChange={(e) => setWhatsappNumber(e.target.value)}
-            className="w-full rounded-xl border border-line px-4 py-2.5 text-sm outline-none focus:border-brand-dark"
+            className="input"
             placeholder="+919876543210"
           />
         </label>
         {message && (
-          <p className={`text-sm ${message.includes("saved") ? "text-brand-dark" : "text-red-600"}`}>
+          <p className={`text-sm ${message.includes("saved") ? "text-success" : "text-danger"}`}>
             {message}
           </p>
         )}
         <button
           type="submit"
           disabled={saving}
-          className="rounded-xl bg-brand-dark px-6 py-2.5 text-sm font-bold text-white disabled:opacity-60"
+          className="btn btn-primary"
         >
           {saving ? "Saving..." : "Save Settings"}
         </button>

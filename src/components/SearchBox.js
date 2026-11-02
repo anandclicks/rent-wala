@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import data from "@/data/data.json";
+import { LocateFixed, MapPin, Search } from "lucide-react";
 import CustomSelect from "@/components/CustomSelect";
 import {
   buildSearchQuery,
@@ -36,33 +37,6 @@ async function reverseGeocode(lat, lon) {
   );
   if (!res.ok) throw new Error("Could not fetch location details");
   return res.json();
-}
-
-function SearchIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M20 20l-3.2-3.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function PinIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      <circle cx="12" cy="10" r="2.4" stroke="currentColor" strokeWidth="1.6" />
-    </svg>
-  );
-}
-
-function LocateIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-    </svg>
-  );
 }
 
 export default function SearchBox({
@@ -236,21 +210,21 @@ export default function SearchBox({
       )}
 
       <div
-        className={`rounded-2xl bg-white ring-1 ring-line/60 ${
-          isSearchPage ? "p-4 shadow-sm" : "p-5"
-        } ${isHero ? "shadow-2xl shadow-black/10" : ""}`}
+        className={
+          isSearchPage
+            ? ""
+            : `rounded-2xl bg-white p-5 ring-1 ring-line/60 ${isHero ? "shadow-pop" : ""}`
+        }
       >
         {!isHero && !isSearchPage && (
-          <div className="inline-flex rounded-xl bg-brand-soft p-1">
+          <div className="inline-flex rounded-lg bg-surface p-1">
             {["Rent", "Buy"].map((tab) => (
               <button
                 key={tab}
                 type="button"
                 onClick={() => setActiveTab(tab)}
-                className={`rounded-lg px-5 py-2 text-sm font-semibold transition ${
-                  activeTab === tab
-                    ? "bg-brand-dark text-white shadow-sm shadow-brand-dark/30"
-                    : "text-ink/65 hover:text-brand-dark"
+                className={`h-9 cursor-pointer rounded-md px-5 text-sm font-semibold transition ${
+                  activeTab === tab ? "bg-white text-brand shadow-card" : "text-ink/65 hover:text-ink"
                 }`}
               >
                 {tab}
@@ -260,20 +234,20 @@ export default function SearchBox({
         )}
 
         {isSearchPage ? (
-          <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
-            <div className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-line bg-white px-3 py-2 transition focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/15">
+          <div className="grid gap-2.5 sm:grid-cols-2 lg:flex lg:items-center">
+            <div className="flex min-w-0 flex-1 items-center gap-2 sm:col-span-2 h-11 rounded-lg border border-line bg-white px-1.5 transition hover:border-slate-300 focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/10">
               <button
                 type="button"
                 onClick={detectLocation}
                 disabled={locating}
                 aria-label="Detect current location"
                 title="Detect current location"
-                className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-brand transition hover:bg-brand-soft disabled:opacity-60"
+                className="grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-md text-brand transition hover:bg-brand-soft disabled:opacity-60"
               >
                 {locating ? (
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-brand/30 border-t-brand" />
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-brand/25 border-t-brand" />
                 ) : (
-                  <PinIcon className="h-4 w-4" />
+                  <MapPin className="h-4 w-4" />
                 )}
               </button>
               <input
@@ -288,9 +262,9 @@ export default function SearchBox({
                 type="button"
                 onClick={detectLocation}
                 disabled={locating}
-                className="hidden shrink-0 items-center gap-1 rounded-lg bg-brand-soft px-2.5 py-1.5 text-[11px] font-bold text-brand-dark transition hover:bg-brand-light disabled:opacity-60 sm:inline-flex"
+                className="hidden h-8 shrink-0 cursor-pointer items-center gap-1 rounded-md bg-brand-soft px-2.5 text-xs font-semibold text-brand transition hover:bg-brand-light disabled:opacity-60 sm:inline-flex"
               >
-                <LocateIcon className="h-3.5 w-3.5" />
+                <LocateFixed className="h-3.5 w-3.5" />
                 Detect
               </button>
             </div>
@@ -301,7 +275,7 @@ export default function SearchBox({
               onChange={handleTypeChange}
               options={typeOptions}
               placeholder="All types"
-              className="lg:w-auto"
+              className="lg:w-[180px]"
             />
 
             <CustomSelect
@@ -310,34 +284,34 @@ export default function SearchBox({
               onChange={handleCityChange}
               options={cityOptions}
               placeholder="Select city"
-              className="lg:w-auto"
+              className="lg:w-[180px]"
             />
 
             <button
               type="button"
               onClick={() => runSearch()}
-              className="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand-dark px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand-dark/30 transition hover:bg-brand-darker lg:px-8"
+              className="btn btn-primary sm:col-span-2 lg:px-8"
             >
-              <SearchIcon className="h-4 w-4" />
+              <Search className="h-4 w-4" />
               Search
             </button>
           </div>
         ) : (
           <>
             <div className={`flex flex-col gap-3 sm:flex-row ${isHero ? "" : "mt-4"}`}>
-              <div className="flex flex-1 items-center gap-2 rounded-xl border border-line bg-white px-3 py-2 transition focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/15">
+              <div className="flex flex-1 items-center gap-2 h-11 rounded-lg border border-line bg-white px-1.5 transition hover:border-slate-300 focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/10">
                 <button
                   type="button"
                   onClick={detectLocation}
                   disabled={locating}
                   aria-label="Detect current location"
                   title="Detect current location"
-                  className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-brand transition hover:bg-brand-soft disabled:opacity-60"
+                  className="grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-md text-brand transition hover:bg-brand-soft disabled:opacity-60"
                 >
                   {locating ? (
-                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-brand/30 border-t-brand" />
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-brand/25 border-t-brand" />
                   ) : (
-                    <PinIcon className="h-4 w-4" />
+                    <MapPin className="h-4 w-4" />
                   )}
                 </button>
                 <input
@@ -355,18 +329,18 @@ export default function SearchBox({
                   type="button"
                   onClick={detectLocation}
                   disabled={locating}
-                  className="hidden shrink-0 items-center gap-1 rounded-lg bg-brand-soft px-2.5 py-1.5 text-[11px] font-bold text-brand-dark transition hover:bg-brand-light disabled:opacity-60 sm:inline-flex"
+                  className="hidden h-8 shrink-0 cursor-pointer items-center gap-1 rounded-md bg-brand-soft px-2.5 text-xs font-semibold text-brand transition hover:bg-brand-light disabled:opacity-60 sm:inline-flex"
                 >
-                  <LocateIcon className="h-3.5 w-3.5" />
+                  <LocateFixed className="h-3.5 w-3.5" />
                   Detect
                 </button>
               </div>
               <button
                 type="button"
                 onClick={() => runSearch()}
-                className="flex items-center justify-center gap-2 rounded-xl bg-brand-dark px-8 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand-dark/30 transition hover:bg-brand-darker sm:shrink-0"
+                className="btn btn-primary btn-lg"
               >
-                <SearchIcon className="h-4 w-4" />
+                <Search className="h-4 w-4" />
                 Search
               </button>
             </div>
@@ -395,12 +369,12 @@ export default function SearchBox({
 
         <datalist id="localities">
           {data.localities.map((l) => (
-            <option key={l.name} value={`${l.name}, ${l.city}`} />
+            <option key={`${l.name}-${l.city}`} value={`${l.name}, ${l.city}`} />
           ))}
         </datalist>
 
         {(locError || searchError) && (
-          <p className={`mt-2 text-xs ${isHero ? "text-white/90" : "text-red-600"}`}>
+          <p role="alert" className={`mt-2 animate-fade-in text-xs font-medium ${isHero ? "text-white/90" : "text-danger"}`}>
             {searchError || locError}
           </p>
         )}

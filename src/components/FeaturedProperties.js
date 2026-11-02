@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import PropertyCard from "@/components/PropertyCard";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 const FILTERS = [
   { label: "All", value: "ALL" },
@@ -24,46 +24,33 @@ export default function FeaturedProperties({ properties }) {
   }, [properties, active]);
 
   return (
-    <section className="bg-white py-14">
-      <div className="mx-auto max-w-[1400px] px-4 lg:px-8">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-bold text-ink sm:text-[1.75rem]">Featured Properties</h2>
-            <p className="mt-1 text-sm text-muted">Handpicked listings just for you</p>
-          </div>
-          <Link
-            href="/search"
-            className="text-sm font-semibold text-brand-dark transition hover:text-brand-darker"
-          >
-            View All →
-          </Link>
-        </div>
+    <section className="bg-surface py-10 lg:py-14">
+      <div className="container-page">
+        <SectionHeader title="Featured Properties" subtitle="Handpicked listings just for you" href="/search?listingType=RENT" />
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div role="tablist" aria-label="Filter by property type" className="no-scrollbar -mx-4 mt-5 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0">
           {FILTERS.map((f) => (
             <button
               key={f.value}
               type="button"
+              role="tab"
+              aria-selected={active === f.value}
               onClick={() => setActive(f.value)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                active === f.value
-                  ? "bg-brand-dark text-white"
-                  : "bg-brand-soft text-ink/70 hover:bg-brand-light hover:text-brand-dark"
-              }`}
+              className={`chip ${active === f.value ? "chip-active" : ""}`}
             >
               {f.label}
             </button>
           ))}
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {filtered.slice(0, 8).map((p) => (
-            <PropertyCard key={p.id} property={p} />
-          ))}
-        </div>
-
-        {filtered.length === 0 && (
-          <p className="mt-8 text-center text-sm text-muted">No properties in this category yet.</p>
+        {filtered.length > 0 ? (
+          <div key={active} className="mt-6 grid animate-fade-up grid-cols-1 gap-4 min-[480px]:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
+            {filtered.slice(0, 8).map((p) => (
+              <PropertyCard key={p.id} property={p} />
+            ))}
+          </div>
+        ) : (
+          <p className="card mt-6 px-6 py-12 text-center text-sm text-muted">No properties in this category yet.</p>
         )}
       </div>
     </section>

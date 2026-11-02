@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------
+   Design tokens
+   One palette for every screen: brand blue for actions, ink/muted for
+   text, line for borders, surface for page backgrounds, accent yellow
+   for "Featured" highlights (OLX-style).
+------------------------------------------------------------------- */
 :root {
   --background: #ffffff;
   --foreground: #1a2332;
@@ -10,14 +16,19 @@
   --brand-light: #e8f0ff;
   --brand-soft: #f4f8ff;
   --brand-mint: #dbeafe;
+  --accent: #ffce32;
+  --accent-dark: #e6b400;
   --ink: #1a2332;
   --navy: #0f172a;
   --muted: #64748b;
   --line: #e2e8f0;
   --sale: #0066ff;
   --rent-badge: #0066ff;
-  --surface: #f8f9fa;
-  --footer-bg: #1e293b;
+  --surface: #f5f7fa;
+  --footer-bg: #0f172a;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --whatsapp: #25d366;
 }
 
 @theme inline {
@@ -30,6 +41,8 @@
   --color-brand-light: var(--brand-light);
   --color-brand-soft: var(--brand-soft);
   --color-brand-mint: var(--brand-mint);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
   --color-ink: var(--ink);
   --color-navy: var(--navy);
   --color-muted: var(--muted);
@@ -38,10 +51,46 @@
   --color-rent-badge: var(--rent-badge);
   --color-surface: var(--surface);
   --color-footer-bg: var(--footer-bg);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-whatsapp: var(--whatsapp);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-script: var(--font-dancing-script);
+}
+
+@theme {
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 3px rgb(15 23 42 / 0.06);
+  --shadow-card-hover: 0 10px 28px -8px rgb(15 23 42 / 0.16), 0 2px 6px rgb(15 23 42 / 0.06);
+  --shadow-pop: 0 16px 40px -12px rgb(15 23 42 / 0.25), 0 4px 12px rgb(15 23 42 / 0.08);
+
+  --animate-fade-in: fade-in 0.2s ease-out both;
+  --animate-fade-up: fade-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-scale-in: scale-in 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-slide-in-left: slide-in-left 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-sheet-up: sheet-up 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.96) translateY(-4px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes slide-in-left {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes sheet-up {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
 }
 
 body {
@@ -56,4 +105,139 @@ body {
 
 .font-script {
   font-family: var(--font-dancing-script), cursive;
+}
+
+/* Every Lucide icon shares one stroke weight across the site. */
+svg.lucide {
+  stroke-width: 1.75;
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------------
+   Shared component classes — use these instead of re-styling buttons,
+   cards, inputs and chips per page.
+------------------------------------------------------------------- */
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex h-11 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg px-5 text-sm font-semibold whitespace-nowrap transition duration-200 ease-out select-none outline-none focus-visible:ring-4 focus-visible:ring-brand/20 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-sm {
+    @apply h-9 px-3.5 text-[13px];
+  }
+  .btn-lg {
+    @apply h-12 px-6 text-[15px];
+  }
+  .btn-primary {
+    @apply bg-brand text-white shadow-sm shadow-brand/20 hover:bg-brand-dark hover:shadow-md hover:shadow-brand/25;
+  }
+  .btn-secondary {
+    @apply bg-brand-light text-brand-dark hover:bg-brand-mint;
+  }
+  .btn-outline {
+    @apply border border-line bg-white text-ink hover:border-brand hover:text-brand;
+  }
+  .btn-outline-brand {
+    @apply border-[1.5px] border-brand bg-white text-brand hover:bg-brand-soft;
+  }
+  .btn-ghost {
+    @apply text-ink/75 hover:bg-surface hover:text-ink;
+  }
+  .btn-whatsapp {
+    @apply bg-whatsapp text-white hover:brightness-95;
+  }
+  .btn-inverse {
+    @apply bg-white text-brand-dark hover:bg-brand-light;
+  }
+
+  .icon-btn {
+    @apply grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full text-ink/70 transition duration-200 outline-none hover:bg-brand-soft hover:text-brand focus-visible:ring-4 focus-visible:ring-brand/20 active:scale-95 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-xl border border-line bg-white;
+  }
+  .card-interactive {
+    @apply transition duration-300 ease-out hover:-translate-y-1 hover:border-transparent hover:shadow-card-hover;
+  }
+  .card-section {
+    @apply rounded-xl border border-line bg-white p-5 sm:p-6;
+  }
+
+  /* Form controls */
+  .input {
+    @apply h-11 w-full rounded-lg border border-line bg-white px-3.5 text-sm text-ink transition outline-none placeholder:text-muted/80 hover:border-slate-300 focus:border-brand focus:ring-4 focus:ring-brand/10 disabled:cursor-not-allowed disabled:bg-surface;
+  }
+  textarea.input {
+    @apply h-auto py-3 leading-relaxed;
+  }
+  select.input {
+    @apply cursor-pointer appearance-none bg-[url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2716%27%20height%3D%2716%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%2364748b%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27m6%209%206%206%206-6%27/%3E%3C/svg%3E")] bg-[position:right_0.85rem_center] bg-no-repeat pr-10;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink;
+  }
+
+  /* Chips (filters, tags, quick picks) */
+  .chip {
+    @apply inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full border border-line bg-white px-4 text-[13px] font-medium whitespace-nowrap text-ink/80 transition duration-200 outline-none hover:border-brand/50 hover:text-brand focus-visible:ring-4 focus-visible:ring-brand/15 active:scale-[0.97];
+  }
+  .chip-active {
+    @apply border-brand bg-brand text-white hover:border-brand-dark hover:bg-brand-dark hover:text-white;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-bold tracking-wide uppercase;
+  }
+  .badge-featured {
+    @apply bg-accent text-ink;
+  }
+  .badge-brand {
+    @apply bg-brand text-white;
+  }
+  .badge-dark {
+    @apply bg-ink/85 text-white backdrop-blur-sm;
+  }
+  .badge-soft {
+    @apply bg-brand-light text-brand-dark;
+  }
+  .badge-success {
+    @apply bg-success/10 text-success;
+  }
+
+  /* Typography helpers */
+  .section-title {
+    @apply text-xl font-bold tracking-tight text-ink sm:text-2xl;
+  }
+  .section-subtitle {
+    @apply mt-1 text-sm text-muted;
+  }
+  .link {
+    @apply inline-flex items-center gap-1 font-semibold text-brand transition hover:text-brand-dark;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

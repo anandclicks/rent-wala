@@ -132,7 +132,7 @@ export default function NewPropertyPage() {
 
   return (
     <div>
-      <Link href="/admin/properties" className="text-sm font-semibold text-brand-dark hover:underline">
+      <Link href="/admin/properties" className="text-sm font-semibold text-brand transition hover:text-brand-dark">
         ← Back to listings
       </Link>
       <h1 className="mt-4 text-2xl font-bold text-ink">Add New Listing</h1>
@@ -141,7 +141,7 @@ export default function NewPropertyPage() {
         website.
       </p>
 
-      <form onSubmit={submit} className="mt-8 space-y-6 rounded-2xl border border-line bg-white p-6">
+      <form onSubmit={submit} className="mt-8 space-y-6 card p-6">
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Title *">
             <input required value={form.title} onChange={(e) => set("title", e.target.value)} className={inputClass} />
@@ -259,12 +259,12 @@ export default function NewPropertyPage() {
           </label>
         </div>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm font-medium text-danger">{error}</p>}
 
         <button
           type="submit"
           disabled={loading}
-          className="rounded-xl bg-brand-dark px-8 py-3 text-sm font-bold text-white disabled:opacity-60"
+          className="btn btn-primary btn-lg"
         >
           {loading ? "Saving..." : "Publish Listing"}
         </button>
@@ -274,12 +274,12 @@ export default function NewPropertyPage() {
 }
 
 const inputClass =
-  "w-full rounded-xl border border-line px-4 py-2.5 text-sm outline-none focus:border-brand-dark focus:ring-2 focus:ring-brand/15";
+  "input";
 
 function Field({ label, children }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-semibold text-ink">{label}</span>
+      <span className="label">{label}</span>
       {children}
     </label>
   );

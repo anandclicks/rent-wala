@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import data from "@/data/data.json";
+import { IndianRupee, MapPin, Search, TrendingUp } from "lucide-react";
 import CustomSelect from "@/components/CustomSelect";
 import {
   BHK_HERO_OPTIONS,
@@ -28,8 +29,7 @@ const POPULAR = [
   { label: "Kitchen flat Noida", location: "Noida", lookingFor: "kitchen" },
 ];
 
-export default function HeroSearch({ variant = "legacy" }) {
-  const isHome = variant === "home";
+export default function HeroSearch() {
   const router = useRouter();
   const [location, setLocation] = useState("");
   const [lookingFor, setLookingFor] = useState("");
@@ -91,18 +91,11 @@ export default function HeroSearch({ variant = "legacy" }) {
   );
 
   const showBhk = showsBhkForLookingFor(lookingFor);
-  const shellClass = isHome
-    ? "overflow-visible rounded-2xl border border-line bg-white p-4 shadow-lg ring-1 ring-line/60 sm:p-5"
-    : "overflow-visible rounded-[1.75rem] bg-black/15 p-4 shadow-2xl shadow-black/15 ring-1 ring-white/35 backdrop-blur-xl sm:p-5";
-  const popularChipClass = isHome
-    ? "rounded-full border border-line bg-brand-soft/50 px-3 py-1 text-xs font-medium text-ink transition hover:bg-brand-soft"
-    : "rounded-full border border-white/35 bg-white/10 px-3 py-1 text-xs font-medium text-white/95 backdrop-blur-sm transition hover:bg-white/20";
-  const popularLabelClass = isHome ? "text-xs font-medium text-muted" : "text-xs font-medium text-white/90";
 
   return (
-    <div className="w-full max-w-[720px]">
-      <div className={shellClass}>
-        <div className="grid gap-3 sm:grid-cols-2">
+    <div className="w-full max-w-[760px]">
+      <div className="rounded-2xl bg-white p-3 shadow-pop ring-1 ring-black/5 sm:p-4">
+        <div className={`grid gap-2.5 sm:gap-3 ${showBhk ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
           <CustomSelect
             ariaLabel="Looking for"
             value={lookingFor}
@@ -120,23 +113,23 @@ export default function HeroSearch({ variant = "legacy" }) {
             options={cityOptions}
             placeholder="City"
           />
+          {showBhk && (
+            <div className="animate-fade-in">
+              <CustomSelect
+                ariaLabel="BHK configuration"
+                value={bhk}
+                onChange={setBhk}
+                options={bhkOptions}
+                placeholder="BHK / RK"
+              />
+            </div>
+          )}
         </div>
 
-        {showBhk && (
-          <div className="mt-3">
-            <CustomSelect
-              ariaLabel="BHK configuration"
-              value={bhk}
-              onChange={setBhk}
-              options={bhkOptions}
-              placeholder="BHK / RK"
-            />
-          </div>
-        )}
-
-        <div className="relative z-10 mt-4 flex flex-col overflow-visible rounded-2xl bg-brand-soft/30 ring-1 ring-line/50 lg:flex-row lg:items-stretch">
-          <div className="flex min-w-0 flex-1 items-center gap-2.5 px-4 py-3.5">
-            <PinIcon className="h-[18px] w-[18px] shrink-0 text-brand-dark" />
+        <div className="mt-2.5 flex flex-col gap-2.5 sm:mt-3 lg:flex-row lg:items-stretch lg:gap-0 lg:overflow-visible lg:rounded-xl lg:border lg:border-line lg:transition lg:focus-within:border-brand lg:focus-within:ring-4 lg:focus-within:ring-brand/10">
+          <label className="flex h-12 min-w-0 flex-1 items-center gap-2.5 rounded-lg border border-line px-3.5 transition focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/10 lg:rounded-none lg:border-0 lg:focus-within:ring-0">
+            <MapPin className="h-5 w-5 text-brand" />
+            <span className="sr-only">Location</span>
             <input
               list="hero-localities"
               value={location}
@@ -150,12 +143,12 @@ export default function HeroSearch({ variant = "legacy" }) {
               placeholder="Enter location, sector or landmark"
               className="min-w-0 flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-muted/80"
             />
-          </div>
+          </label>
 
-          <Divider className="hidden lg:block" />
-          <Divider className="lg:hidden" horizontal />
+          <span aria-hidden className="my-3 hidden w-px bg-line lg:block" />
 
-          <div className="px-4 py-3.5 lg:min-w-[140px]">
+          <div className="flex h-12 items-center gap-2 rounded-lg border border-line px-3.5 lg:min-w-[170px] lg:rounded-none lg:border-0">
+            <IndianRupee className="h-4 w-4 text-muted" />
             <CustomSelect
               ariaLabel="Budget"
               value={budgetIdx}
@@ -164,75 +157,56 @@ export default function HeroSearch({ variant = "legacy" }) {
               placeholder="Budget"
               variant="inline"
               align="right"
+              className="flex-1"
             />
           </div>
 
           <button
             type="button"
             onClick={() => runSearch()}
-            className="flex items-center justify-center gap-2 rounded-b-2xl bg-brand-dark px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-brand-darker lg:rounded-none lg:rounded-r-2xl lg:px-10"
+            className="btn btn-primary btn-lg lg:h-auto lg:rounded-l-none lg:rounded-r-[11px] lg:px-8"
           >
-            <SearchIcon className="h-4 w-4" />
+            <Search className="h-5 w-5" />
             Search
           </button>
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className={popularLabelClass}>Popular:</span>
-          {POPULAR.map((tag) => (
-            <button
-              key={tag.label}
-              type="button"
-              onClick={() => {
-                setLocation(tag.location);
-                setLookingFor(tag.lookingFor);
-                runSearch({ location: tag.location, lookingFor: tag.lookingFor });
-              }}
-              className={popularChipClass}
-            >
-              {tag.label}
-            </button>
-          ))}
-        </div>
+        {error && (
+          <p role="alert" className="mt-2 animate-fade-in text-xs font-medium text-danger">
+            {error}
+          </p>
+        )}
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <span className="flex items-center gap-1 text-xs font-medium text-white/90">
+          <TrendingUp className="h-4 w-4" />
+          Popular:
+        </span>
+        {POPULAR.map((tag) => (
+          <button
+            key={tag.label}
+            type="button"
+            onClick={() => {
+              setLocation(tag.location);
+              setLookingFor(tag.lookingFor);
+              runSearch({ location: tag.location, lookingFor: tag.lookingFor });
+            }}
+            className="h-8 cursor-pointer rounded-full border border-white/30 bg-white/10 px-3 text-xs font-medium text-white backdrop-blur-sm transition duration-200 hover:border-white/60 hover:bg-white/20 active:scale-[0.97]"
+          >
+            {tag.label}
+          </button>
+        ))}
       </div>
 
       <datalist id="hero-localities">
         {data.localities.map((l) => (
-          <option key={l.name} value={`${l.name}, ${l.city}`} />
+          <option key={`${l.name}-${l.city}`} value={`${l.name}, ${l.city}`} />
         ))}
         {data.cities.map((c) => (
           <option key={c} value={c} />
         ))}
       </datalist>
-
-      {error && (
-        <p className={`mt-2 text-xs font-medium ${isHome ? "text-red-600" : "text-red-200"}`}>{error}</p>
-      )}
     </div>
-  );
-}
-
-function Divider({ horizontal, className = "" }) {
-  if (horizontal) {
-    return <div className={`mx-4 h-px bg-line ${className}`} />;
-  }
-  return <div className={`my-3 w-px self-stretch bg-line ${className}`} />;
-}
-
-function PinIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      <circle cx="12" cy="10" r="2.4" stroke="currentColor" strokeWidth="1.6" />
-    </svg>
-  );
-}
-
-function SearchIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M20 20l-3.2-3.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
   );
 }

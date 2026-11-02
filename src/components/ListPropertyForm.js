@@ -1,12 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { ArrowLeft, ArrowRight, Building2, CircleCheck, House, ImagePlus, LandPlot, Send } from "lucide-react";
 import data from "@/data/data.json";
 
 const PROPERTY_CATEGORIES = [
-  { id: "residential", label: "Residential", desc: "Flats, houses, villas & PG" },
-  { id: "commercial", label: "Commercial", desc: "Offices, shops & warehouses" },
-  { id: "land", label: "Land / Plot", desc: "Residential or commercial plots" },
+  { id: "residential", label: "Residential", desc: "Flats, houses, villas & PG", icon: House },
+  { id: "commercial", label: "Commercial", desc: "Offices, shops & warehouses", icon: Building2 },
+  { id: "land", label: "Land / Plot", desc: "Residential or commercial plots", icon: LandPlot },
 ];
 
 const LISTING_TYPES = {
@@ -154,9 +155,9 @@ export default function ListPropertyForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-line bg-white p-8 text-center shadow-lg shadow-brand/5">
-        <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-brand-light text-brand-dark">
-          <CheckIcon className="h-8 w-8" />
+      <div className="card animate-scale-in p-8 text-center shadow-card">
+        <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-success/10 text-success">
+          <CircleCheck className="h-8 w-8" />
         </span>
         <h2 className="mt-5 text-2xl font-bold text-ink">Property submitted!</h2>
         <p className="mt-2 text-sm text-muted">
@@ -165,7 +166,7 @@ export default function ListPropertyForm() {
         <button
           type="button"
           onClick={reset}
-          className="mt-6 rounded-xl bg-brand-dark px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-darker"
+          className="btn btn-primary mt-6"
         >
           Post another property
         </button>
@@ -174,16 +175,16 @@ export default function ListPropertyForm() {
   }
 
   return (
-    <div className="rounded-2xl border border-line bg-white shadow-lg shadow-brand/5">
-      <div className="border-b border-line px-6 py-5 sm:px-8">
+    <div className="card shadow-card">
+      <div className="border-b border-line px-5 py-5 sm:px-8">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-brand-dark">
+            <p className="text-xs font-bold uppercase tracking-wider text-brand">
               Step {step} of {totalSteps}
             </p>
             <h2 className="mt-1 text-xl font-bold text-ink">{stepTitles[step]}</h2>
           </div>
-          <span className="hidden rounded-full bg-brand-soft px-3 py-1 text-xs font-semibold text-brand-dark sm:inline">
+          <span className="badge badge-success hidden normal-case tracking-normal sm:inline-flex">
             100% Free · Zero Brokerage
           </span>
         </div>
@@ -191,15 +192,15 @@ export default function ListPropertyForm() {
           {Array.from({ length: totalSteps }).map((_, i) => (
             <span
               key={i}
-              className={`h-1.5 flex-1 rounded-full transition ${
-                i < step ? "bg-brand-dark" : "bg-brand-light"
+              className={`h-1.5 flex-1 rounded-full transition-colors duration-500 ${
+                i < step ? "bg-brand" : "bg-line"
               }`}
             />
           ))}
         </div>
       </div>
 
-      <div className="px-6 py-6 sm:px-8 sm:py-8">
+      <div key={step} className="animate-fade-up px-5 py-6 sm:px-8 sm:py-8">
         {step === 1 && (
           <div className="space-y-8">
             <div>
@@ -212,12 +213,20 @@ export default function ListPropertyForm() {
                     onClick={() =>
                       update({ category: cat.id, listingType: "", propertyType: "" })
                     }
-                    className={`rounded-xl border p-4 text-left transition ${
+                    aria-pressed={form.category === cat.id}
+                    className={`group cursor-pointer rounded-xl border p-4 text-left transition duration-200 active:scale-[0.98] ${
                       form.category === cat.id
-                        ? "border-brand-dark bg-brand-soft ring-2 ring-brand-dark/20"
-                        : "border-line hover:border-brand/40 hover:bg-brand-soft/40"
+                        ? "border-brand bg-brand-soft ring-4 ring-brand/10"
+                        : "border-line hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-card"
                     }`}
                   >
+                    <span
+                      className={`mb-3 grid h-10 w-10 place-items-center rounded-lg transition ${
+                        form.category === cat.id ? "bg-brand text-white" : "bg-brand-light text-brand"
+                      }`}
+                    >
+                      <cat.icon className="h-5 w-5" />
+                    </span>
                     <p className="font-bold text-ink">{cat.label}</p>
                     <p className="mt-1 text-xs text-muted">{cat.desc}</p>
                   </button>
@@ -234,11 +243,8 @@ export default function ListPropertyForm() {
                       key={type.id}
                       type="button"
                       onClick={() => update({ listingType: type.id, propertyType: "" })}
-                      className={`rounded-xl px-5 py-2.5 text-sm font-semibold transition ${
-                        form.listingType === type.id
-                          ? "bg-brand-dark text-white shadow-md shadow-brand-dark/25"
-                          : "border border-line bg-white text-ink hover:border-brand/40"
-                      }`}
+                      aria-pressed={form.listingType === type.id}
+                      className={`chip h-10 px-5 text-sm ${form.listingType === type.id ? "chip-active" : ""}`}
                     >
                       {type.label}
                     </button>
@@ -506,45 +512,47 @@ export default function ListPropertyForm() {
                     key={item}
                     type="button"
                     onClick={() => toggleAmenity(item)}
-                    className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
-                      form.amenities.includes(item)
-                        ? "bg-brand-dark text-white"
-                        : "border border-line bg-white text-ink hover:border-brand/40"
-                    }`}
+                    aria-pressed={form.amenities.includes(item)}
+                    className={`chip ${form.amenities.includes(item) ? "chip-active" : ""}`}
                   >
                     {item}
                   </button>
                 ))}
               </div>
             </div>
-            <div className="rounded-xl border border-dashed border-brand/30 bg-brand-soft/50 p-4">
-              <p className="text-sm font-semibold text-ink">Photos</p>
-              <p className="mt-1 text-xs text-muted">
-                Photo upload will be enabled after verification call. Our team will help you add
-                high-quality images for better visibility.
-              </p>
+            <div className="flex gap-3 rounded-xl border border-dashed border-brand/30 bg-brand-soft p-4">
+              <ImagePlus className="h-5 w-5 text-brand" />
+              <div>
+                <p className="text-sm font-semibold text-ink">Photos</p>
+                <p className="mt-1 text-xs text-muted">
+                  Photo upload will be enabled after verification call. Our team will help you add
+                  high-quality images for better visibility.
+                </p>
+              </div>
             </div>
             <SummaryCard form={form} />
           </div>
         )}
       </div>
 
-      <div className="flex items-center justify-between gap-3 border-t border-line px-6 py-4 sm:px-8">
+      <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-4 sm:px-8">
         <button
           type="button"
           onClick={back}
           disabled={step === 1}
-          className="rounded-xl border border-line px-5 py-2.5 text-sm font-semibold text-ink transition hover:bg-brand-soft disabled:cursor-not-allowed disabled:opacity-40"
+          className="btn btn-outline"
         >
+          <ArrowLeft className="h-4 w-4" />
           Back
         </button>
         <button
           type="button"
           onClick={next}
           disabled={!canContinue()}
-          className="rounded-xl bg-brand-dark px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand-dark/25 transition hover:bg-brand-darker disabled:cursor-not-allowed disabled:opacity-50"
+          className="btn btn-primary"
         >
           {step === 5 ? "Submit listing" : "Continue"}
+          {step === 5 ? <Send className="h-4 w-4" /> : <ArrowRight className="h-4 w-4" />}
         </button>
       </div>
     </div>
@@ -560,13 +568,12 @@ const stepTitles = {
   6: "Done",
 };
 
-const inputClass =
-  "w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none transition focus:border-brand-dark focus:ring-2 focus:ring-brand/15";
+const inputClass = "input";
 
 function Field({ label, children, className = "" }) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-1.5 block text-sm font-semibold text-ink">{label}</span>
+      <span className="label">{label}</span>
       {children}
     </label>
   );
@@ -583,7 +590,7 @@ function SummaryCard({ form }) {
   ].filter(([, v]) => v);
 
   return (
-    <div className="rounded-xl bg-gray-50 p-4">
+    <div className="rounded-xl border border-line bg-surface p-4">
       <p className="text-sm font-bold text-ink">Listing summary</p>
       <dl className="mt-3 space-y-2">
         {rows.map(([k, v]) => (
@@ -594,19 +601,5 @@ function SummaryCard({ form }) {
         ))}
       </dl>
     </div>
-  );
-}
-
-function CheckIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M5 12l5 5L20 7"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
