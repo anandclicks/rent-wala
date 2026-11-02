@@ -1,24 +1,28 @@
-import { Geist, Geist_Mono, Dancing_Script } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { SITE_CONFIG } from "@/data/properties";
 
-const geistSans = Geist({
+// Fonts are self-hosted (Latin subset, variable weight) so builds never depend on
+// fetching from Google Fonts — that fetch was failing on the deploy server.
+const geistSans = localFont({
+  src: "./fonts/Geist-Latin.woff2",
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  weight: "100 900",
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "./fonts/GeistMono-Latin.woff2",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "100 900",
 });
 
-const dancingScript = Dancing_Script({
+const dancingScript = localFont({
+  src: "./fonts/DancingScript-Latin.woff2",
   variable: "--font-dancing-script",
-  subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: "400 700",
 });
 
 export const metadata = {
