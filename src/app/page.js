@@ -40,8 +40,17 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <FeatureStrip />
-      <CategoryCarousel />
+      {/* The hero's h1 is desktop-only, so the page still needs one on phones. */}
+      <h1 className="sr-only lg:hidden">Find a Place You&apos;ll Love</h1>
+      {/* Phones open on categories; desktop keeps the trust strip first. */}
+      <div className="flex flex-col">
+        <div className="lg:order-2">
+          <CategoryCarousel />
+        </div>
+        <div className="lg:order-1">
+          <FeatureStrip />
+        </div>
+      </div>
       <FeaturedProperties properties={properties} />
       <DualCTA />
       <ExploreCarouselSection
@@ -76,15 +85,11 @@ const AVATARS = [
 
 function Hero() {
   return (
-    <section className="bg-white pb-2 pt-4 sm:pt-6">
+    <section className="hidden bg-white pb-2 pt-6 lg:block">
       <div className="container-page">
-        <div className="relative isolate overflow-hidden rounded-2xl sm:rounded-3xl">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/mainbgimage.jpg"
-            alt=""
-            className="absolute inset-0 -z-10 h-full w-full object-cover object-[center_40%]"
-          />
+        <div className="relative isolate overflow-hidden rounded-3xl">
+          {/* A background image scoped to lg, because a hidden <img> would still download on phones. */}
+          <div className="absolute inset-0 -z-10 bg-cover bg-[center_40%] lg:bg-[url('/mainbgimage.jpg')]" />
           <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy/90 via-brand-darker/70 to-brand/20" />
 
           <div className="grid items-end gap-8 px-4 py-8 sm:px-8 sm:py-12 lg:grid-cols-[1fr_auto] lg:px-12 lg:py-16">

@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import Link from "next/link";
 import { ChevronRight, Headphones, House, Mail, Plus, Search, X } from "lucide-react";
 import Logo from "@/components/Logo";
+import { NavbarSearch, NavbarSearchWithParams } from "@/components/layout/NavbarSearch";
 import { MORE_LINKS, NAV_LINKS, SUPPORT } from "@/components/layout/nav-config";
 
 function MenuRow({ href, icon: Icon, children, onClick, external }) {
@@ -41,7 +42,7 @@ function Group({ title, children }) {
 }
 
 /** Slide-in drawer for small screens, list layout inspired by Housing.com's menu. */
-export default function MobileMenu({ open, onClose }) {
+export default function MobileMenu({ open, focusSearch = false, onClose }) {
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => e.key === "Escape" && onClose();
@@ -55,6 +56,8 @@ export default function MobileMenu({ open, onClose }) {
   }, [open, onClose]);
 
   if (!open) return null;
+
+  const searchProps = { placeholder: "Location or property", autoFocus: focusSearch, onSearch: onClose };
 
   return (
     <div className="fixed inset-0 z-[90] lg:hidden">
@@ -78,7 +81,10 @@ export default function MobileMenu({ open, onClose }) {
         </div>
 
         <div className="flex-1 overflow-y-auto">
-          <div className="p-4">
+          <div className="space-y-3 p-4">
+            <Suspense fallback={<NavbarSearch {...searchProps} />}>
+              <NavbarSearchWithParams {...searchProps} />
+            </Suspense>
             <Link
               href="/list-your-property"
               onClick={onClose}

@@ -8,51 +8,9 @@ import Logo from "@/components/Logo";
 import Dropdown, { DropdownItem } from "@/components/ui/Dropdown";
 import MobileMenu from "@/components/layout/MobileMenu";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
+import { NavbarSearch, NavbarSearchWithParams } from "@/components/layout/NavbarSearch";
 import { CITIES, MORE_LINKS, NAV_LINKS, isLinkActive } from "@/components/layout/nav-config";
 import { useWishlist } from "@/lib/wishlist";
-
-function NavbarSearch({ className = "", initial = "" }) {
-  const router = useRouter();
-  const [query, setQuery] = useState(initial);
-
-  const submit = (e) => {
-    e.preventDefault();
-    const q = query.trim();
-    router.push(q ? `/search?q=${encodeURIComponent(q)}` : "/search");
-  };
-
-  return (
-    <form onSubmit={submit} role="search" className={className}>
-      <label className="group flex h-11 items-stretch overflow-hidden rounded-lg border-2 border-ink/85 bg-white transition focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/10">
-        <span className="sr-only">Search location, property or landmark</span>
-        <span className="grid place-items-center pl-3.5 text-muted">
-          <Search className="h-[18px] w-[18px]" />
-        </span>
-        <input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search location, property or landmark"
-          className="min-w-0 flex-1 bg-transparent px-3 text-sm text-ink outline-none placeholder:text-muted/80"
-        />
-        <button
-          type="submit"
-          aria-label="Search"
-          className="hidden w-12 place-items-center bg-ink/90 text-white transition hover:bg-brand sm:grid"
-        >
-          <Search className="h-5 w-5" />
-        </button>
-      </label>
-    </form>
-  );
-}
-
-function NavbarSearchWithParams(props) {
-  const params = useSearchParams();
-  const q = params.get("q") || "";
-  // Remount when the URL query changes so the field reflects the current search.
-  return <NavbarSearch key={q} {...props} initial={q} />;
-}
 
 function CityPicker({ params, compact = false }) {
   const router = useRouter();
@@ -67,14 +25,17 @@ function CityPicker({ params, compact = false }) {
           onClick={toggle}
           aria-expanded={open}
           aria-haspopup="menu"
+          aria-label={`City: ${label}`}
           className={`flex h-11 items-center gap-2 rounded-lg text-sm font-medium text-ink transition hover:bg-surface ${
-            compact ? "max-w-[150px] px-2" : "min-w-[170px] border border-line px-3"
+            compact ? "w-10 justify-center sm:w-auto sm:max-w-[150px] sm:px-2" : "min-w-[170px] border border-line px-3"
           }`}
         >
-          <MapPin className="h-[18px] w-[18px] text-brand" />
-          <span className="truncate">{label}</span>
+          <MapPin className="h-[18px] w-[18px] shrink-0 text-brand" />
+          <span className={`truncate ${compact ? "hidden sm:inline" : ""}`}>{label}</span>
           <ChevronDown
-            className={`ml-auto h-4 w-4 text-muted transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+            className={`ml-auto h-4 w-4 text-muted transition-transform duration-200 ${open ? "rotate-180" : ""} ${
+              compact ? "hidden sm:block" : ""
+            }`}
           />
         </button>
       )}
@@ -208,6 +169,7 @@ export function PostPropertyButton({ className = "" }) {
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [focusSearch, setFocusSearch] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const [lastPath, setLastPath] = useState(pathname);
@@ -217,6 +179,11 @@ export default function Navbar() {
     setLastPath(pathname);
     setMenuOpen(false);
   }
+
+  const openMenu = ({ search = false } = {}) => {
+    setFocusSearch(search);
+    setMenuOpen(true);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
@@ -232,10 +199,10 @@ export default function Navbar() {
         }`}
       >
         {/* Row 1 — logo, location, search, actions */}
-        <div className="container-page flex h-16 items-center gap-3 lg:h-[4.5rem] lg:gap-5">
+        <div className="container-page flex h-16 items-center gap-2 sm:gap-3 lg:h-[4.5rem] lg:gap-5">
           <button
             type="button"
-            onClick={() => setMenuOpen(true)}
+            onClick={() => openMenu()}
             aria-label="Open menu"
             aria-expanded={menuOpen}
             className="icon-btn -ml-2 lg:hidden"
@@ -255,25 +222,26 @@ export default function Navbar() {
             <NavbarSearchWithParams className="hidden flex-1 lg:block" />
           </Suspense>
 
-          <div className="ml-auto flex items-center gap-1 lg:ml-0 lg:gap-2">
+          <div className="ml-auto flex items-center gap-0.5 sm:gap-1 lg:ml-0 lg:gap-2">
             <div className="lg:hidden">
               <Suspense fallback={<CityPicker params={null} compact />}>
                 <CityPickerWithParams compact />
               </Suspense>
             </div>
+            <button
+              type="button"
+              onClick={() => openMenu({ search: true })}
+              aria-label="Search properties"
+              className="icon-btn lg:hidden"
+            >
+              <Search className="h-[22px] w-[22px]" />
+            </button>
             <WishlistButton />
             <button type="button" aria-label="Account" className="icon-btn hidden lg:grid">
               <UserRound className="h-[22px] w-[22px]" />
             </button>
             <PostPropertyButton className="ml-2 hidden lg:inline-flex" />
           </div>
-        </div>
-
-        {/* Row 2 — mobile search */}
-        <div className="container-page pb-3 lg:hidden">
-          <Suspense fallback={<NavbarSearch />}>
-            <NavbarSearchWithParams />
-          </Suspense>
         </div>
 
         {/* Row 2 — desktop category bar */}
@@ -290,8 +258,8 @@ export default function Navbar() {
         </div>
       </header>
 
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
-      <MobileBottomNav onMenu={() => setMenuOpen(true)} />
+      <MobileMenu open={menuOpen} focusSearch={focusSearch} onClose={() => setMenuOpen(false)} />
+      <MobileBottomNav onMenu={() => openMenu()} />
     </>
   );
 }
