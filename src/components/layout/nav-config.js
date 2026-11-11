@@ -1,34 +1,19 @@
-import {
-  BedDouble,
-  Building,
-  Building2,
-  ChefHat,
-  House,
-  KeyRound,
-  LandPlot,
-  Castle,
-} from "lucide-react";
+import { KeyRound, Tag } from "lucide-react";
+import { CATEGORY_PARAM, PROPERTY_CATEGORIES, categoryHref } from "@/data/categories";
 
-/** Primary category links shown in the header bar and the mobile menu. */
-export const NAV_LINKS = [
+/** Header bar (desktop) and the "Browse" group of the mobile menu: just Rent and Sell. */
+export const DESKTOP_NAV_LINKS = [
   { label: "Rent", href: "/search?listingType=RENT", icon: KeyRound, match: { listingType: "RENT" } },
-  { label: "PG/Hostel", href: "/search?category=PG", icon: BedDouble, match: { category: "PG" } },
-  { label: "Commercial", href: "/search?category=COMMERCIAL", icon: Building2, match: { category: "COMMERCIAL" } },
-  {
-    label: "Independent House",
-    href: "/search?category=INDEPENDENT_HOUSE",
-    icon: House,
-    match: { category: "INDEPENDENT_HOUSE" },
-  },
+  { label: "Sell", href: "/list-your-property", icon: Tag, path: "/list-your-property" },
 ];
 
-/** Secondary links grouped under "More". */
-export const MORE_LINKS = [
-  { label: "Flats / Apartments", href: "/search?category=APARTMENT", icon: Building, match: { category: "APARTMENT" } },
-  { label: "Villas", href: "/search?category=VILLA", icon: Castle, match: { category: "VILLA" } },
-  { label: "Lands & Plots", href: "/search?category=LAND", icon: LandPlot, match: { category: "LAND" } },
-  { label: "Kitchen Flats", href: "/search?kitchen=1&listingType=RENT", icon: ChefHat, match: { kitchen: "1" } },
-];
+/** The site's categories (from data/categories.js) as menu links. */
+export const CATEGORY_LINKS = PROPERTY_CATEGORIES.map((c) => ({
+  label: c.label,
+  href: categoryHref(c),
+  icon: c.icon,
+  match: { [CATEGORY_PARAM]: c.key },
+}));
 
 export const CITIES = ["Delhi", "Gurugram", "Noida"];
 
@@ -40,6 +25,7 @@ export const SUPPORT = {
 };
 
 export function isLinkActive(link, pathname, params) {
+  if (link.path) return pathname === link.path;
   if (pathname !== "/search" || !params || !link.match) return false;
   return Object.entries(link.match).every(([k, v]) => params.get(k) === v);
 }

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ChevronRight, Headphones, House, Mail, Plus, Search, X } from "lucide-react";
 import Logo from "@/components/Logo";
 import { NavbarSearch, NavbarSearchWithParams } from "@/components/layout/NavbarSearch";
-import { MORE_LINKS, NAV_LINKS, SUPPORT } from "@/components/layout/nav-config";
+import { CATEGORY_LINKS, DESKTOP_NAV_LINKS, SUPPORT } from "@/components/layout/nav-config";
 
 function MenuRow({ href, icon: Icon, children, onClick, external }) {
   const content = (
@@ -105,15 +105,15 @@ export default function MobileMenu({ open, focusSearch = false, onClose }) {
           </Group>
 
           <Group title="Browse">
-            {NAV_LINKS.map((l) => (
+            {DESKTOP_NAV_LINKS.map((l) => (
               <MenuRow key={l.label} href={l.href} icon={l.icon} onClick={onClose}>
                 {l.label}
               </MenuRow>
             ))}
           </Group>
 
-          <Group title="More categories">
-            {MORE_LINKS.map((l) => (
+          <Group title="Categories">
+            {CATEGORY_LINKS.map((l) => (
               <MenuRow key={l.label} href={l.href} icon={l.icon} onClick={onClose}>
                 {l.label}
               </MenuRow>

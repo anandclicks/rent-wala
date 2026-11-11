@@ -29,6 +29,8 @@
   --success: #16a34a;
   --danger: #dc2626;
   --whatsapp: #25d366;
+  /* Sky blue sampled from /public/logo-brand.png. */
+  --logo: #00adef;
 }
 
 @theme inline {
@@ -54,6 +56,7 @@
   --color-success: var(--success);
   --color-danger: var(--danger);
   --color-whatsapp: var(--whatsapp);
+  --color-logo: var(--logo);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -143,6 +146,20 @@ svg.lucide {
   }
   .btn-outline-brand {
     @apply border-[1.5px] border-brand bg-white text-brand hover:bg-brand-soft;
+  }
+  /*
+    Logo-blue fill; swaps to white with a blue outline and blue text on mouse hover
+    (and keyboard focus, so it isn't mouse-only). Nothing changes on click.
+  */
+  .btn-logo {
+    border: 1.5px solid var(--logo);
+    background-color: var(--logo);
+    color: #fff;
+  }
+  .btn-logo:hover,
+  .btn-logo:focus-visible {
+    background-color: #fff;
+    color: var(--logo);
   }
   .btn-ghost {
     @apply text-ink/75 hover:bg-surface hover:text-ink;

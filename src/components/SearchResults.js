@@ -10,6 +10,9 @@ import PropertyCard from "@/components/PropertyCard";
 import CustomSelect from "@/components/CustomSelect";
 import { mapSearchTypeToCategory, normalizeCity, parseLocationInput } from "@/lib/search";
 import { filterStaticProperties } from "@/data/properties";
+import { CATEGORY_OWNED_PARAMS, categoryFromParams } from "@/data/categories";
+import NearbyPrompt from "@/components/NearbyPrompt";
+import { distanceKm, readSavedCoords, wasNearbyPromptAnswered } from "@/lib/geo";
 
 const PAGE_SIZE = 24;
 
@@ -17,6 +20,7 @@ const SORT_OPTIONS = [
   { value: "", label: "Relevance" },
   { value: "price_asc", label: "Price: Low to High" },
   { value: "price_desc", label: "Price: High to Low" },
+  { value: "nearest", label: "Nearest to me" },
 ];
 
 const CATEGORY_LABELS = {
@@ -35,8 +39,14 @@ const formatINR = (n) => `₹${Number(n).toLocaleString("en-IN")}`;
 
 function activeFilterChips(params) {
   const chips = [];
+  const picked = categoryFromParams(params);
   const category = params.get("category");
-  if (category) chips.push({ keys: ["category", "type"], label: CATEGORY_LABELS[category] || category });
+  if (picked) {
+    const keys = [...CATEGORY_OWNED_PARAMS, ...(picked.query.bhk ? ["bhk"] : [])];
+    chips.push({ keys, label: picked.label });
+  } else if (category) {
+    chips.push({ keys: CATEGORY_OWNED_PARAMS, label: CATEGORY_LABELS[category] || category });
+  }
   const listingType = params.get("listingType");
   if (listingType) chips.push({ keys: ["listingType"], label: listingType === "SELL" ? "Buy" : "Rent" });
   const min = params.get("minPrice");
@@ -46,7 +56,10 @@ function activeFilterChips(params) {
       min && max ? `${formatINR(min)} – ${formatINR(max)}` : min ? `Above ${formatINR(min)}` : `Under ${formatINR(max)}`;
     chips.push({ keys: ["minPrice", "maxPrice"], label });
   }
-  if (params.get("bhk")) chips.push({ keys: ["bhk"], label: params.get("bhk") });
+  // Rooms already shows as its own chip; don't repeat its "1 RK".
+  if (params.get("bhk") && params.get("bhk") !== picked?.query.bhk) {
+    chips.push({ keys: ["bhk"], label: params.get("bhk") });
+  }
   if (params.get("furnishing")) chips.push({ keys: ["furnishing"], label: params.get("furnishing") });
   if (params.get("kitchen") === "1") chips.push({ keys: ["kitchen"], label: "Kitchen" });
   return chips;
@@ -61,6 +74,9 @@ export default function SearchResults() {
   const [page, setPage] = useState({ key: queryKey, count: PAGE_SIZE });
   const visible = page.key === queryKey ? page.count : PAGE_SIZE;
   const [sheetOpen, setSheetOpen] = useState(false);
+  // This component only renders in the browser (useSearchParams under Suspense), so storage reads are safe here.
+  const [coords, setCoords] = useState(readSavedCoords);
+  const [nearbyPromptOpen, setNearbyPromptOpen] = useState(() => !wasNearbyPromptAnswered());
 
   const cityParam = searchParams.get("city") || "";
   const localityParam = searchParams.get("locality") || "";
@@ -74,6 +90,7 @@ export default function SearchResults() {
   const bhk = searchParams.get("bhk") || "";
   const furnishing = searchParams.get("furnishing") || "";
   const kitchen = searchParams.get("kitchen") === "1";
+  const space = searchParams.get("space") || "";
 
   const { city, locality } = useMemo(() => {
     const parsed = parseLocationInput(q, cityParam);
@@ -86,7 +103,7 @@ export default function SearchResults() {
   const properties = useMemo(() => {
     const hasLocation = Boolean(q || locality || city);
     const hasFilters = Boolean(
-      category || listingType || minPrice || maxPrice || bhk || furnishing || kitchen
+      category || space || listingType || minPrice || maxPrice || bhk || furnishing || kitchen
     );
     if (!hasLocation && !hasFilters) return [];
 
@@ -94,6 +111,7 @@ export default function SearchResults() {
       city: city || undefined,
       locality,
       category,
+      space,
       listingType,
       minPrice,
       maxPrice,
@@ -102,13 +120,30 @@ export default function SearchResults() {
       kitchen,
       q,
     });
-  }, [city, locality, category, listingType, minPrice, maxPrice, bhk, furnishing, kitchen, q]);
+  }, [city, locality, category, space, listingType, minPrice, maxPrice, bhk, furnishing, kitchen, q]);
+
+  // Distance from the visitor, once they've shared their location.
+  const distances = useMemo(() => {
+    if (!coords) return null;
+    const map = new Map();
+    for (const p of properties) {
+      if (Number.isFinite(p.latitude) && Number.isFinite(p.longitude)) {
+        map.set(p.id, distanceKm(coords, { lat: p.latitude, lng: p.longitude }));
+      }
+    }
+    return map;
+  }, [coords, properties]);
 
   const sorted = useMemo(() => {
+    if (sort === "nearest") {
+      if (!distances) return properties;
+      const d = (p) => distances.get(p.id) ?? Infinity;
+      return [...properties].sort((a, b) => d(a) - d(b));
+    }
     if (!sort) return properties;
     const dir = sort === "price_desc" ? -1 : 1;
     return [...properties].sort((a, b) => dir * ((a.rawPrice ?? 0) - (b.rawPrice ?? 0)));
-  }, [properties, sort]);
+  }, [properties, sort, distances]);
 
   useEffect(() => {
     if (!sheetOpen) return;
@@ -144,9 +179,23 @@ export default function SearchResults() {
     mutate(params);
     router.push(`/search?${params.toString()}`, { scroll: false });
   };
-  const clearFilters = () => setParams((p) => FILTER_KEYS.forEach((k) => p.delete(k)));
+  const clearFilters = () =>
+    setParams((p) => [...FILTER_KEYS, ...CATEGORY_OWNED_PARAMS].forEach((k) => p.delete(k)));
   const removeChip = (keys) => setParams((p) => keys.forEach((k) => p.delete(k)));
-  const setSort = (value) => setParams((p) => (value ? p.set("sort", value) : p.delete("sort")));
+  const setSort = (value) => {
+    // "Nearest" needs the visitor's location first.
+    if (value === "nearest" && !coords) {
+      setNearbyPromptOpen(true);
+      return;
+    }
+    setParams((p) => (value ? p.set("sort", value) : p.delete("sort")));
+  };
+  const onCoords = (c) => {
+    setCoords(c);
+    setParams((p) => p.set("sort", "nearest"));
+  };
+  const pickedCategory = categoryFromParams(searchParams);
+  const showNearbyPrompt = nearbyPromptOpen && !coords && hasSearch && total > 0;
 
   return (
     <div className="min-h-[60vh] bg-surface">
@@ -176,8 +225,7 @@ export default function SearchResults() {
               variant="search"
               initialLocation={q || locationLabel}
               initialCity={city}
-              initialType={type}
-              initialCategory={categoryParam}
+              initialCategoryKey={categoryFromParams(searchParams)?.key || ""}
               preserveQuery={searchParams.toString()}
             />
           </div>
@@ -264,7 +312,7 @@ export default function SearchResults() {
                 <>
                   <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
                     {sorted.slice(0, visible).map((p) => (
-                      <PropertyCard key={p.id} property={p} />
+                      <PropertyCard key={p.id} property={p} distanceKm={distances?.get(p.id)} />
                     ))}
                   </div>
                   {visible < total && (
@@ -287,6 +335,14 @@ export default function SearchResults() {
           </div>
         )}
       </section>
+
+      {showNearbyPrompt && (
+        <NearbyPrompt
+          what={pickedCategory?.label || "properties"}
+          onCoords={onCoords}
+          onClose={() => setNearbyPromptOpen(false)}
+        />
+      )}
 
       {sheetOpen && (
         <div className="fixed inset-0 z-[95] lg:hidden">

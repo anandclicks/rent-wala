@@ -101,6 +101,9 @@ export function filterStaticProperties(filters) {
   if (filters.category) {
     results = results.filter((p) => p.category === filters.category);
   }
+  if (filters.space) {
+    results = results.filter((p) => p.propertyType === filters.space);
+  }
   if (filters.listingType) {
     results = results.filter((p) => p.listingType === filters.listingType);
   }

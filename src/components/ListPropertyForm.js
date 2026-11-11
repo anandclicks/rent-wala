@@ -3,18 +3,19 @@
 import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Building2, CircleCheck, House, ImagePlus, LandPlot, Send } from "lucide-react";
 import data from "@/data/data.json";
+import { categoryLabelsForGroup } from "@/data/categories";
 
 const PROPERTY_CATEGORIES = [
-  { id: "residential", label: "Residential", desc: "Flats, houses, villas & PG", icon: House },
-  { id: "commercial", label: "Commercial", desc: "Offices, shops & warehouses", icon: Building2 },
-  { id: "land", label: "Land / Plot", desc: "Residential or commercial plots", icon: LandPlot },
+  { id: "residential", label: "Residential", desc: "Rooms, flats, villas, houses & PG", icon: House },
+  { id: "commercial", label: "Commercial", desc: "Co-working, offices & shops", icon: Building2 },
+  { id: "land", label: "Lands / Plots", desc: "Residential or commercial plots", icon: LandPlot },
 ];
 
 const LISTING_TYPES = {
   residential: [
     { id: "rent", label: "Rent" },
     { id: "sell", label: "Resale" },
-    { id: "pg", label: "PG / Hostel" },
+    { id: "pg", label: "PG / Hostels" },
     { id: "flatmates", label: "Flatmates" },
   ],
   commercial: [
@@ -24,26 +25,10 @@ const LISTING_TYPES = {
   land: [{ id: "sell", label: "Resale" }],
 };
 
-const RESIDENTIAL_TYPES = [
-  "Apartment",
-  "Independent House",
-  "Villa",
-  "Builder Floor",
-  "Studio Apartment",
-  "Farm House",
-  "Serviced Apartment",
-];
-
-const COMMERCIAL_TYPES = [
-  "Office Space",
-  "Retail Shop",
-  "Showroom",
-  "Warehouse",
-  "Industrial Shed",
-  "Co-working Space",
-];
-
-const LAND_TYPES = ["Residential Plot", "Commercial Plot", "Agricultural Land"];
+// Property types are the site's categories (data/categories.js), split by form group.
+const RESIDENTIAL_TYPES = categoryLabelsForGroup("residential");
+const COMMERCIAL_TYPES = categoryLabelsForGroup("commercial");
+const LAND_TYPES = categoryLabelsForGroup("land");
 
 const BHK_OPTIONS = ["1 RK", "1 BHK", "2 BHK", "3 BHK", "4 BHK", "4+ BHK"];
 const FURNISHING = ["Unfurnished", "Semi-Furnished", "Fully Furnished"];

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Bath, BadgeCheck, BedDouble, Heart, MapPin, Ruler, Users } from "lucide-react";
+import { formatDistance } from "@/lib/geo";
 import { useWishlist } from "@/lib/wishlist";
 
 function statusLabel(property) {
@@ -29,7 +30,8 @@ export function ShortlistButton({ id, className = "" }) {
   );
 }
 
-export default function PropertyCard({ property }) {
+/** `distanceKm` (optional) shows "x km away" when the visitor has shared their location. */
+export default function PropertyCard({ property, distanceKm }) {
   const href = property.slug ? `/property/${property.slug}` : "#";
   const showBeds = property.beds != null && property.beds > 0;
   const showBaths = property.baths != null && property.baths > 0;
@@ -103,6 +105,11 @@ export default function PropertyCard({ property }) {
                 {property.locality ? `${property.locality}, ` : ""}
                 {property.city}
               </span>
+              {Number.isFinite(distanceKm) && (
+                <span className="ml-auto shrink-0 normal-case tracking-normal text-brand">
+                  {formatDistance(distanceKm)}
+                </span>
+              )}
             </p>
           </div>
         </div>

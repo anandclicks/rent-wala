@@ -1,4 +1,5 @@
 /** Replace URLs with /public/kayanat/... when client assets are available. */
+import { categoryHref, getCategory } from "@/data/categories";
 
 export const HERO_SLIDES = [
   "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
@@ -34,7 +35,7 @@ export const OFFERS = [
     title: "First month 10% off",
     subtitle: "On select PG & coliving stays",
     badge: "PG OFFER",
-    href: "/search?category=PG",
+    href: categoryHref(getCategory("pg")),
   },
   {
     id: "o2",
@@ -48,13 +49,13 @@ export const OFFERS = [
     title: "Festive move-in",
     subtitle: "Special rates on verified flats",
     badge: "LIMITED",
-    href: "/search?category=APARTMENT",
+    href: categoryHref(getCategory("flats")),
   },
   {
     id: "o4",
     title: "Coworking trial",
     subtitle: "Day passes on select spaces",
     badge: "NEW",
-    href: "/search?category=COMMERCIAL",
+    href: categoryHref(getCategory("coworking")),
   },
 ];

@@ -9,10 +9,10 @@ import {
   BHK_HERO_OPTIONS,
   LOOKING_FOR_OPTIONS,
   buildSearchQuery,
-  mapLookingFor,
   parseLocationInput,
   showsBhkForLookingFor,
 } from "@/lib/search";
+import { withCategory } from "@/data/categories";
 
 const BUDGET_OPTIONS = [
   { label: "Any", min: "", max: "" },
@@ -24,9 +24,9 @@ const BUDGET_OPTIONS = [
 
 const POPULAR = [
   { label: "PG in Sector 62", location: "Sector 62, Noida", lookingFor: "pg" },
-  { label: "Coworking in Gurugram", location: "Gurugram", lookingFor: "commercial" },
+  { label: "Coworking in Gurugram", location: "Gurugram", lookingFor: "coworking" },
   { label: "Coliving in South Delhi", location: "South Delhi", lookingFor: "pg" },
-  { label: "Kitchen flat Noida", location: "Noida", lookingFor: "kitchen" },
+  { label: "Flats in Noida", location: "Noida", lookingFor: "flats" },
 ];
 
 export default function HeroSearch() {
@@ -51,7 +51,6 @@ export default function HeroSearch() {
       }
 
       setError("");
-      const mapped = mapLookingFor(selectedLooking);
       const parsed = parseLocationInput(loc, selectedCity);
       const budget = BUDGET_OPTIONS[budgetIdx];
 
@@ -59,13 +58,10 @@ export default function HeroSearch() {
         city: selectedCity || parsed.city,
         locality: parsed.locality,
         location: loc,
-        type: mapped.type,
-        category: mapped.category,
-        listingType: mapped.listingType,
-        kitchen: mapped.kitchen,
-        bhk: selectedBhk,
+        listingType: selectedLooking ? "RENT" : "",
       });
-      const params = new URLSearchParams(query);
+      const params = withCategory(new URLSearchParams(query), selectedLooking);
+      if (selectedBhk) params.set("bhk", selectedBhk);
       if (budget.min) params.set("minPrice", budget.min);
       if (budget.max) params.set("maxPrice", budget.max);
       router.push(`/search?${params.toString()}`);

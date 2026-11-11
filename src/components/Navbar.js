@@ -3,13 +3,12 @@
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ChevronDown, Heart, MapPin, Menu, Plus, Search, UserRound, Check } from "lucide-react";
+import { ChevronDown, Heart, MapPin, Menu, Plus, UserRound, Check } from "lucide-react";
 import Logo from "@/components/Logo";
 import Dropdown, { DropdownItem } from "@/components/ui/Dropdown";
 import MobileMenu from "@/components/layout/MobileMenu";
-import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import { NavbarSearch, NavbarSearchWithParams } from "@/components/layout/NavbarSearch";
-import { CITIES, MORE_LINKS, NAV_LINKS, isLinkActive } from "@/components/layout/nav-config";
+import { CITIES, DESKTOP_NAV_LINKS, isLinkActive } from "@/components/layout/nav-config";
 import { useWishlist } from "@/lib/wishlist";
 
 function CityPicker({ params, compact = false }) {
@@ -72,11 +71,10 @@ function CityPickerWithParams(props) {
 
 function CategoryBar({ params }) {
   const pathname = usePathname();
-  const moreActive = MORE_LINKS.some((l) => isLinkActive(l, pathname, params));
 
   return (
     <nav aria-label="Property categories" className="flex items-center gap-1">
-      {NAV_LINKS.map((link) => {
+      {DESKTOP_NAV_LINKS.map((link) => {
         const active = isLinkActive(link, pathname, params);
         const Icon = link.icon;
         return (
@@ -94,39 +92,6 @@ function CategoryBar({ params }) {
           </Link>
         );
       })}
-      <Dropdown
-        trigger={({ open, toggle }) => (
-          <button
-            type="button"
-            onClick={toggle}
-            aria-expanded={open}
-            aria-haspopup="menu"
-            className={`flex h-11 items-center gap-1.5 rounded-lg px-3 text-sm font-medium transition ${
-              moreActive || open ? "text-brand" : "text-ink/75 hover:bg-surface hover:text-ink"
-            }`}
-          >
-            More
-            <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
-          </button>
-        )}
-      >
-        {({ close }) => (
-          <div role="menu">
-            {MORE_LINKS.map((link) => (
-              <DropdownItem
-                key={link.label}
-                as={Link}
-                href={link.href}
-                icon={link.icon}
-                active={isLinkActive(link, pathname, params)}
-                onClick={close}
-              >
-                {link.label}
-              </DropdownItem>
-            ))}
-          </div>
-        )}
-      </Dropdown>
     </nav>
   );
 }
@@ -200,16 +165,6 @@ export default function Navbar() {
       >
         {/* Row 1 — logo, location, search, actions */}
         <div className="container-page flex h-16 items-center gap-2 sm:gap-3 lg:h-[4.5rem] lg:gap-5">
-          <button
-            type="button"
-            onClick={() => openMenu()}
-            aria-label="Open menu"
-            aria-expanded={menuOpen}
-            className="icon-btn -ml-2 lg:hidden"
-          >
-            <Menu className="h-6 w-6" />
-          </button>
-
           <Logo variant="brand" />
 
           <div className="hidden lg:block">
@@ -222,25 +177,22 @@ export default function Navbar() {
             <NavbarSearchWithParams className="hidden flex-1 lg:block" />
           </Suspense>
 
+          {/* Phones show just the logo and a hamburger on the right; the drawer holds the rest. */}
           <div className="ml-auto flex items-center gap-0.5 sm:gap-1 lg:ml-0 lg:gap-2">
-            <div className="lg:hidden">
-              <Suspense fallback={<CityPicker params={null} compact />}>
-                <CityPickerWithParams compact />
-              </Suspense>
-            </div>
-            <button
-              type="button"
-              onClick={() => openMenu({ search: true })}
-              aria-label="Search properties"
-              className="icon-btn lg:hidden"
-            >
-              <Search className="h-[22px] w-[22px]" />
-            </button>
-            <WishlistButton />
+            <WishlistButton className="hidden lg:inline-block" />
             <button type="button" aria-label="Account" className="icon-btn hidden lg:grid">
               <UserRound className="h-[22px] w-[22px]" />
             </button>
             <PostPropertyButton className="ml-2 hidden lg:inline-flex" />
+            <button
+              type="button"
+              onClick={() => openMenu()}
+              aria-label="Open menu"
+              aria-expanded={menuOpen}
+              className="icon-btn -mr-2 text-ink/70 lg:hidden"
+            >
+              <Menu className="h-7 w-7" strokeWidth={2} />
+            </button>
           </div>
         </div>
 
@@ -259,7 +211,6 @@ export default function Navbar() {
       </header>
 
       <MobileMenu open={menuOpen} focusSearch={focusSearch} onClose={() => setMenuOpen(false)} />
-      <MobileBottomNav onMenu={() => openMenu()} />
     </>
   );
 }

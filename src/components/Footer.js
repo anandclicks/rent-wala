@@ -92,7 +92,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-page flex flex-col items-center justify-between gap-3 pb-24 pt-5 text-sm text-slate-500 sm:flex-row lg:pb-5">
+        <div className="container-page flex flex-col items-center justify-between gap-3 pb-20 pt-5 text-sm text-slate-500 sm:flex-row sm:pb-5">
           <p>© {new Date().getFullYear()} Property Rent Wala. All rights reserved.</p>
           <div className="flex gap-5">
             {["Terms", "Privacy", "Cookies"].map((l) => (

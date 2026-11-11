@@ -1,14 +1,15 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { hasBottomNav } from "@/components/layout/MobileBottomNav";
 
 export default function WhatsAppFloat({ number = "" }) {
   const pathname = usePathname();
   const num = number.replace(/\D/g, "");
   const href = `https://wa.me/${num || "919876543210"}`;
-  // Detail pages carry WhatsApp in their mobile contact bar, so the float is desktop-only there.
-  const position = hasBottomNav(pathname) ? "grid bottom-20 lg:bottom-6" : "hidden lg:grid bottom-6";
+  // Detail pages carry WhatsApp in their mobile contact bar (and admin has no use for it),
+  // so the float is desktop-only there.
+  const desktopOnly = pathname.startsWith("/property/") || pathname.startsWith("/admin");
+  const position = desktopOnly ? "hidden lg:grid bottom-6" : "grid bottom-5 lg:bottom-6";
 
   return (
     <a

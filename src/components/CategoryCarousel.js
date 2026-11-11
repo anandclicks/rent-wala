@@ -1,46 +1,98 @@
+import Image from "next/image";
 import Link from "next/link";
+import { HERO_IMAGE_SOFTEN, HERO_SHADE } from "@/lib/hero-style";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { PROPERTY_CATEGORIES, categoryHref } from "@/data/categories";
+import {
+  ART_CIRCLE_STYLE as CIRCLE_STYLE,
+  CATEGORY_ART,
+} from "@/components/CategoryIllustrations";
+import CitySelect from "@/components/home/CitySelect";
 
-const img = (id) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=400&q=70`;
+const CATEGORIES = PROPERTY_CATEGORIES.map((c) => ({
+  title: c.label,
+  Art: CATEGORY_ART[c.key],
+  href: categoryHref(c),
+}));
 
-const CATEGORIES = [
-  { title: "Flats / Apartments", image: img("1502672260266-1c1ef2d93688"), href: "/search?category=APARTMENT" },
-  { title: "PG / Hostels", image: img("1631049307264-da0ec9d70304"), href: "/search?category=PG" },
-  { title: "Coworking Spaces", image: img("1497366811353-6870744d04b2"), href: "/search?category=COMMERCIAL" },
-  { title: "Independent House", image: img("1560518883-ce09059eeffa"), href: "/search?category=INDEPENDENT_HOUSE" },
-  { title: "Villas", image: img("1613490493576-7fde63acd811"), href: "/search?category=VILLA" },
-  { title: "Kitchen Flats", image: img("1556911220-bff31c812dba"), href: "/search?kitchen=1&listingType=RENT" },
-  { title: "Lands & Plots", image: img("1500382017468-9049fed747ef"), href: "/search?category=LAND" },
-  { title: "Offices & Shops", image: img("1497366216548-37526070297c"), href: "/search?category=COMMERCIAL" },
-];
+/**
+ * Phone version of the desktop hero banner (the desktop one is hidden below lg).
+ * `sizes` makes desktop pick the tiniest srcset entry, so the hidden image costs nothing there,
+ * while phones get a resized copy instead of the 21 MB original.
+ */
+function PhoneHero() {
+  return (
+    <div className="relative isolate mb-8 overflow-hidden rounded-2xl px-5 py-9 lg:hidden">
+      <Image
+        src="/mainbgimage.jpg"
+        alt=""
+        fill
+        sizes="(min-width: 1024px) 1px, 100vw"
+        loading="eager"
+        fetchPriority="high"
+        className="-z-10 object-cover"
+        style={{ objectPosition: "center 40%", ...HERO_IMAGE_SOFTEN }}
+      />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy/90 via-brand-darker/70 to-brand/20" />
+      <div className="absolute inset-0 -z-10" style={HERO_SHADE} />
+      <p className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white ring-1 ring-white/20 backdrop-blur-sm">
+        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+        Homes for a Better Tomorrow
+      </p>
+      <h1 className="mt-3 text-[2rem] font-extrabold leading-[1.1] tracking-tight text-white">
+        Find a Place You&apos;ll Love
+      </h1>
+      <p className="mt-2 text-sm leading-relaxed text-white/85">
+        Buy, Rent or Book PG — Verified Listings, Trusted Owners
+      </p>
+    </div>
+  );
+}
 
-/** OLX-style category tiles: square image tile with the label underneath. */
+/** Category tiles: round line-art illustration with the label underneath. */
 export default function CategoryCarousel() {
   return (
-    <section className="bg-white py-10 lg:py-12">
+    <section className="bg-white pb-2 pt-4 md:pb-10 lg:py-12">
       <div className="container-page">
-        <SectionHeader title="Explore by Category" subtitle="Find the right space for your lifestyle" href="/search?listingType=RENT" linkLabel="All properties" />
+        <PhoneHero />
+        <CitySelect />
 
-        <ul className="no-scrollbar -mx-4 mt-6 grid snap-x auto-cols-[104px] grid-flow-col grid-rows-2 gap-x-3 gap-y-5 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid-flow-row md:grid-cols-8 md:grid-rows-none md:gap-4 md:overflow-visible md:px-0 lg:gap-5">
-          {CATEGORIES.map((cat) => (
-            <li key={cat.title} className="snap-start">
-              <Link href={cat.href} className="group flex flex-col items-center gap-2.5 text-center outline-none">
-                <span className="relative block aspect-square w-full overflow-hidden rounded-2xl bg-surface ring-1 ring-line transition duration-300 group-hover:-translate-y-1 group-hover:shadow-card-hover group-hover:ring-brand/40 group-focus-visible:ring-4 group-focus-visible:ring-brand/25">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={cat.image}
-                    alt=""
-                    loading="lazy"
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
-                  />
-                </span>
-                <span className="text-[13px] font-medium leading-snug text-ink transition group-hover:text-brand sm:text-sm">
-                  {cat.title}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {/*
+          Phones skip "Explore by Category" for now: tapping a city above already opens every category.
+          Tablet: 5 per row. Laptop: all 9 in one row.
+        */}
+        <div className="hidden md:block">
+          <SectionHeader
+            title="Explore by Category"
+            subtitle="Find the right space for your lifestyle"
+            href="/search?listingType=RENT"
+            linkLabel="All properties"
+          />
+
+          <ul className="mt-6 grid grid-cols-5 gap-4 lg:grid-cols-9 lg:gap-5">
+            {CATEGORIES.map(({ title, Art, href }) => (
+              <li key={title}>
+                <Link
+                  href={href}
+                  className="group flex flex-col items-center gap-2.5 text-center outline-none"
+                >
+                  <span
+                    className="flex aspect-square items-center justify-center rounded-full ring-1 transition duration-300 group-hover:-translate-y-1 group-hover:shadow-card-hover group-focus-visible:ring-4 w-full max-w-28"
+                    style={CIRCLE_STYLE}
+                  >
+                    <Art
+                      className="transition duration-300 group-hover:scale-110"
+                      style={{ width: "58%", height: "58%" }}
+                    />
+                  </span>
+                  <span className="text-xs font-medium leading-tight text-ink/80 transition group-hover:text-brand">
+                    {title}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

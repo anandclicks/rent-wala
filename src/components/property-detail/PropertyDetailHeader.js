@@ -14,7 +14,7 @@ export default function PropertyDetailHeader({ property }) {
   const listingLabel = property.status === "FOR SALE" ? "Buy" : "Rent";
   const typeLabel =
     property.categoryEnum === "PG"
-      ? "PG/Hostel"
+      ? "PG / Hostel"
       : property.category?.replace(/_/g, " ") || "Properties";
 
   const share = async () => {

@@ -5,14 +5,10 @@ import { useRouter } from "next/navigation";
 import data from "@/data/data.json";
 import { LocateFixed, MapPin, Search } from "lucide-react";
 import CustomSelect from "@/components/CustomSelect";
-import {
-  buildSearchQuery,
-  mapCategoryToType,
-  parseLocationInput,
-} from "@/lib/search";
+import { buildSearchQuery, parseLocationInput } from "@/lib/search";
+import { PROPERTY_CATEGORIES, withCategory } from "@/data/categories";
 
-const PROPERTY_TYPES = ["Apartment", "Villa", "Independent House", "Plot", "PG / Hostel", "Office Space"];
-const CATEGORIES = ["HOMES", "PG", "VILLAS", "MORE"];
+const HERO_CATEGORY_LABELS = PROPERTY_CATEGORIES.slice(0, 4).map((c) => c.label.toUpperCase());
 
 const CITY_ALIASES = {
   Delhi: ["delhi", "new delhi", "south delhi", "north delhi", "east delhi", "west delhi"],
@@ -43,14 +39,13 @@ export default function SearchBox({
   variant = "default",
   initialLocation = "",
   initialCity = "",
-  initialType = "",
-  initialCategory = "",
+  initialCategoryKey = "",
   preserveQuery = "",
 }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("Rent");
   const [location, setLocation] = useState(initialLocation);
-  const [propertyType, setPropertyType] = useState(initialType || mapCategoryToType(initialCategory));
+  const [propertyType, setPropertyType] = useState(initialCategoryKey);
   const [city, setCity] = useState(initialCity);
   const [locating, setLocating] = useState(false);
   const [locError, setLocError] = useState("");
@@ -61,9 +56,9 @@ export default function SearchBox({
   useEffect(() => {
     if (!isSearchPage) return;
     setCity(initialCity);
-    setPropertyType(initialType || mapCategoryToType(initialCategory));
+    setPropertyType(initialCategoryKey);
     setLocation(initialLocation);
-  }, [isSearchPage, initialCity, initialType, initialCategory, initialLocation]);
+  }, [isSearchPage, initialCity, initialCategoryKey, initialLocation]);
 
   const pushSearch = useCallback(
     (overrides = {}) => {
@@ -82,14 +77,11 @@ export default function SearchBox({
         city: parsed.city,
         locality: parsed.locality,
         location: loc,
-        type: selectedType,
-        category:
-          overrides.category ??
-          (selectedType ? "" : new URLSearchParams(preserveQuery).get("category") || ""),
         listingType: new URLSearchParams(preserveQuery).get("listingType") || "",
         preserveParams: isSearchPage && preserveQuery ? new URLSearchParams(preserveQuery) : undefined,
       });
-      router.push(`/search?${query}`);
+      // The type dropdown holds a category key; "" means all types.
+      router.push(`/search?${withCategory(new URLSearchParams(query), selectedType).toString()}`);
     },
     [location, city, propertyType, router, isSearchPage, preserveQuery]
   );
@@ -182,7 +174,7 @@ export default function SearchBox({
   const typeOptions = useMemo(
     () => [
       { value: "", label: isSearchPage ? "All types" : "Select property type" },
-      ...PROPERTY_TYPES.map((t) => ({ value: t, label: t })),
+      ...PROPERTY_CATEGORIES.map((c) => ({ value: c.key, label: c.label })),
     ],
     [isSearchPage]
   );
@@ -198,12 +190,12 @@ export default function SearchBox({
     <div className={isSearchPage ? "w-full" : "w-full max-w-2xl"}>
       {isHero && (
         <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-bold tracking-[0.18em] text-white/90">
-          {CATEGORIES.map((cat, i) => (
+          {HERO_CATEGORY_LABELS.map((cat, i) => (
             <span key={cat} className="flex items-center gap-3">
               <button type="button" className="transition hover:text-white">
                 {cat}
               </button>
-              {i < CATEGORIES.length - 1 && <span className="text-white/40">•</span>}
+              {i < HERO_CATEGORY_LABELS.length - 1 && <span className="text-white/40">•</span>}
             </span>
           ))}
         </div>

@@ -16,6 +16,12 @@ import CategoryCarousel from "@/components/CategoryCarousel";
 import FeaturedProperties from "@/components/FeaturedProperties";
 import ExploreCarouselSection from "@/components/ExploreCarouselSection";
 import { getAllProperties, getPropertiesByCategoryEnum } from "@/data/properties";
+import { HERO_IMAGE_SOFTEN, HERO_SHADE } from "@/lib/hero-style";
+import { categoryHref, getCategory } from "@/data/categories";
+
+const PG = getCategory("pg");
+const COMMERCIAL = getCategory("commercial");
+const FLATS = getCategory("flats");
 
 const FEATURES = [
   { icon: ShieldCheck, title: "Verified Listings", subtitle: "Real photos, genuine properties" },
@@ -40,8 +46,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      {/* The hero's h1 is desktop-only, so the page still needs one on phones. */}
-      <h1 className="sr-only lg:hidden">Find a Place You&apos;ll Love</h1>
       {/* Phones open on categories; desktop keeps the trust strip first. */}
       <div className="flex flex-col">
         <div className="lg:order-2">
@@ -54,22 +58,22 @@ export default function Home() {
       <FeaturedProperties properties={properties} />
       <DualCTA />
       <ExploreCarouselSection
-        title="PG & Coliving"
+        title={PG.label}
         subtitle="Affordable stays for students and professionals"
-        viewAllHref="/search?category=PG"
+        viewAllHref={categoryHref(PG)}
         items={pgs}
       />
       <ExploreCarouselSection
-        title="Coworking & Offices"
-        subtitle="Professional workspaces across Delhi NCR"
-        viewAllHref="/search?category=COMMERCIAL"
+        title={COMMERCIAL.label}
+        subtitle="Co-working spaces, offices & shops across Delhi NCR"
+        viewAllHref={categoryHref(COMMERCIAL)}
         items={commercial}
         className="bg-surface"
       />
       <ExploreCarouselSection
-        title="Flats & Apartments"
-        subtitle="Modern apartments for every budget"
-        viewAllHref="/search?category=APARTMENT"
+        title={FLATS.label}
+        subtitle="Modern flats for every budget"
+        viewAllHref={categoryHref(FLATS)}
         items={flats}
       />
       <StatsSection />
@@ -89,8 +93,12 @@ function Hero() {
       <div className="container-page">
         <div className="relative isolate overflow-hidden rounded-3xl">
           {/* A background image scoped to lg, because a hidden <img> would still download on phones. */}
-          <div className="absolute inset-0 -z-10 bg-cover bg-[center_40%] lg:bg-[url('/mainbgimage.jpg')]" />
+          <div
+            className="absolute inset-0 -z-10 bg-cover bg-[center_40%] lg:bg-[url('/mainbgimage.jpg')]"
+            style={HERO_IMAGE_SOFTEN}
+          />
           <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy/90 via-brand-darker/70 to-brand/20" />
+          <div className="absolute inset-0 -z-10" style={HERO_SHADE} />
 
           <div className="grid items-end gap-8 px-4 py-8 sm:px-8 sm:py-12 lg:grid-cols-[1fr_auto] lg:px-12 lg:py-16">
             <div className="animate-fade-up">
@@ -99,7 +107,7 @@ function Hero() {
                 Homes for a Better Tomorrow
               </p>
               <h1 className="mt-4 max-w-xl text-[2rem] font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
-                Find a Place You&apos;ll <span className="text-accent">Love</span>
+                Find a Place You&apos;ll Love
               </h1>
               <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/85 sm:text-[15px]">
                 Buy, Rent or Book PG — Verified Listings, Trusted Owners, Hassle-Free Experience

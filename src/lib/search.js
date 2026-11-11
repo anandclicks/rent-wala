@@ -1,35 +1,17 @@
 import data from "@/data/data.json";
 import { filterStaticProperties } from "@/data/properties";
 import { normalizeCity } from "@/lib/cities";
+import { PROPERTY_CATEGORIES } from "@/data/categories";
 
 export { normalizeCity };
 
-export const LOOKING_FOR_OPTIONS = [
-  { value: "pg", label: "PG / Coliving" },
-  { value: "hotel", label: "Hotel / Hostel" },
-  { value: "flat", label: "Rent Flat / Apartment" },
-  { value: "commercial", label: "Commercial / Coworking" },
-  { value: "kitchen", label: "Kitchen space" },
-  { value: "independent", label: "Independent / Villa" },
-];
-
-const LOOKING_FOR_MAP = {
-  pg: { type: "PG / Hostel", category: "PG", listingType: "RENT" },
-  hotel: { type: "PG / Hostel", category: "PG", listingType: "RENT" },
-  flat: { type: "Apartment", category: "APARTMENT", listingType: "RENT" },
-  commercial: { type: "Office Space", category: "COMMERCIAL", listingType: "RENT" },
-  kitchen: { kitchen: true, listingType: "RENT" },
-  independent: { type: "Independent House", category: "INDEPENDENT_HOUSE", listingType: "RENT" },
-};
-
-export function mapLookingFor(lookingFor = "") {
-  return LOOKING_FOR_MAP[lookingFor] || {};
-}
+/** Hero "Looking for" options: the site's categories (data/categories.js), keyed by category key. */
+export const LOOKING_FOR_OPTIONS = PROPERTY_CATEGORIES.map((c) => ({ value: c.key, label: c.label }));
 
 export const BHK_HERO_OPTIONS = ["1 RK", "1 BHK", "2 BHK", "3 BHK"];
 
 export function showsBhkForLookingFor(lookingFor = "") {
-  return lookingFor === "pg" || lookingFor === "hotel" || lookingFor === "flat";
+  return ["pg", "flats", "villas", "independent"].includes(lookingFor);
 }
 
 function findLocalityMatch(text) {

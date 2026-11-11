@@ -3,18 +3,16 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { ChevronDown, RotateCcw, SlidersHorizontal } from "lucide-react";
+import {
+  CATEGORY_OWNED_PARAMS,
+  PROPERTY_CATEGORIES,
+  categoryFromParams,
+  withCategory,
+} from "@/data/categories";
 
 const CATEGORIES = [
   { label: "All", value: "" },
-  { label: "House", value: "INDEPENDENT_HOUSE" },
-  { label: "Apartment", value: "APARTMENT" },
-  { label: "Villa", value: "VILLA" },
-  { label: "Builder Floor", value: "BUILDER_FLOOR" },
-  { label: "Plot", value: "LAND" },
-  { label: "Penthouse", value: "PENTHOUSE" },
-  { label: "Studio", value: "STUDIO" },
-  { label: "PG", value: "PG" },
-  { label: "Commercial", value: "COMMERCIAL" },
+  ...PROPERTY_CATEGORIES.map((c) => ({ label: c.label, value: c.key })),
 ];
 
 const BHK_OPTIONS = ["Any", "1 RK", "1 BHK", "2 BHK", "3 BHK", "4 BHK", "4+ BHK"];
@@ -120,7 +118,7 @@ export default function SearchFilters({ className = "", showHeader = true }) {
     [push, searchParams]
   );
 
-  const category = searchParams.get("category") || "";
+  const categoryKey = categoryFromParams(searchParams)?.key || "";
   const listingType = searchParams.get("listingType") || "";
   const bhk = searchParams.get("bhk") || "";
   const minPrice = searchParams.get("minPrice") || "";
@@ -131,7 +129,7 @@ export default function SearchFilters({ className = "", showHeader = true }) {
 
   const clearAll = () => {
     const params = new URLSearchParams(searchParams.toString());
-    FILTER_KEYS.forEach((k) => params.delete(k));
+    [...FILTER_KEYS, ...CATEGORY_OWNED_PARAMS].forEach((k) => params.delete(k));
     push(params);
   };
 
@@ -163,8 +161,8 @@ export default function SearchFilters({ className = "", showHeader = true }) {
             <button
               key={c.label}
               type="button"
-              onClick={() => update({ category: c.value })}
-              className={`chip h-8 px-3 text-xs ${category === c.value ? "chip-active" : ""}`}
+              onClick={() => push(withCategory(searchParams, c.value))}
+              className={`chip h-8 px-3 text-xs ${categoryKey === c.value ? "chip-active" : ""}`}
             >
               {c.label}
             </button>

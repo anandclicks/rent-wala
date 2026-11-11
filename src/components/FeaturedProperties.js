@@ -3,24 +3,20 @@
 import { useMemo, useState } from "react";
 import PropertyCard from "@/components/PropertyCard";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { PROPERTY_CATEGORIES, cardMatchesCategory, getCategory } from "@/data/categories";
 
 const FILTERS = [
   { label: "All", value: "ALL" },
-  { label: "Flats", value: "FLATS" },
-  { label: "PG/Hostel", value: "PG" },
-  { label: "Villa", value: "VILLA" },
-  { label: "Independent House", value: "INDEPENDENT_HOUSE" },
+  ...PROPERTY_CATEGORIES.map((c) => ({ label: c.label, value: c.key })),
 ];
-
-const FLAT_CATS = new Set(["APARTMENT", "STUDIO", "BUILDER_FLOOR"]);
 
 export default function FeaturedProperties({ properties }) {
   const [active, setActive] = useState("ALL");
 
   const filtered = useMemo(() => {
-    if (active === "ALL") return properties;
-    if (active === "FLATS") return properties.filter((p) => FLAT_CATS.has(p.categoryEnum));
-    return properties.filter((p) => p.categoryEnum === active);
+    const category = getCategory(active);
+    if (!category) return properties;
+    return properties.filter((p) => cardMatchesCategory(p, category));
   }, [properties, active]);
 
   return (
