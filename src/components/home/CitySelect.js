@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { ART_CIRCLE_STYLE, CATEGORY_ART } from "@/components/CategoryIllustrations";
 import { DelhiArt, GorakhpurArt, GurugramArt, NoidaArt } from "@/components/CityIllustrations";
-import { PROPERTY_CATEGORIES, categoryQuery } from "@/data/categories";
+import { PROPERTY_CATEGORIES } from "@/data/categories";
+import CityCategoryBrowser from "@/components/home/CityCategoryBrowser";
 
 const CITIES = [
   { name: "Delhi", Art: DelhiArt },
@@ -14,13 +14,28 @@ const CITIES = [
   { name: "Gorakhpur", Art: GorakhpurArt },
 ];
 
-function cityCategoryHref(city, category) {
-  return `/search?${new URLSearchParams({ city, ...categoryQuery(category) }).toString()}`;
-}
-
 /** Phone-only "Select City" row. Tapping a city opens a popup with every category for that city. */
 export default function CitySelect() {
   const [openCity, setOpenCity] = useState(null);
+  // Category picked in the city popup; when set, the full-screen category browser is shown.
+  const [browseKey, setBrowseKey] = useState(null);
+
+  const closeAll = useCallback(() => {
+    setBrowseKey(null);
+    setOpenCity(null);
+  }, []);
+  const backToCity = useCallback(() => setBrowseKey(null), []);
+
+  // Lock page scroll while the popup or the browser is open.
+  const isOpen = Boolean(openCity);
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isOpen]);
 
   return (
     <div className="mb-8 md:hidden">
@@ -42,24 +57,30 @@ export default function CitySelect() {
         ))}
       </ul>
 
-      {openCity && <CityCategoriesDialog city={openCity} onClose={() => setOpenCity(null)} />}
+      {openCity && !browseKey && (
+        <CityCategoriesDialog city={openCity} onClose={closeAll} onPick={setBrowseKey} />
+      )}
+      {openCity && browseKey && (
+        <CityCategoryBrowser
+          city={openCity}
+          activeKey={browseKey}
+          onSelect={setBrowseKey}
+          onBack={backToCity}
+          onNavigate={closeAll}
+        />
+      )}
     </div>
   );
 }
 
-function CityCategoriesDialog({ city, onClose }) {
+function CityCategoriesDialog({ city, onClose, onPick }) {
   const closeRef = useRef(null);
 
   useEffect(() => {
     closeRef.current?.focus();
     const onKey = (e) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
+    return () => document.removeEventListener("keydown", onKey);
   }, [onClose]);
 
   const titleId = `city-dialog-${city.name.toLowerCase()}`;
@@ -103,10 +124,10 @@ function CityCategoriesDialog({ city, onClose }) {
             const Art = CATEGORY_ART[category.key];
             return (
               <li key={category.key}>
-                <Link
-                  href={cityCategoryHref(city.name, category)}
-                  onClick={onClose}
-                  className="group flex flex-col items-center gap-1.5 text-center outline-none"
+                <button
+                  type="button"
+                  onClick={() => onPick(category.key)}
+                  className="group flex w-full cursor-pointer flex-col items-center gap-1.5 text-center outline-none"
                 >
                   <span
                     className="grid h-16 w-16 place-items-center rounded-full ring-1 transition group-hover:-translate-y-0.5 group-focus-visible:ring-4"
@@ -117,7 +138,7 @@ function CityCategoriesDialog({ city, onClose }) {
                   <span className="text-[11px] font-medium leading-tight text-ink/80 group-hover:text-brand">
                     {category.label}
                   </span>
-                </Link>
+                </button>
               </li>
             );
           })}

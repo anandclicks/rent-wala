@@ -90,6 +90,7 @@ export function formatPropertyForCard(p) {
     listingType: p.listingType,
     categoryEnum: p.category,
     propertyType: p.propertyType,
+    roomType: p.roomType,
     latitude: p.latitude,
     longitude: p.longitude,
     suitableFor: p.suitableFor,

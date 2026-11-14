@@ -10,7 +10,7 @@ import PropertyCard from "@/components/PropertyCard";
 import CustomSelect from "@/components/CustomSelect";
 import { mapSearchTypeToCategory, normalizeCity, parseLocationInput } from "@/lib/search";
 import { filterStaticProperties } from "@/data/properties";
-import { CATEGORY_OWNED_PARAMS, categoryFromParams } from "@/data/categories";
+import { CATEGORY_OWNED_PARAMS, ROOM_TYPE_LABELS, categoryFromParams } from "@/data/categories";
 import NearbyPrompt from "@/components/NearbyPrompt";
 import { distanceKm, readSavedCoords, wasNearbyPromptAnswered } from "@/lib/geo";
 
@@ -56,11 +56,13 @@ function activeFilterChips(params) {
       min && max ? `${formatINR(min)} – ${formatINR(max)}` : min ? `Above ${formatINR(min)}` : `Under ${formatINR(max)}`;
     chips.push({ keys: ["minPrice", "maxPrice"], label });
   }
-  // Rooms already shows as its own chip; don't repeat its "1 RK".
+  // A category that sets its own BHK (none today) shows it inside its chip; don't repeat it.
   if (params.get("bhk") && params.get("bhk") !== picked?.query.bhk) {
     chips.push({ keys: ["bhk"], label: params.get("bhk") });
   }
   if (params.get("furnishing")) chips.push({ keys: ["furnishing"], label: params.get("furnishing") });
+  const room = params.get("room");
+  if (room) chips.push({ keys: ["room"], label: ROOM_TYPE_LABELS[room] || room });
   if (params.get("kitchen") === "1") chips.push({ keys: ["kitchen"], label: "Kitchen" });
   return chips;
 }
@@ -91,6 +93,7 @@ export default function SearchResults() {
   const furnishing = searchParams.get("furnishing") || "";
   const kitchen = searchParams.get("kitchen") === "1";
   const space = searchParams.get("space") || "";
+  const room = searchParams.get("room") || "";
 
   const { city, locality } = useMemo(() => {
     const parsed = parseLocationInput(q, cityParam);
@@ -103,7 +106,7 @@ export default function SearchResults() {
   const properties = useMemo(() => {
     const hasLocation = Boolean(q || locality || city);
     const hasFilters = Boolean(
-      category || space || listingType || minPrice || maxPrice || bhk || furnishing || kitchen
+      category || space || room || listingType || minPrice || maxPrice || bhk || furnishing || kitchen
     );
     if (!hasLocation && !hasFilters) return [];
 
@@ -112,6 +115,7 @@ export default function SearchResults() {
       locality,
       category,
       space,
+      room,
       listingType,
       minPrice,
       maxPrice,
@@ -120,7 +124,7 @@ export default function SearchResults() {
       kitchen,
       q,
     });
-  }, [city, locality, category, space, listingType, minPrice, maxPrice, bhk, furnishing, kitchen, q]);
+  }, [city, locality, category, space, room, listingType, minPrice, maxPrice, bhk, furnishing, kitchen, q]);
 
   // Distance from the visitor, once they've shared their location.
   const distances = useMemo(() => {

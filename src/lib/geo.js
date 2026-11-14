@@ -39,11 +39,16 @@ function saveCoords(coords) {
   }
 }
 
-/** True once the visitor has answered the location prompt (allowed, declined or blocked). */
+/**
+ * True once the visitor has answered the location prompt. "Allow" / "blocked" are remembered for good;
+ * "Not now" only lasts for this visit, so the prompt comes back the next time the site is opened.
+ */
 export function wasNearbyPromptAnswered() {
   if (typeof window === "undefined") return true;
   try {
-    return Boolean(localStorage.getItem(PROMPT_KEY));
+    const saved = localStorage.getItem(PROMPT_KEY);
+    // Older builds kept "dismissed" forever; treat it as unanswered so the prompt comes back.
+    return Boolean((saved && saved !== "dismissed") || sessionStorage.getItem(PROMPT_KEY));
   } catch {
     return false;
   }
@@ -51,9 +56,19 @@ export function wasNearbyPromptAnswered() {
 
 export function markNearbyPromptAnswered(answer) {
   try {
-    localStorage.setItem(PROMPT_KEY, answer);
+    (answer === "dismissed" ? sessionStorage : localStorage).setItem(PROMPT_KEY, answer);
   } catch {
     // Ignore — worst case the prompt shows again next visit.
+  }
+}
+
+/** Browser's location permission: "granted" | "denied" | "prompt" ("prompt" when it can't tell). */
+export async function locationPermission() {
+  try {
+    const status = await navigator.permissions?.query({ name: "geolocation" });
+    return status?.state || "prompt";
+  } catch {
+    return "prompt";
   }
 }
 

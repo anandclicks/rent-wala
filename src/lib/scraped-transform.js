@@ -76,6 +76,35 @@ function buildRoomOptions(item, images) {
   }));
 }
 
+/**
+ * What kind of room a listing offers, read from the scraped "type_of_co_living" (e.g. "1 BHK",
+ * "Double Sharing", "Private room", "Studio Apartment"), falling back to the name/description.
+ * Returns { beds, roomType }: beds is the BHK count (0 for studio / 1 RK), roomType is
+ * "private" | "shared" | "studio" | "bhk".
+ */
+export function parseRoomType(item) {
+  const detail = item.raw?.other_detail || {};
+  const typed = typeof detail.type_of_co_living === "string" && !isObjectId(detail.type_of_co_living)
+    ? detail.type_of_co_living
+    : "";
+  const candidates = [typed, item.name, item.description].filter(Boolean);
+
+  for (const text of candidates) {
+    const bhk = text.match(/(\d)\s*-?\s*bhk/i);
+    if (bhk) return { beds: Number(bhk[1]), roomType: "bhk" };
+    if (/\b1\s*-?\s*rk\b|studio/i.test(text)) return { beds: 0, roomType: "studio" };
+    // Only trust sharing / private wording from the structured field, not free-text marketing copy.
+    if (text === typed) {
+      if (/private|single/i.test(text)) return { beds: undefined, roomType: "private" };
+      if (/sharing|double|triple/i.test(text)) return { beds: undefined, roomType: "shared" };
+    }
+  }
+
+  const bedrooms = Number(detail.bedroom);
+  if (Number.isFinite(bedrooms) && bedrooms > 0) return { beds: bedrooms, roomType: "bhk" };
+  return { beds: undefined, roomType: undefined };
+}
+
 function buildHighlights(item, category) {
   const highlights = [];
   if (item.brand) highlights.push(`Managed by ${item.brand}`);
@@ -93,6 +122,7 @@ export function transformScrapedProperty(item, index = 0) {
   const images = item.images?.length ? item.images : ["/logo-brand.png"];
   const furnishing = inferFurnishing(item.amenities);
   const roomOptions = buildRoomOptions(item, images);
+  const { beds, roomType } = parseRoomType(item);
 
   const badges = [];
   if (item.status === "approve") badges.push("VERIFIED");
@@ -118,6 +148,8 @@ export function transformScrapedProperty(item, index = 0) {
     latitude: item.latitude,
     longitude: item.longitude,
     furnishing,
+    beds,
+    roomType,
     badges,
     amenities: item.amenities || [],
     images,
@@ -159,6 +191,7 @@ const CITY_STATE = {
   Delhi: "Delhi",
   Noida: "Uttar Pradesh",
   Gurugram: "Haryana",
+  Gorakhpur: "Uttar Pradesh",
   Faridabad: "Haryana",
   Ghaziabad: "Uttar Pradesh",
 };

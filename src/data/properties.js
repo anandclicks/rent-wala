@@ -1,5 +1,6 @@
 import { formatPropertyForCard } from "@/lib/property-utils";
 import { normalizeCity } from "@/lib/cities";
+import { matchesSpace } from "@/data/categories";
 import {
   transformScrapedProperties,
   buildLocalitiesFromProperties,
@@ -102,7 +103,10 @@ export function filterStaticProperties(filters) {
     results = results.filter((p) => p.category === filters.category);
   }
   if (filters.space) {
-    results = results.filter((p) => p.propertyType === filters.space);
+    results = results.filter((p) => matchesSpace(p.propertyType, filters.space));
+  }
+  if (filters.room) {
+    results = results.filter((p) => p.roomType === filters.room);
   }
   if (filters.listingType) {
     results = results.filter((p) => p.listingType === filters.listingType);

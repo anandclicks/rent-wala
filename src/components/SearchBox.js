@@ -14,6 +14,7 @@ const CITY_ALIASES = {
   Delhi: ["delhi", "new delhi", "south delhi", "north delhi", "east delhi", "west delhi"],
   Noida: ["noida", "greater noida"],
   Gurugram: ["gurugram", "gurgaon"],
+  Gorakhpur: ["gorakhpur"],
 };
 
 function matchSupportedCity(...values) {

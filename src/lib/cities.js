@@ -4,6 +4,7 @@ const CITY_ALIASES = {
   Delhi: ["delhi", "new delhi"],
   Noida: ["noida", "greater noida"],
   Gurugram: ["gurugram", "gurgaon"],
+  Gorakhpur: ["gorakhpur"],
 };
 
 export function normalizeCity(city = "") {

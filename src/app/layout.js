@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import StartupLocationPrompt from "@/components/StartupLocationPrompt";
 import { SITE_CONFIG } from "@/data/properties";
 
 // Fonts are self-hosted (Latin subset, variable weight) so builds never depend on
@@ -37,11 +38,13 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-surface font-sans text-ink">
+      {/* Browser extensions (e.g. ColorZilla's cz-shortcut-listen) add attributes to <body>; ignore those mismatches. */}
+      <body className="flex min-h-full flex-col bg-surface font-sans text-ink" suppressHydrationWarning>
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppFloat number={SITE_CONFIG.whatsappNumber || ""} />
+        <StartupLocationPrompt />
       </body>
     </html>
   );

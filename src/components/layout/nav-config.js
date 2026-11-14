@@ -1,3 +1,4 @@
+import data from "@/data/data.json";
 import { KeyRound, Tag } from "lucide-react";
 import { CATEGORY_PARAM, PROPERTY_CATEGORIES, categoryHref } from "@/data/categories";
 
@@ -15,7 +16,8 @@ export const CATEGORY_LINKS = PROPERTY_CATEGORIES.map((c) => ({
   match: { [CATEGORY_PARAM]: c.key },
 }));
 
-export const CITIES = ["Delhi", "Gurugram", "Noida"];
+/** Cities the site serves (one list in data.json, shared with hero search and the listing form). */
+export const CITIES = data.cities;
 
 export const SUPPORT = {
   phone: "+91 98765 43210",
