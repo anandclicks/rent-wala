@@ -55,6 +55,15 @@ export const ROOM_TYPE_LABELS = {
   shared: "Shared Room",
 };
 
+/** PG / hostel sharing options for the `sharing` filter (set in lib/scraped-transform). */
+export const SHARING_LABELS = {
+  single: "Single Sharing",
+  double: "Double Sharing",
+  triple: "Triple Sharing",
+  four: "Four Sharing",
+};
+const SHARING_BADGES = { single: "Single", double: "Double", triple: "Triple", four: "Four" };
+
 const rent = (noun) => ({ label: `${noun} for Rent`, badge: "For Rent", query: { listingType: "RENT" } });
 const sale = (noun) => ({ label: `${noun} for Sale`, badge: "For Sale", query: { listingType: "SELL" } });
 const bhk = (value, noun) => ({ label: `${value} ${noun}`, badge: value, query: { bhk: value } });
@@ -67,7 +76,7 @@ const furnished = (noun) => [
 /**
  * Narrower picks shown beside a category in the phone category browser (OLX-style right panel).
  * Each `query` is layered on top of the category's own query, so it only uses filters the
- * search page understands (listingType, bhk, furnishing).
+ * search page understands (listingType, bhk, furnishing, room, sharing).
  */
 export const CATEGORY_SUBTYPES = {
   rooms: [
@@ -90,7 +99,11 @@ export const CATEGORY_SUBTYPES = {
   coworking: [rent("Co-Working Spaces"), ...furnished("Spaces").slice(0, 2)],
   villas: [rent("Villas"), sale("Villas"), bhk("3 BHK", "Villas"), bhk("4+ BHK", "Villas")],
   lands: [sale("Plots"), { ...rent("Plots"), label: "Plots for Lease", badge: "Lease" }],
-  pg: furnished("PGs"),
+  pg: Object.entries(SHARING_LABELS).map(([value, label]) => ({
+    label,
+    badge: SHARING_BADGES[value],
+    query: { sharing: value },
+  })),
   independent: [
     rent("Houses"),
     sale("Houses"),
@@ -122,7 +135,7 @@ export function categoryLabelsForGroup(group) {
 }
 
 /** URL params a category selection owns; cleared before applying another category. */
-export const CATEGORY_OWNED_PARAMS = [CATEGORY_PARAM, "category", "space", "room", "type", "kitchen"];
+export const CATEGORY_OWNED_PARAMS = [CATEGORY_PARAM, "category", "space", "room", "sharing", "type", "kitchen"];
 
 /** Best guess for links that only carry the DB category (old bookmarks, property pages). */
 const KEY_BY_DB_CATEGORY = {

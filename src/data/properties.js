@@ -166,6 +166,9 @@ function filterRawProperties(filters) {
   if (filters.room) {
     results = results.filter((p) => p.roomType === filters.room);
   }
+  if (filters.sharing) {
+    results = results.filter((p) => p.sharing?.includes(filters.sharing));
+  }
   if (filters.listingType) {
     results = results.filter((p) => p.listingType === filters.listingType);
   }

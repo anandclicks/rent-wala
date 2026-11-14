@@ -5,6 +5,7 @@ import {
   CATEGORY_OWNED_PARAMS,
   PROPERTY_CATEGORIES,
   ROOM_TYPE_LABELS,
+  SHARING_LABELS,
   categoryFromParams,
   withCategory,
 } from "@/data/categories";
@@ -41,6 +42,7 @@ export function filtersFromParams(params) {
     category: params.get("category") || mapSearchTypeToCategory(params.get("type") || ""),
     space: params.get("space") || "",
     room: params.get("room") || "",
+    sharing: params.get("sharing") || "",
     listingType: params.get("listingType") || "",
     minPrice: params.get("minPrice") || "",
     maxPrice: params.get("maxPrice") || "",
@@ -189,14 +191,23 @@ export function buildFacets(params) {
     key: "room",
     options: Object.entries(ROOM_TYPE_LABELS).map(([value, label]) => ({ value, label })),
   });
+  const sharing = checksFacet(params, {
+    id: "sharing",
+    title: "Sharing",
+    tab: "Sharing",
+    key: "sharing",
+    options: Object.entries(SHARING_LABELS).map(([value, label]) => ({ value, label })),
+  });
+  // Room kinds / sharing only exist for co-living and flats; hide a section when nothing could match.
+  const relevant = (facet) => facet.active || facet.options.some((o) => o.count > 0);
 
   return [
     categoryFacet(params),
     locationFacet(params),
     budgetFacet(params),
     checksFacet(params, { id: "bhk", title: "BHK", tab: "BHK", key: "bhk", options: BHK_OPTIONS }),
-    // Room kinds only exist for co-living / flats; hide the section when nothing could match.
-    ...(room.active || room.options.some((o) => o.count > 0) ? [room] : []),
+    ...(relevant(sharing) ? [sharing] : []),
+    ...(relevant(room) ? [room] : []),
     checksFacet(params, {
       id: "furnishing",
       title: "Furnishing",
@@ -215,7 +226,16 @@ export function buildFacets(params) {
 }
 
 /** Filter keys the panels control: drives "Clear all" and the active-filter badge. */
-export const FILTER_KEYS = ["category", "listingType", "minPrice", "maxPrice", "bhk", "furnishing", "room"];
+export const FILTER_KEYS = [
+  "category",
+  "listingType",
+  "minPrice",
+  "maxPrice",
+  "bhk",
+  "furnishing",
+  "room",
+  "sharing",
+];
 
 /** Params with every filter (and the picked category) removed; location and sort stay. */
 export function clearFilterParams(params) {

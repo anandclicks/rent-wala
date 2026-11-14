@@ -117,14 +117,14 @@ function WishlistButton({ className = "" }) {
   );
 }
 
-/** OLX-style "Sell" pill: white button wrapped in a two-tone ring. */
+/** "Post property" pill in the site's brand blue (same as the Search buttons). */
 export function PostPropertyButton({ className = "" }) {
   return (
     <Link
       href="/list-your-property"
-      className={`group relative rounded-full bg-[conic-gradient(from_180deg,var(--brand),var(--accent),#23e5db,var(--brand))] p-[3px] shadow-sm transition hover:shadow-md active:scale-[0.98] ${className}`}
+      className={`group relative rounded-full bg-brand shadow-sm shadow-brand/25 transition hover:bg-brand-dark hover:shadow-md hover:shadow-brand/30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/25 active:scale-[0.98] ${className}`}
     >
-      <span className="flex h-[38px] items-center gap-1.5 rounded-full bg-white px-4 text-sm font-bold tracking-wide text-ink">
+      <span className="flex h-[42px] items-center gap-1.5 rounded-full px-5 text-sm font-bold tracking-wide text-white">
         <Plus className="h-[18px] w-[18px] transition-transform duration-300 group-hover:rotate-90" />
         POST PROPERTY
       </span>

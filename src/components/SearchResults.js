@@ -11,7 +11,8 @@ import PropertyCard from "@/components/PropertyCard";
 import CustomSelect from "@/components/CustomSelect";
 import { mapSearchTypeToCategory, normalizeCity, parseLocationInput } from "@/lib/search";
 import { filterStaticProperties } from "@/data/properties";
-import { CATEGORY_OWNED_PARAMS, ROOM_TYPE_LABELS, categoryFromParams } from "@/data/categories";
+import { CATEGORY_OWNED_PARAMS, ROOM_TYPE_LABELS, SHARING_LABELS, categoryFromParams } from "@/data/categories";
+import { filtersFromParams } from "@/lib/search-facets";
 import NearbyPrompt from "@/components/NearbyPrompt";
 import { distanceKm, readSavedCoords, wasNearbyPromptAnswered } from "@/lib/geo";
 
@@ -64,6 +65,8 @@ function activeFilterChips(params) {
   if (params.get("furnishing")) chips.push({ keys: ["furnishing"], label: params.get("furnishing") });
   const room = params.get("room");
   if (room) chips.push({ keys: ["room"], label: ROOM_TYPE_LABELS[room] || room });
+  const sharing = params.get("sharing");
+  if (sharing) chips.push({ keys: ["sharing"], label: SHARING_LABELS[sharing] || sharing });
   if (params.get("kitchen") === "1") chips.push({ keys: ["kitchen"], label: "Kitchen" });
   return chips;
 }
@@ -104,28 +107,25 @@ export default function SearchResults() {
     };
   }, [cityParam, localityParam, q]);
 
+  // Same URL → filter rules as the filter panels' counts (lib/search-facets), so they always agree.
   const properties = useMemo(() => {
-    const hasLocation = Boolean(q || locality || city);
-    const hasFilters = Boolean(
-      category || space || room || listingType || minPrice || maxPrice || bhk || furnishing || kitchen
-    );
+    const filters = filtersFromParams(searchParams);
+    const hasLocation = Boolean(filters.q || filters.locality || filters.city);
+    const hasFilters = [
+      "category",
+      "space",
+      "room",
+      "sharing",
+      "listingType",
+      "minPrice",
+      "maxPrice",
+      "bhk",
+      "furnishing",
+      "kitchen",
+    ].some((k) => filters[k]);
     if (!hasLocation && !hasFilters) return [];
-
-    return filterStaticProperties({
-      city: city || undefined,
-      locality,
-      category,
-      space,
-      room,
-      listingType,
-      minPrice,
-      maxPrice,
-      bhk,
-      furnishing,
-      kitchen,
-      q,
-    });
-  }, [city, locality, category, space, room, listingType, minPrice, maxPrice, bhk, furnishing, kitchen, q]);
+    return filterStaticProperties(filters);
+  }, [searchParams]);
 
   // Distance from the visitor, once they've shared their location.
   const distances = useMemo(() => {

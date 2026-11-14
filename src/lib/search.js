@@ -11,7 +11,7 @@ export const LOOKING_FOR_OPTIONS = PROPERTY_CATEGORIES.map((c) => ({ value: c.ke
 export const BHK_HERO_OPTIONS = ["1 RK", "1 BHK", "2 BHK", "3 BHK"];
 
 export function showsBhkForLookingFor(lookingFor = "") {
-  return ["pg", "flats", "villas", "independent"].includes(lookingFor);
+  return ["flats", "independent"].includes(lookingFor);
 }
 
 function findLocalityMatch(text) {

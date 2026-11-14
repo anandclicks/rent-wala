@@ -1,7 +1,34 @@
 const SHARING_LABELS = ["Private Room", "Double Sharing", "Triple Sharing", "Four Sharing"];
 
+/**
+ * Co-living plan ids in the scraped data → room kind. Worked out from listings that name their
+ * type ("Private room" → …590b etc.) and from prices (single > double > triple in 249 of 252 cases).
+ */
+const PLAN_KINDS = {
+  "625698d3a91948671a4c590b": { sharing: "single", name: "Private Room" },
+  "625698e8a91948671a4c590c": { sharing: "double", name: "Double Sharing" },
+  "625698f4a91948671a4c590d": { sharing: "triple", name: "Triple Sharing" },
+  "625698fea91948671a4c590e": { name: "Studio" },
+};
+
 function isObjectId(value) {
   return typeof value === "string" && /^[a-f0-9]{24}$/i.test(value);
+}
+
+/** Sharing options a PG / co-living listing offers: any of "single", "double", "triple", "four". */
+export function parseSharing(item) {
+  if (item.property_type !== "coliving") return [];
+  const found = new Set();
+  for (const plan of item.price_plans || []) {
+    const kind = PLAN_KINDS[plan.name];
+    if (kind?.sharing) found.add(kind.sharing);
+  }
+  const typed = String(item.raw?.other_detail?.type_of_co_living || "").toLowerCase();
+  if (/private|single/.test(typed)) found.add("single");
+  if (/double/.test(typed)) found.add("double");
+  if (/triple/.test(typed)) found.add("triple");
+  if (/\b4\b|four/.test(typed) && /bed|shar/.test(typed)) found.add("four");
+  return ["single", "double", "triple", "four"].filter((s) => found.has(s));
 }
 
 export function mapScrapedType(propertyType) {
@@ -69,7 +96,10 @@ function buildRoomOptions(item, images) {
   if (plans.length <= 1) return undefined;
 
   return plans.map((plan, index) => ({
-    name: plan.name && !isObjectId(plan.name) ? plan.name : SHARING_LABELS[index] || `Plan ${index + 1}`,
+    name:
+      plan.name && !isObjectId(plan.name)
+        ? plan.name
+        : PLAN_KINDS[plan.name]?.name || SHARING_LABELS[index] || `Plan ${index + 1}`,
     price: plan.price,
     image: thumb,
     furniture: category === "PG" ? ["Bed", "Wardrobe"] : [],
@@ -123,6 +153,7 @@ export function transformScrapedProperty(item, index = 0) {
   const furnishing = inferFurnishing(item.amenities);
   const roomOptions = buildRoomOptions(item, images);
   const { beds, roomType } = parseRoomType(item);
+  const sharing = parseSharing(item);
 
   const badges = [];
   if (item.status === "approve") badges.push("VERIFIED");
@@ -150,6 +181,7 @@ export function transformScrapedProperty(item, index = 0) {
     furnishing,
     beds,
     roomType,
+    sharing,
     badges,
     amenities: item.amenities || [],
     images,

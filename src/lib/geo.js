@@ -62,16 +62,6 @@ export function markNearbyPromptAnswered(answer) {
   }
 }
 
-/** Browser's location permission: "granted" | "denied" | "prompt" ("prompt" when it can't tell). */
-export async function locationPermission() {
-  try {
-    const status = await navigator.permissions?.query({ name: "geolocation" });
-    return status?.state || "prompt";
-  } catch {
-    return "prompt";
-  }
-}
-
 /** Ask the browser for the visitor's position. Resolves { lat, lng } or rejects with a friendly message. */
 export function requestCoords() {
   return new Promise((resolve, reject) => {
