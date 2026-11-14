@@ -1,10 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
-import { ART_CIRCLE_STYLE, CATEGORY_ART } from "@/components/CategoryIllustrations";
-import { DelhiArt, GorakhpurArt, GurugramArt, NoidaArt } from "@/components/CityIllustrations";
-import { PROPERTY_CATEGORIES } from "@/data/categories";
+import { CATEGORY_ART } from "@/components/CategoryIllustrations";
+import {
+  CITY_CIRCLE_STYLE,
+  DelhiArt,
+  GorakhpurArt,
+  GurugramArt,
+  NoidaArt,
+} from "@/components/CityIllustrations";
+import { PROPERTY_CATEGORIES, categoryQuery, getCategory } from "@/data/categories";
 import CityCategoryBrowser from "@/components/home/CityCategoryBrowser";
 
 const CITIES = [
@@ -14,8 +21,13 @@ const CITIES = [
   { name: "Gorakhpur", Art: GorakhpurArt },
 ];
 
-/** Phone-only "Select City" row. Tapping a city opens a popup with every category for that city. */
+/**
+ * "Select City" row (phone and laptop). Tapping a city opens a popup with every category for it.
+ * Picking a category then opens the full-screen category browser on phones, or goes straight
+ * to search on larger screens.
+ */
 export default function CitySelect() {
+  const router = useRouter();
   const [openCity, setOpenCity] = useState(null);
   // Category picked in the city popup; when set, the full-screen category browser is shown.
   const [browseKey, setBrowseKey] = useState(null);
@@ -25,6 +37,17 @@ export default function CitySelect() {
     setOpenCity(null);
   }, []);
   const backToCity = useCallback(() => setBrowseKey(null), []);
+
+  const pickCategory = (key) => {
+    const category = getCategory(key);
+    if (category && window.matchMedia("(min-width: 768px)").matches) {
+      const params = new URLSearchParams({ city: openCity.name, ...categoryQuery(category) });
+      closeAll();
+      router.push(`/search?${params.toString()}`);
+      return;
+    }
+    setBrowseKey(key);
+  };
 
   // Lock page scroll while the popup or the browser is open.
   const isOpen = Boolean(openCity);
@@ -38,27 +61,27 @@ export default function CitySelect() {
   }, [isOpen]);
 
   return (
-    <div className="mb-8 md:hidden">
-      <h2 className="mb-3 text-lg font-bold text-ink">Select City</h2>
-      <ul className="grid grid-cols-4 gap-3">
+    <div className="mb-8 md:mb-12">
+      <h2 className="mb-3 text-lg font-bold text-ink md:mb-5 md:text-2xl md:tracking-tight">Select City</h2>
+      <ul className="grid grid-cols-4 gap-3 md:flex md:flex-wrap md:gap-6">
         {CITIES.map((city) => (
-          <li key={city.name}>
+          <li key={city.name} className="md:w-[112px]">
             <button
               type="button"
               onClick={() => setOpenCity(city)}
               aria-haspopup="dialog"
-              className="flex aspect-square w-full cursor-pointer flex-col items-center justify-center gap-0.5 rounded-full ring-1 outline-none transition active:scale-95 focus-visible:ring-4"
-              style={ART_CIRCLE_STYLE}
+              className="flex aspect-square w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-full outline-none transition duration-300 active:scale-95 focus-visible:ring-4 md:hover:-translate-y-1 md:hover:shadow-card-hover"
+              style={CITY_CIRCLE_STYLE}
             >
-              <city.Art style={{ width: "52%", height: "52%" }} />
-              <span className="text-[11px] font-semibold leading-none text-ink">{city.name}</span>
+              <city.Art style={{ width: "54%", height: "54%" }} />
+              <span className="text-[11px] font-bold leading-none text-ink md:text-[13px]">{city.name}</span>
             </button>
           </li>
         ))}
       </ul>
 
       {openCity && !browseKey && (
-        <CityCategoriesDialog city={openCity} onClose={closeAll} onPick={setBrowseKey} />
+        <CityCategoriesDialog city={openCity} onClose={closeAll} onPick={pickCategory} />
       )}
       {openCity && browseKey && (
         <CityCategoryBrowser
@@ -101,7 +124,7 @@ function CityCategoriesDialog({ city, onClose, onPick }) {
       >
         <span
           className="absolute left-1/2 top-0 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full ring-4 ring-white"
-          style={{ ...ART_CIRCLE_STYLE, "--tw-ring-color": "#fff" }}
+          style={{ ...CITY_CIRCLE_STYLE, "--tw-ring-color": "#fff" }}
         >
           <city.Art style={{ width: "62%", height: "62%" }} />
         </span>
@@ -131,7 +154,7 @@ function CityCategoriesDialog({ city, onClose, onPick }) {
                 >
                   <span
                     className="grid h-16 w-16 place-items-center rounded-full ring-1 transition group-hover:-translate-y-0.5 group-focus-visible:ring-4"
-                    style={ART_CIRCLE_STYLE}
+                    style={CITY_CIRCLE_STYLE}
                   >
                     <Art style={{ width: "60%", height: "60%" }} />
                   </span>

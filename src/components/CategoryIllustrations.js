@@ -5,7 +5,8 @@
 
 /** Logo sky blue (sampled from /public/logo-brand.png). */
 export const LOGO_BLUE = "#00adef";
-const Y = LOGO_BLUE;
+/** Accent fill: logo blue by default; a wrapper can recolour it with the --art-accent CSS variable. */
+const Y = `var(--art-accent, ${LOGO_BLUE})`;
 
 /** Soft circle behind every illustration: a whisper of the logo blue, not a block of it. */
 export const ART_CIRCLE_STYLE = {

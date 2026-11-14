@@ -1,4 +1,15 @@
-import { LOGO_BLUE as B, Svg, W } from "@/components/CategoryIllustrations";
+import { Svg, W } from "@/components/CategoryIllustrations";
+
+/** City line art: grey strokes with warm yellow highlights on a light grey circle. */
+export const CITY_ACCENT = "#f7c23b";
+const B = CITY_ACCENT;
+export const CITY_CIRCLE_STYLE = {
+  backgroundColor: "#f4f4f4",
+  color: "#6b6b6b",
+  "--tw-ring-color": "#e6e6e6",
+  // Category art inside the city flow picks up the same yellow (see CategoryIllustrations).
+  "--art-accent": CITY_ACCENT,
+};
 
 /** Delhi — India Gate. */
 export function DelhiArt(props) {

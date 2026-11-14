@@ -3,10 +3,11 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowLeft, ChevronRight, MapPin } from "lucide-react";
-import { ART_CIRCLE_STYLE, CATEGORY_ART } from "@/components/CategoryIllustrations";
+import { CATEGORY_ART } from "@/components/CategoryIllustrations";
+import { CITY_ACCENT, CITY_CIRCLE_STYLE } from "@/components/CityIllustrations";
 import { CATEGORY_SUBTYPES, PROPERTY_CATEGORIES, categoryQuery, getCategory } from "@/data/categories";
 
-const RAIL_BG = "#e6f4fb";
+const RAIL_BG = "#f4f4f4";
 
 function searchHref(city, category, extra = {}) {
   return `/search?${new URLSearchParams({ city, ...categoryQuery(category), ...extra }).toString()}`;
@@ -46,6 +47,7 @@ export default function CityCategoryBrowser({ city, activeKey, onSelect, onBack,
       aria-modal="true"
       aria-labelledby="category-browser-title"
       className="fixed inset-0 z-[96] flex animate-fade-in flex-col bg-white md:hidden"
+      style={{ "--art-accent": CITY_ACCENT }}
     >
       <header className="flex h-14 shrink-0 items-center gap-2 border-b border-line px-2">
         <button ref={backRef} type="button" onClick={onBack} aria-label="Back" className="icon-btn">
@@ -79,7 +81,7 @@ export default function CityCategoryBrowser({ city, activeKey, onSelect, onBack,
                     {active && <span className="absolute inset-y-3 left-0 w-1 rounded-r-full bg-brand" />}
                     <ItemArt
                       style={{ width: 36, height: 36 }}
-                      className={active ? "text-ink" : "text-[#0b4a66]"}
+                      className={active ? "text-ink" : "text-[#6b6b6b]"}
                     />
                     <span
                       className={`text-[11px] leading-tight ${active ? "font-bold text-ink" : "font-medium text-ink/75"}`}
@@ -114,7 +116,7 @@ export default function CityCategoryBrowser({ city, activeKey, onSelect, onBack,
                 >
                   <span
                     className="relative grid h-[68px] w-[68px] place-items-center rounded-full ring-1 transition group-active:scale-95 group-focus-visible:ring-4"
-                    style={ART_CIRCLE_STYLE}
+                    style={CITY_CIRCLE_STYLE}
                   >
                     <Art style={{ width: "58%", height: "58%" }} />
                     <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-brand px-1.5 py-0.5 text-[8.5px] font-bold uppercase leading-none tracking-wide text-white shadow-sm">
@@ -135,7 +137,7 @@ export default function CityCategoryBrowser({ city, activeKey, onSelect, onBack,
               >
                 <span
                   className="grid h-[68px] w-[68px] place-items-center rounded-full ring-1 transition group-active:scale-95 group-focus-visible:ring-4"
-                  style={ART_CIRCLE_STYLE}
+                  style={CITY_CIRCLE_STYLE}
                 >
                   <ChevronRight className="h-7 w-7 text-brand" />
                 </span>
