@@ -56,7 +56,7 @@ export const ROOM_TYPE_LABELS = {
 };
 
 const rent = (noun) => ({ label: `${noun} for Rent`, badge: "For Rent", query: { listingType: "RENT" } });
-const sale = (noun) => ({ label: `${noun} for Sale`, badge: "For Sale", query: { listingType: "SALE" } });
+const sale = (noun) => ({ label: `${noun} for Sale`, badge: "For Sale", query: { listingType: "SELL" } });
 const bhk = (value, noun) => ({ label: `${value} ${noun}`, badge: value, query: { bhk: value } });
 const furnished = (noun) => [
   { label: `Fully Furnished ${noun}`, badge: "Furnished", query: { furnishing: "Fully Furnished" } },

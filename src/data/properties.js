@@ -88,7 +88,65 @@ function matchesLocationQuery(property, query) {
 }
 
 export function filterStaticProperties(filters) {
-  let results = [...PROPERTIES];
+  return filterRawProperties(filters).map(formatPropertyForCard);
+}
+
+/** How many listings match — used for the "(73)" counts next to every filter option. */
+export function countProperties(filters) {
+  return filterRawProperties(filters).length;
+}
+
+/** Listings per locality for the given filters, busiest first: [{ name, count }]. */
+export function localityCounts(filters) {
+  const counts = new Map();
+  for (const p of filterRawProperties(filters)) {
+    if (p.locality) counts.set(p.locality, (counts.get(p.locality) || 0) + 1);
+  }
+  return [...counts]
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+}
+
+/** Prices of the matching listings (for the budget histogram). */
+export function priceList(filters) {
+  return filterRawProperties(filters)
+    .map((p) => p.price)
+    .filter((n) => Number.isFinite(n) && n > 0);
+}
+
+/** Every city + locality pair in the data with its listing count, busiest first. */
+export function allLocalities() {
+  const counts = new Map();
+  for (const p of PROPERTIES) {
+    if (!p.locality || !p.city) continue;
+    const key = `${p.locality}|${p.city}`;
+    counts.set(key, (counts.get(key) || 0) + 1);
+  }
+  return [...counts]
+    .map(([key, count]) => {
+      const [name, city] = key.split("|");
+      return { name, city, count };
+    })
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+}
+
+/** City and locality of the listing closest to a { lat, lng } point. */
+export function nearestPlace(coords) {
+  let best = null;
+  let bestD = Infinity;
+  for (const p of PROPERTIES) {
+    if (!Number.isFinite(p.latitude) || !Number.isFinite(p.longitude)) continue;
+    const d = (p.latitude - coords.lat) ** 2 + (p.longitude - coords.lng) ** 2;
+    if (d < bestD) {
+      bestD = d;
+      best = p;
+    }
+  }
+  return best ? { city: best.city, locality: best.locality || "" } : null;
+}
+
+function filterRawProperties(filters) {
+  let results = PROPERTIES;
 
   if (filters.city) {
     const city = normalizeCity(filters.city).toLowerCase();
@@ -133,7 +191,7 @@ export function filterStaticProperties(filters) {
   if (filters.kitchen) {
     results = results.filter((p) => hasKitchenAmenity(p));
   }
-  return results.map(formatPropertyForCard);
+  return results;
 }
 
 export function getScrapedStats() {

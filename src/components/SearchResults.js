@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ChevronRight, MapPin, SearchX, SlidersHorizontal, X } from "lucide-react";
 import SearchBox from "@/components/SearchBox";
 import SearchFilters, { FILTER_KEYS } from "@/components/SearchFilters";
+import FiltersSheet from "@/components/MobileFilters";
 import PropertyCard from "@/components/PropertyCard";
 import CustomSelect from "@/components/CustomSelect";
 import { mapSearchTypeToCategory, normalizeCity, parseLocationInput } from "@/lib/search";
@@ -149,17 +150,7 @@ export default function SearchResults() {
     return [...properties].sort((a, b) => dir * ((a.rawPrice ?? 0) - (b.rawPrice ?? 0)));
   }, [properties, sort, distances]);
 
-  useEffect(() => {
-    if (!sheetOpen) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e) => e.key === "Escape" && setSheetOpen(false);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [sheetOpen]);
+  const closeSheet = useCallback(() => setSheetOpen(false), []);
 
   const total = properties.length;
   const hasSearch = Boolean(
@@ -247,7 +238,7 @@ export default function SearchResults() {
         ) : (
           <div className="grid gap-6 lg:grid-cols-[280px_1fr] lg:gap-8">
             <div className="hidden lg:block">
-              <div className="sticky top-[8.5rem]">
+              <div>
                 <SearchFilters />
               </div>
             </div>
@@ -349,44 +340,10 @@ export default function SearchResults() {
       )}
 
       {sheetOpen && (
-        <div className="fixed inset-0 z-[95] lg:hidden">
-          <button
-            type="button"
-            aria-label="Close filters"
-            onClick={() => setSheetOpen(false)}
-            className="absolute inset-0 animate-fade-in bg-navy/50 backdrop-blur-[2px]"
-          />
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-label="Filters"
-            className="absolute inset-x-0 bottom-0 flex max-h-[88vh] animate-sheet-up flex-col rounded-t-2xl bg-white shadow-pop"
-          >
-            <span aria-hidden className="absolute left-1/2 top-1.5 h-1 w-10 -translate-x-1/2 rounded-full bg-line" />
-            <div className="flex items-center justify-between border-b border-line px-5 py-3">
-              <p className="flex items-center gap-2 text-base font-bold text-ink">
-                <SlidersHorizontal className="h-[18px] w-[18px] text-brand" />
-                Filters
-              </p>
-              <button type="button" onClick={() => setSheetOpen(false)} aria-label="Close filters" className="icon-btn -mr-2">
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            <div className="flex-1 overflow-y-auto">
-              <SearchFilters showHeader={false} className="rounded-none border-0" />
-            </div>
-            <div className="flex gap-3 border-t border-line p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-              {filterCount > 0 && (
-                <button type="button" onClick={clearFilters} className="btn btn-outline flex-1">
-                  Clear all
-                </button>
-              )}
-              <button type="button" onClick={() => setSheetOpen(false)} className="btn btn-primary flex-[2]">
-                Show {total.toLocaleString("en-IN")} results
-              </button>
-            </div>
-          </div>
-        </div>
+        <FiltersSheet
+          onClose={closeSheet}
+          sortOptions={coords ? SORT_OPTIONS : SORT_OPTIONS.filter((o) => o.value !== "nearest")}
+        />
       )}
     </div>
   );
